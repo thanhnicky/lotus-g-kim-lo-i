@@ -63,8 +63,9 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  /* Lotus wood palette */
+  --background: oklch(0.975 0.012 80);        /* cream */
+  --foreground: oklch(0.22 0.03 50);          /* dark walnut text */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
