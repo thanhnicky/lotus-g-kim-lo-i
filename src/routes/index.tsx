@@ -1,5 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
+import colorPaletteImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
 import heroGate from "../assets/hero-gate.jpg";
 import appRailing from "../assets/app-railing.jpg";
 import appFence from "../assets/app-fence.jpg";
@@ -7,21 +9,26 @@ import appPergola from "../assets/app-pergola.jpg";
 import appDoor from "../assets/app-door.jpg";
 import appFrame from "../assets/app-frame.jpg";
 import appLouver from "../assets/app-louver.jpg";
-import beforeGate from "../assets/before-gate.jpg";
-import afterGate from "../assets/after-gate.jpg";
-import beforeRailing from "../assets/before-railing.jpg";
-import afterRailing from "../assets/after-railing.jpg";
+import appKhungKeoThep from "../assets/khung-keo-thep-gia-go-lotus.jpg";
+import beforeChanBanSat from "../assets/before-chan-ban-sat.jpg";
+import afterChanBanSat from "../assets/after-chan-ban-sat.jpg";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const ZALO_URL = "https://zalo.me/0000000000";
-const HOTLINE = "0909 000 000";
+const ZALO_URL = "https://zalo.me/0943966662";
+const HOTLINE = "0943 966 662";
 
 const serif = "'Playfair Display', serif";
 
 function LandingPage() {
+  const [selectedCombos, setSelectedCombos] = useState<Record<string, { small: number; large: number }>>({
+    "Combo tiết kiệm": { small: 0, large: 0 },
+    "Combo thông dụng": { small: 0, large: 0 },
+    "Combo cao cấp 2K": { small: 0, large: 0 },
+  });
+
   return (
     <div className="min-h-screen bg-background text-foreground antialiased">
       <Header />
@@ -32,10 +39,10 @@ function LandingPage() {
       <Applications />
       <Benefits />
       <BeforeAfter />
-      <ColorPalette />
       <Process />
-      <Combos />
-      <LeadForm />
+      <ColorPalette />
+      <Combos selectedCombos={selectedCombos} setSelectedCombos={setSelectedCombos} />
+      <LeadForm selectedCombos={selectedCombos} />
       <Feedback />
       <FAQ />
       <FinalCTA />
@@ -51,13 +58,7 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <a href="#top" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
-            L
-          </div>
-          <div className="leading-tight">
-            <div className="text-sm font-bold tracking-wide">SƠN LOTUS</div>
-            <div className="text-[11px] text-muted-foreground">Giả gỗ trên kim loại</div>
-          </div>
+          <img src={logoLotus} alt="Sơn Lotus Logo" className="h-12 w-12 rounded-md object-contain" />
         </a>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           <a href="#ung-dung" className="hover:text-primary">Ứng dụng</a>
@@ -277,6 +278,7 @@ function Applications() {
     { img: appDoor, t: "Cửa sắt giả gỗ" },
     { img: appPergola, t: "Pergola / mái hiên" },
     { img: appLouver, t: "Lam sắt trang trí" },
+    { img: appKhungKeoThep, t: "Khung kèo thép giả gỗ" },
   ];
   return (
     <section id="ung-dung" className="py-14 md:py-20">
@@ -363,10 +365,12 @@ function Benefits() {
 
 /* ---------- Before / After ---------- */
 function BeforeAfter() {
-  const pairs = [
-    { b: beforeGate, a: afterGate, label: "Cổng sắt – màu Walnut" },
-    { b: beforeRailing, a: afterRailing, label: "Lan can – màu Teak" },
-  ];
+  const [sliderPosition, setSliderPosition] = useState(50);
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSliderPosition(Number(e.target.value));
+  };
+
   return (
     <section className="py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -375,40 +379,65 @@ function BeforeAfter() {
           <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
             Sự thay đổi rõ rệt sau khi hoàn thiện giả gỗ Lotus
           </h2>
+          <p className="mt-3 text-muted-foreground">
+            Kéo thanh trượt để so sánh sự khác biệt trước và sau khi sơn giả gỗ.
+          </p>
         </div>
-        <div className="mt-8 grid gap-8 md:grid-cols-2">
-          {pairs.map((p) => (
-            <div key={p.label} className="overflow-hidden rounded-2xl bg-card ring-1 ring-border shadow-sm">
-              <div className="grid grid-cols-2">
-                <BAImage src={p.b} tag="TRƯỚC" alt={`Trước - ${p.label}`} />
-                <BAImage src={p.a} tag="SAU" alt={`Sau - ${p.label}`} highlight />
-              </div>
-              <div className="flex items-center justify-between px-4 py-3 text-sm">
-                <span className="font-semibold">{p.label}</span>
-                <a href={ZALO_URL} className="font-semibold text-primary hover:underline">
-                  Tư vấn hạng mục tương tự →
-                </a>
+        <div className="mt-8 mx-auto max-w-4xl">
+          <div className="relative overflow-hidden rounded-2xl shadow-lg">
+            {/* After image (background) */}
+            <img
+              src={afterChanBanSat}
+              alt="Sau khi sơn giả gỗ"
+              className="aspect-[4/3] w-full object-cover"
+            />
+            {/* Before image (foreground with clipping) */}
+            <div
+              className="absolute inset-0 overflow-hidden"
+              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+            >
+              <img
+                src={beforeChanBanSat}
+                alt="Trước khi sơn giả gỗ"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            {/* Slider handle */}
+            <div
+              className="absolute inset-y-0 w-1 bg-white cursor-ew-resize"
+              style={{ left: `${sliderPosition}%` }}
+            >
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg">
+                <svg className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                </svg>
               </div>
             </div>
-          ))}
+            {/* Labels */}
+            <span className="absolute left-4 top-4 rounded bg-foreground/80 px-3 py-1 text-xs font-bold text-background">
+              TRƯỚC
+            </span>
+            <span className="absolute right-4 top-4 rounded bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+              SAU
+            </span>
+            {/* Hidden slider input */}
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={sliderPosition}
+              onChange={handleSliderChange}
+              className="absolute inset-0 w-full cursor-ew-resize opacity-0"
+            />
+          </div>
+          <div className="mt-6 text-center">
+            <a href={ZALO_URL} className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-md transition hover:bg-primary/90">
+              Tư vấn hạng mục tương tự →
+            </a>
+          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function BAImage({ src, tag, alt, highlight }: { src: string; tag: string; alt: string; highlight?: boolean }) {
-  return (
-    <div className="relative">
-      <img src={src} alt={alt} loading="lazy" width={1024} height={1024} className="aspect-square w-full object-cover" />
-      <span
-        className={`absolute left-2 top-2 rounded px-2 py-1 text-[11px] font-bold tracking-wider ${
-          highlight ? "bg-primary text-primary-foreground" : "bg-foreground/80 text-background"
-        }`}
-      >
-        {tag}
-      </span>
-    </div>
   );
 }
 
@@ -423,7 +452,6 @@ const COLORS = [
 ];
 
 function ColorPalette() {
-  const [selected, setSelected] = useState<string | null>(null);
   return (
     <section id="bang-mau" className="bg-secondary/40 py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -433,43 +461,25 @@ function ColorPalette() {
             Chọn tông gỗ phù hợp cho hạng mục của bạn
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Các tông gỗ phổ biến được khách hàng Lotus lựa chọn nhiều nhất. Chọn màu yêu thích và
+            Các tông gỗ phổ biến được khách hàng Lotus lựa chọn nhiều nhất. Xem bảng màu chi tiết và
             gửi cho chúng tôi để nhận tư vấn đúng combo.
           </p>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {COLORS.map((c) => {
-            const active = selected === c.name;
-            return (
-              <button
-                key={c.name}
-                onClick={() => {
-                  setSelected(c.name);
-                  const colorInput = document.getElementById("form-color") as HTMLSelectElement | null;
-                  if (colorInput) colorInput.value = c.name;
-                  document.getElementById("tu-van")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className={`group overflow-hidden rounded-xl bg-background text-left shadow-sm ring-1 transition ${
-                  active ? "ring-2 ring-primary" : "ring-border hover:ring-primary/50"
-                }`}
-              >
-                <div className="h-24 w-full" style={{ backgroundColor: c.hex }} />
-                <div className="px-3 py-3">
-                  <div className="text-sm font-bold">{c.name}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{c.hex.toUpperCase()}</div>
-                  <div className="mt-3 inline-flex items-center text-xs font-semibold text-primary">
-                    Chọn màu này →
-                  </div>
-                </div>
-              </button>
-            );
-          })}
+        <div className="mt-8 flex justify-center">
+          <img
+            src={colorPaletteImage}
+            alt="Bảng màu sơn giả gỗ trên kim loại Lotus"
+            className="w-full max-w-5xl rounded-2xl shadow-lg"
+          />
         </div>
-        {selected && (
-          <p className="mt-4 text-sm text-foreground">
-            Đã chọn màu: <strong>{selected}</strong>. Cuộn xuống mục tư vấn để gửi thông tin.
-          </p>
-        )}
+        <div className="mt-8 text-center">
+          <a
+            href="#tu-van"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground shadow-md transition hover:bg-primary/90"
+          >
+            Đặt hàng / Nhận tư vấn
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -515,13 +525,15 @@ function Process() {
 }
 
 /* ---------- Combos ---------- */
-function Combos() {
+function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<string, { small: number; large: number }>; setSelectedCombos: React.Dispatch<React.SetStateAction<Record<string, { small: number; large: number }>>>; }) {
+
   const combos = [
     {
       name: "Combo tiết kiệm",
       tag: "Cơ bản",
       desc: "Sơn lót kim loại + sơn phủ màu giả gỗ kim loại.",
       items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ"],
+      prices: { small: 515000, large: 2350000 },
       highlight: false,
     },
     {
@@ -529,6 +541,7 @@ function Combos() {
       tag: "Phổ biến nhất",
       desc: "Sơn lót kim loại + sơn phủ màu giả gỗ + sơn phủ trong suốt bảo vệ ngoài trời.",
       items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ bảo vệ ngoài trời"],
+      prices: { small: 751000, large: 3420000 },
       highlight: true,
     },
     {
@@ -536,9 +549,38 @@ function Combos() {
       tag: "Bền cao cấp",
       desc: "Sơn lót kim loại + sơn phủ màu giả gỗ + sơn phủ trong suốt 2K bảo vệ ngoài trời.",
       items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ 2K bảo vệ cao cấp"],
+      prices: { small: 888000, large: 4050000 },
       highlight: false,
     },
   ];
+
+  const formatPrice = (price: number) => {
+    return (price / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ".000 đ";
+  };
+
+  const updateQuantity = (comboName: string, size: "small" | "large", value: number) => {
+    setSelectedCombos(prev => ({
+      ...prev,
+      [comboName]: {
+        ...prev[comboName],
+        [size]: Math.max(0, value),
+      },
+    }));
+  };
+
+  const getComboTotal = (comboName: string) => {
+    const combo = combos.find(c => c.name === comboName);
+    if (!combo) return 0;
+    const selected = selectedCombos[comboName];
+    return (selected.small * combo.prices.small) + (selected.large * combo.prices.large);
+  };
+
+  const getTotalPrice = () => {
+    return combos.reduce((total, combo) => {
+      const selected = selectedCombos[combo.name];
+      return total + (selected.small * combo.prices.small) + (selected.large * combo.prices.large);
+    }, 0);
+  };
   return (
     <section id="combo" className="bg-secondary/40 py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -564,6 +606,72 @@ function Combos() {
               <div className="text-xs font-semibold uppercase tracking-wider text-primary">{c.tag}</div>
               <h3 className="mt-1 text-xl font-bold" style={{ fontFamily: serif }}>{c.name}</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+              <div className="mt-4 space-y-3">
+                <div className="flex items-center justify-between rounded-lg bg-secondary/50 p-3">
+                  <div>
+                    <div className="text-sm font-medium">Combo nhỏ (1kg mỗi loại)</div>
+                    <div className="text-xs text-muted-foreground">{formatPrice(c.prices.small)}</div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => updateQuantity(c.name, "small", selectedCombos[c.name].small - 1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      min="0"
+                      value={selectedCombos[c.name].small}
+                      onChange={(e) => updateQuantity(c.name, "small", parseInt(e.target.value) || 0)}
+                      className="w-12 rounded-md border border-input bg-background px-2 py-1 text-center text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => updateQuantity(c.name, "small", selectedCombos[c.name].small + 1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between rounded-lg bg-secondary/50 p-3">
+                  <div>
+                    <div className="text-sm font-medium">Combo lớn (5kg mỗi loại)</div>
+                    <div className="text-xs text-muted-foreground">{formatPrice(c.prices.large)}</div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => updateQuantity(c.name, "large", selectedCombos[c.name].large - 1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      min="0"
+                      value={selectedCombos[c.name].large}
+                      onChange={(e) => updateQuantity(c.name, "large", parseInt(e.target.value) || 0)}
+                      className="w-12 rounded-md border border-input bg-background px-2 py-1 text-center text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => updateQuantity(c.name, "large", selectedCombos[c.name].large + 1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                {getComboTotal(c.name) > 0 && (
+                  <div className="flex items-center justify-between rounded-lg bg-primary/10 p-3">
+                    <span className="text-sm font-semibold">Tổng:</span>
+                    <span className="text-lg font-bold text-primary">{formatPrice(getComboTotal(c.name))}</span>
+                  </div>
+                )}
+              </div>
               <ul className="mt-5 space-y-2 text-sm">
                 {c.items.map((i) => (
                   <li key={i} className="flex items-start gap-2">
@@ -572,27 +680,33 @@ function Combos() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-auto pt-6">
-                <a
-                  href="#tu-van"
-                  onClick={() => {
-                    setTimeout(() => {
-                      const el = document.getElementById("form-combo") as HTMLSelectElement | null;
-                      if (el) el.value = c.name;
-                    }, 50);
-                  }}
-                  className={`flex w-full items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold transition ${
-                    c.highlight
-                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "border-2 border-primary text-primary hover:bg-secondary"
-                  }`}
-                >
-                  Chọn combo này
-                </a>
-              </div>
             </div>
           ))}
         </div>
+        {getTotalPrice() > 0 && (
+          <div className="mt-8 rounded-2xl border-2 border-primary bg-secondary/50 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-bold">Tổng giá trị đơn hàng</h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Định mức Combo nhỏ 1kg ~ 5m²; Combo lớn loại 5kg là 25m²
+                </p>
+              </div>
+              <div className="text-right">
+                <div className="text-3xl font-bold text-primary">{formatPrice(getTotalPrice())}</div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  * Giá trên chưa bao gồm phí vận chuyển
+                </p>
+              </div>
+            </div>
+            <a
+              href="#tu-van"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-md transition hover:bg-primary/90"
+            >
+              Tiếp tục điền thông tin đặt hàng
+            </a>
+          </div>
+        )}
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Chưa chắc chọn combo nào?{" "}
           <a href={ZALO_URL} className="font-semibold text-primary hover:underline">
@@ -606,67 +720,232 @@ function Combos() {
 }
 
 /* ---------- Lead Form ---------- */
-function LeadForm() {
-  const [sent, setSent] = useState(false);
+function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: number; large: number }> }) {
+  const navigate = useNavigate();
+  const [comboColors, setComboColors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"cod" | "online">("cod");
+
+  const comboPrices: Record<string, { small: number; large: number }> = {
+    "Combo tiết kiệm": { small: 515000, large: 2350000 },
+    "Combo thông dụng": { small: 751000, large: 3420000 },
+    "Combo cao cấp 2K": { small: 888000, large: 4050000 },
+  };
+
+  const colorOptions = ["Chưa chọn", "LPCP14.LWF1018", "LMCP0.LWF103", "LPCP4.LWF101", "LPCP8.LWF103", "LPCP0.LWF1017", "LPCP0.LWF101", "LPCP0.LWF1012", "LPCP8.LWFF2", "LPCP0.LWF1013"];
+
+  const formatPrice = (price: number) => {
+    return (price / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ".000 đ";
+  };
+
+  const getTotalPrice = () => {
+    const basePrice = Object.entries(selectedCombos).reduce((total, [comboName, quantities]) => {
+      const combo = comboPrices[comboName];
+      if (!combo) return total;
+      return total + (quantities.small * combo.small) + (quantities.large * combo.large);
+    }, 0);
+    
+    // Apply 10% discount for online payment
+    if (paymentMethod === "online") {
+      return basePrice * 0.9;
+    }
+    return basePrice;
+  };
+
+  const getBasePrice = () => {
+    return Object.entries(selectedCombos).reduce((total, [comboName, quantities]) => {
+      const combo = comboPrices[comboName];
+      if (!combo) return total;
+      return total + (quantities.small * combo.small) + (quantities.large * combo.large);
+    }, 0);
+  };
+
+  const getSelectedItems = () => {
+    const items: { name: string; quantity: number; size: string; key: string }[] = [];
+    Object.entries(selectedCombos).forEach(([comboName, quantities]) => {
+      if (quantities.small > 0) items.push({ name: comboName, quantity: quantities.small, size: "nhỏ", key: `${comboName}-small` });
+      if (quantities.large > 0) items.push({ name: comboName, quantity: quantities.large, size: "lớn", key: `${comboName}-large` });
+    });
+    return items;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const phone = formData.get("phone") as string;
+    const name = formData.get("name") as string;
+    const address = formData.get("address") as string;
+    const note = formData.get("note") as string;
+
+    // Validate color selection for all selected combos
+    const selectedItems = getSelectedItems();
+    for (const item of selectedItems) {
+      const color = comboColors[item.key];
+      if (!color || color === "Chưa chọn") {
+        alert(`Vui lòng chọn màu cho ${item.name} (${item.size})`);
+        return;
+      }
+    }
+
+    // Set loading state
+    setIsSubmitting(true);
+
+    // Prepare order data
+    const orderData = {
+      selectedCombos,
+      comboColors,
+      name,
+      phone,
+      address,
+      note,
+      paymentMethod,
+      totalPrice: getTotalPrice(),
+    };
+
+    // Save order data to sessionStorage
+    sessionStorage.setItem("orderData", JSON.stringify(orderData));
+
+    // Send data to Google Apps Script
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbz9APlANR5iSSEFE9lvjo06P2FzSRH_I_-1QUXRFLsQENotaMKVJ9AVseFgXWYgFSj3/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+    } catch (error) {
+      console.error("Error sending data to Google Sheets:", error);
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Navigate to thank-you page
+    navigate({ to: "/thank-you/$phone", params: { phone } });
+  };
+
   return (
     <section id="tu-van" className="py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="grid gap-8 lg:grid-cols-5">
           <div className="lg:col-span-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">Đặt hàng / Tư vấn</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-primary">Đặt hàng ngay</span>
             <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-              Gửi thông tin – Lotus tư vấn đúng hệ sơn cho bạn
+              Hoàn tất đơn hàng – Lotus giao hàng tận nơi
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Điền nhanh thông tin bên dưới, đội ngũ Lotus sẽ liên hệ lại trong giờ làm việc.
+              Điền thông tin giao hàng, chúng tôi sẽ xác nhận đơn và giao sơn đến tận tay bạn trong thời gian ngắn nhất.
             </p>
 
-            {sent ? (
-              <div className="mt-6 rounded-xl border border-primary/30 bg-secondary p-6 text-center">
-                <h3 className="text-lg font-bold text-primary">Đã nhận thông tin của bạn!</h3>
-                <p className="mt-2 text-sm">
-                  Lotus sẽ gọi lại sớm. Bạn có thể nhắn Zalo ngay để được tư vấn nhanh hơn.
-                </p>
-                <a
-                  href={ZALO_URL}
-                  className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
-                >
-                  <ZaloIcon className="h-4 w-4" /> Mở Zalo ngay
-                </a>
-              </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-                className="mt-6 grid gap-4 rounded-2xl bg-card p-5 ring-1 ring-border md:p-6"
-              >
+            <form
+              onSubmit={handleSubmit}
+              className="mt-6 grid gap-4 rounded-2xl bg-card p-5 ring-1 ring-border md:p-6"
+            >
                 <div className="grid gap-4 md:grid-cols-2">
                   <Field label="Họ và tên" name="name" required placeholder="Nguyễn Văn A" />
                   <Field label="Số điện thoại" name="phone" required type="tel" placeholder="09xx xxx xxx" />
                 </div>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <Field label="Hạng mục cần sơn" name="item" placeholder="VD: cổng sắt, lan can..." />
-                  <Field label="Diện tích ước tính (m²)" name="area" placeholder="VD: 12" />
-                </div>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <SelectField id="form-color" label="Màu gỗ quan tâm" name="color"
-                    options={["Chưa chọn", ...COLORS.map((c) => c.name)]} />
-                  <SelectField id="form-combo" label="Combo quan tâm" name="combo"
-                    options={["Chưa chọn", "Combo tiết kiệm", "Combo thông dụng", "Combo cao cấp 2K"]} />
+                <Field label="Địa chỉ giao hàng" name="address" required placeholder="Số nhà, đường, phường/xã, quận/huyện, thành phố" />
+                <Field label="Ghi chú" name="note" placeholder="Yêu cầu độ bóng hay mờ của lớp phủ trong suốt" />
+                {getTotalPrice() > 0 && (
+                  <div className="rounded-xl border-2 border-primary bg-secondary/50 p-5">
+                    <h4 className="mb-4 text-base font-bold text-primary">Thông tin đơn hàng</h4>
+                    <div className="space-y-3 text-sm">
+                      {getSelectedItems().map((item) => (
+                        <div key={item.key} className="rounded-lg bg-background p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-medium">{item.name} ({item.size}) x{item.quantity}</span>
+                          </div>
+                          <div>
+                            <label className="mb-1 block text-xs text-muted-foreground">Mã màu giả gỗ:</label>
+                            <select
+                              value={comboColors[item.key] || "Chưa chọn"}
+                              onChange={(e) => setComboColors(prev => ({ ...prev, [item.key]: e.target.value }))}
+                              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20"
+                            >
+                              {colorOptions.map(color => (
+                                <option key={color} value={color}>{color}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      ))}
+                      <div className="mt-4 flex items-center justify-between border-t-2 border-primary pt-4">
+                        <span className="text-lg font-bold">Thành tiền:</span>
+                        <div className="text-right">
+                          {paymentMethod === "online" && (
+                            <span className="text-sm text-muted-foreground line-through mr-2">
+                              {formatPrice(getBasePrice())}
+                            </span>
+                          )}
+                          <span className="text-2xl font-bold text-primary">
+                            {formatPrice(getTotalPrice())}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs text-muted-foreground">
+                      * Giá trên chưa bao gồm phí vận chuyển và có thể thay đổi tùy theo diện tích thực tế.
+                    </p>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      Định mức Combo nhỏ 1kg ~ 5m²; Combo lớn loại 5kg là 25m²
+                    </p>
+                  </div>
+                )}
+                <div className="mt-4 rounded-xl border-2 border-primary bg-secondary/50 p-4">
+                  <h4 className="mb-3 text-sm font-bold text-primary">Hình thức thanh toán</h4>
+                  <div className="space-y-3">
+                    <label className="flex cursor-pointer items-start gap-3 rounded-lg bg-background p-3 ring-1 ring-border transition hover:ring-primary">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="cod"
+                        checked={paymentMethod === "cod"}
+                        onChange={(e) => setPaymentMethod(e.target.value as "cod" | "online")}
+                        className="mt-1 h-4 w-4"
+                      />
+                      <div>
+                        <span className="font-semibold">COD - Thanh toán khi nhận hàng</span>
+                      </div>
+                    </label>
+                    <label className="flex cursor-pointer items-start gap-3 rounded-lg bg-background p-3 ring-1 ring-border transition hover:ring-primary">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="online"
+                        checked={paymentMethod === "online"}
+                        onChange={(e) => setPaymentMethod(e.target.value as "cod" | "online")}
+                        className="mt-1 h-4 w-4"
+                      />
+                      <div>
+                        <span className="font-semibold">Chuyển khoản Online</span>
+                        <p className="mt-1 text-xs text-primary">Miễn phí giao hàng và giảm 10%</p>
+                      </div>
+                    </label>
+                  </div>
                 </div>
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-md hover:bg-primary/90"
+                  disabled={isSubmitting}
+                  className="mt-2 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Đặt hàng / Nhận tư vấn
+                  {isSubmitting ? (
+                    <>
+                      <svg className="mr-2 h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Đang xử lý...
+                    </>
+                  ) : (
+                    "Xác nhận đặt hàng"
+                  )}
                 </button>
                 <p className="text-xs text-muted-foreground">
-                  Bằng cách gửi, bạn đồng ý để Lotus liên hệ tư vấn về sản phẩm.
+                  Bằng cách đặt hàng, bạn đồng ý để Lotus liên hệ xác nhận đơn hàng và giao hàng.
                 </p>
               </form>
-            )}
           </div>
 
           <aside className="lg:col-span-2">
@@ -686,7 +965,7 @@ function LeadForm() {
               <ul className="mt-4 space-y-2 text-sm">
                 <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Phản hồi nhanh trong giờ làm việc</li>
                 <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Tư vấn đúng hệ theo từng hạng mục</li>
-                <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Báo giá rõ ràng, không ép mua</li>
+                <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Báo giá rõ ràng, hướng dẫn kỹ thuật chi tiết </li>
               </ul>
               <a
                 href={ZALO_URL}
@@ -720,7 +999,7 @@ function Field({ label, name, type = "text", required, placeholder }: { label: s
   );
 }
 
-function SelectField({ id, label, name, options }: { id?: string; label: string; name: string; options: string[]; }) {
+function SelectField({ id, label, name, options, onChange }: { id?: string; label: string; name: string; options: string[]; onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void; }) {
   return (
     <label className="block">
       <span className="mb-1.5 block text-sm font-semibold">{label}</span>
@@ -728,6 +1007,7 @@ function SelectField({ id, label, name, options }: { id?: string; label: string;
         id={id}
         name={name}
         defaultValue={options[0]}
+        onChange={onChange}
         className="w-full rounded-lg border border-input bg-background px-4 py-3 text-base outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
       >
         {options.map((o) => <option key={o}>{o}</option>)}
@@ -739,9 +1019,12 @@ function SelectField({ id, label, name, options }: { id?: string; label: string;
 /* ---------- Feedback ---------- */
 function Feedback() {
   const projects = [
-    { img: afterGate, item: "Cổng sắt", color: "Walnut", area: "TP.HCM", quote: "Cổng nhà mình nhìn ấm hơn hẳn, khách đến ai cũng tưởng gỗ thật." },
+    { img: afterChanBanSat, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
     { img: appRailing, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: appPergola, item: "Pergola sân vườn", color: "Cánh gián", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 1 năm vẫn đẹp." },
+    { img: appPergola, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
+    { img: afterChanBanSat, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
+    { img: appRailing, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
+    { img: appPergola, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
   ];
   return (
     <section className="bg-secondary/40 py-14 md:py-20">
@@ -840,11 +1123,7 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-3 md:px-6">
         <div>
           <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">L</div>
-            <div>
-              <div className="text-sm font-bold tracking-wide">SƠN LOTUS</div>
-              <div className="text-[11px] opacity-70">Hệ giả gỗ trên kim loại</div>
-            </div>
+            <img src={logoLotus} alt="Sơn Lotus Logo" className="h-12 w-12 rounded-md object-contain" />
           </div>
           <p className="mt-3 text-sm opacity-80 leading-relaxed">
             Giải pháp sơn giả gỗ chuyên cho cổng sắt, hàng rào, lan can, pergola và chi tiết kim loại.
@@ -855,8 +1134,9 @@ function Footer() {
           <ul className="mt-3 space-y-2">
             <li>Hotline: <strong>{HOTLINE}</strong></li>
             <li>Zalo: <a href={ZALO_URL} className="underline">{HOTLINE}</a></li>
-            <li>Website: sonlotus.vn</li>
-            <li>Địa chỉ: [Cập nhật địa chỉ Lotus]</li>
+            <li>Email: sales@sonlotus.vn</li>
+            <li>Website: www.sonlotus.vn</li>
+            <li>Địa chỉ: 99/5 Đường XTT26-1, Ấp 2, Xã Bà Điểm, TP.HCM</li>
           </ul>
         </div>
         <div className="text-sm">
@@ -870,7 +1150,7 @@ function Footer() {
         </div>
       </div>
       <div className="mx-auto mt-8 max-w-7xl px-4 text-xs opacity-60 md:px-6">
-        © {new Date().getFullYear()} Sơn Lotus. Mọi thông tin liên hệ vui lòng cập nhật chính thức.
+        © {new Date().getFullYear()} CÔNG TY TNHH SẢN XUẤT THƯƠNG MẠI DỊCH VỤ BÍCH TRANG. MST: 0313351528.
       </div>
     </footer>
   );
