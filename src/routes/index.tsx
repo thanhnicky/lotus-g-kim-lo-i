@@ -69,7 +69,7 @@ function Header() {
           <a href="#ung-dung" className="hover:text-primary">Ứng dụng</a>
           <a href="#bang-mau" className="hover:text-primary">Bảng màu</a>
           <a href="#combo" className="hover:text-primary">Combo</a>
-          <a href="#tu-van" className="hover:text-primary">Tư vấn</a>
+          <a href="#tu-van" className="hover:text-primary">Đặt Hàng</a>
           <a href="#faq" className="hover:text-primary">FAQ</a>
         </nav>
         <a
@@ -457,6 +457,12 @@ const COLORS = [
 ];
 
 function ColorPalette() {
+  const [isZoomed, setIsZoomed] = useState(false);
+
+  const handleDoubleClick = () => {
+    setIsZoomed(!isZoomed);
+  };
+
   return (
     <section id="bang-mau" className="bg-secondary/40 py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -471,11 +477,20 @@ function ColorPalette() {
           </p>
         </div>
         <div className="mt-8 flex justify-center">
-          <img
-            src={colorPaletteImage}
-            alt="Bảng màu sơn giả gỗ trên kim loại Lotus"
-            className="w-full max-w-5xl rounded-2xl shadow-lg"
-          />
+          <div 
+            className="relative overflow-hidden rounded-2xl shadow-lg cursor-pointer md:cursor-default"
+            onDoubleClick={handleDoubleClick}
+          >
+            <img
+              src={colorPaletteImage}
+              alt="Bảng màu sơn giả gỗ trên kim loại Lotus"
+              className={`w-full max-w-5xl transition-transform duration-300 ${isZoomed ? 'scale-150' : 'scale-100'}`}
+              style={{ transformOrigin: 'center center' }}
+            />
+            <div className="md:hidden absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+              Đúp tap để zoom
+            </div>
+          </div>
         </div>
         <div className="mt-8 text-center">
           <a
@@ -1024,12 +1039,12 @@ function SelectField({ id, label, name, options, onChange }: { id?: string; labe
 /* ---------- Feedback ---------- */
 function Feedback() {
   const projects = [
-    { img: appKhungKeoThep, item: "Khung kèo thép giả gỗ", color: "Vàng-Nâu", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
+    { img: appKhungKeoThep, item: "Khung kèo thép giả gỗ", color: "Gõ đỏ", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
     { img: sonChanBanSatGiaGo, item: "Sơn chân bàn sắt giả gỗ", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: cuaCongSatGiaGo, item: "Cửa cổng sắt giả gỗ", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
-    { img: banGheSatGiaGoNgoaiTroi, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Sơn Lotus có đầy đủ bảng màu nên CĐT dễ chọn và rất ưng ý." },
-    { img: sonSatGiaGoGianHoa, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: satGiaGoAshLotus, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
+    { img: cuaCongSatGiaGo, item: "Cửa cổng sắt giả gỗ", color: "Vàng-đỏ", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
+    { img: banGheSatGiaGoNgoaiTroi, item: "Bàn ghế outdoor XK", color: "Vàng-Nâu", area: "Bình Dương", quote: "Sơn Lotus có đầy đủ bảng màu nên CĐT dễ chọn và rất ưng ý." },
+    { img: sonSatGiaGoGianHoa, item: "Giàn hoa công viên", color: "Nâu-đỏ", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
+    { img: satGiaGoAshLotus, item: "Bàn ghế sắt cafe", color: "Nâu-đen", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, thích cách tạo màu của sơn Lotus." },
   ];
   return (
     <section className="bg-secondary/40 py-14 md:py-20">
