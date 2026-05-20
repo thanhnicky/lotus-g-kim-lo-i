@@ -10,6 +10,8 @@ import appDoor from "../assets/app-door.jpg";
 import appFrame from "../assets/app-frame.jpg";
 import appLouver from "../assets/app-louver.jpg";
 import appKhungKeoThep from "../assets/khung-keo-thep-gia-go-lotus.jpg";
+import sonChanBanSatGiaGo from "../assets/son-chan-ban-sat-gia-go.jpg";
+import cuaCongSatGiaGo from "../assets/cua-cong-sat-gia-go.jpg";
 import beforeChanBanSat from "../assets/before-chan-ban-sat.jpg";
 import afterChanBanSat from "../assets/after-chan-ban-sat.jpg";
 import banGheSatGiaGoNgoaiTroi from "../assets/ban-ghe-sat-gia-go-ngoai-troi.jpg";
@@ -1022,9 +1024,9 @@ function SelectField({ id, label, name, options, onChange }: { id?: string; labe
 /* ---------- Feedback ---------- */
 function Feedback() {
   const projects = [
-    { img: banGheSatGiaGoNgoaiTroi, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
-    { img: sonSatGiaGoGianHoa, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: satGiaGoAshLotus, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
+    { img: appKhungKeoThep, item: "Khung kèo thép giả gỗ", color: "Vàng-Nâu", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
+    { img: sonChanBanSatGiaGo, item: "Sơn chân bàn sắt giả gỗ", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
+    { img: cuaCongSatGiaGo, item: "Cửa cổng sắt giả gỗ", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
     { img: banGheSatGiaGoNgoaiTroi, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Sơn Lotus có đầy đủ bảng màu nên CĐT dễ chọn và rất ưng ý." },
     { img: sonSatGiaGoGianHoa, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
     { img: satGiaGoAshLotus, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
