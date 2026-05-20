@@ -822,7 +822,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
     }
 
     // Navigate to thank-you page
-    navigate({ to: "/thank-you/$phone", params: { phone } });
+    navigate({ to: `/thank-you?phone=${phone}` });
   };
 
   return (
