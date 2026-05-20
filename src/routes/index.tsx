@@ -106,9 +106,9 @@ function Hero() {
 
           <ul className="mt-6 space-y-2 text-sm md:text-base">
             {[
-              "Phù hợp nhiều hạng mục kim loại",
-              "Hiệu ứng vân gỗ đẹp, tăng giá trị thẩm mỹ",
-              "Hỗ trợ tư vấn đúng hệ sơn qua Zalo",
+              "Vân gỗ tự nhiên, người xem không nhận ra đây là kim loại",
+              "Bền trên 5+ năm ngoài trời — không phai, không bong dù nắng mưa",
+              "Bảng màu giả gỗ độc quyền từ Lotus",
             ].map((t) => (
               <li key={t} className="flex items-start gap-3">
                 <CheckIcon className="mt-0.5 h-5 w-5 flex-none text-primary" />
@@ -728,7 +728,7 @@ function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<
           </div>
         )}
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          Chưa chắc chọn combo nào?{" "}
+          Hơn 600+ đơn hàng được giao thành công{" "}
           <a href={ZALO_URL} className="font-semibold text-primary hover:underline">
             Nhắn Zalo gửi ảnh hạng mục
           </a>{" "}
@@ -855,7 +855,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
               Hoàn tất đơn hàng – Lotus giao hàng tận nơi
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Điền thông tin giao hàng, chúng tôi sẽ xác nhận đơn và giao sơn đến tận tay bạn trong thời gian ngắn nhất.
+              Đặt ngay hôm nay – Nhận sơn tại nhà, bắt đầu thi công cuối tuần này. Giao hàng trong 24–48h tại TP.HCM và các tỉnh lân cận
             </p>
 
             <form
@@ -963,7 +963,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                   )}
                 </button>
                 <p className="text-xs text-muted-foreground">
-                  Bằng cách đặt hàng, bạn đồng ý để Lotus liên hệ xác nhận đơn hàng và giao hàng.
+                  Bằng cách đặt hàng, bạn đồng ý để Lotus liên hệ xác nhận đơn hàng và giao hàng. Đổi trà/hoàn tiền trong vòng 7 ngày nếu sơn không đúng màu đã chọn. 
                 </p>
               </form>
           </div>
@@ -983,7 +983,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                 Gửi ảnh hạng mục qua Zalo để được tư vấn đúng hệ sơn, đúng combo và bảng màu phù hợp.
               </p>
               <ul className="mt-4 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Phản hồi nhanh trong giờ làm việc</li>
+                <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Phản hồi nhanh trong vòng 15 phút</li>
                 <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Tư vấn đúng hệ theo từng hạng mục</li>
                 <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Báo giá rõ ràng, hướng dẫn kỹ thuật chi tiết </li>
               </ul>
@@ -1118,7 +1118,7 @@ function FinalCTA() {
     <section className="bg-[oklch(0.25_0.04_50)] py-14 text-background md:py-20">
       <div className="mx-auto max-w-4xl px-4 text-center md:px-6">
         <h2 className="text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-          Bạn muốn đặt hàng nhanh hay cần tư vấn đúng hệ sơn cho hạng mục kim loại của mình?
+          Đừng để cổng sắt thô kéo lùi diện mạo ngôi nhà bạn thêm một ngày nào nữa.
         </h2>
         <p className="mt-4 text-sm opacity-85 md:text-base">
           Đội ngũ Lotus sẵn sàng hỗ trợ – chọn cách liên hệ thuận tiện nhất cho bạn.
