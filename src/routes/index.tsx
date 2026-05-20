@@ -10,8 +10,8 @@ import appDoor from "../assets/app-door.jpg";
 import appFrame from "../assets/app-frame.jpg";
 import appLouver from "../assets/app-louver.jpg";
 import appKhungKeoThep from "../assets/khung-keo-thep-gia-go-lotus.jpg";
-import beforeChanBanSat from "../assets/before-chan-ban-sat.jpg";
-import afterChanBanSat from "../assets/after-chan-ban-sat.jpg";
+import beforeChanBanSat from "../assets/before-chan-ban-sat.JPG";
+import afterChanBanSat from "../assets/after-chan-ban-sat.JPG";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
