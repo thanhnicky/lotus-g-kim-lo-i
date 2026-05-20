@@ -1113,7 +1113,7 @@ function FinalCTA() {
             <ZaloIcon className="h-5 w-5" /> Nhắn Zalo ngay
           </a>
           <a href="#tu-van" className="inline-flex items-center justify-center rounded-lg bg-background px-7 py-4 text-base font-bold text-foreground hover:bg-secondary">
-            Điền form nhận tư vấn
+            Đặt Hàng Nhanh
           </a>
         </div>
       </div>
