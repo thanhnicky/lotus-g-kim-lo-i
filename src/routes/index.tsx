@@ -12,6 +12,9 @@ import appLouver from "../assets/app-louver.jpg";
 import appKhungKeoThep from "../assets/khung-keo-thep-gia-go-lotus.jpg";
 import beforeChanBanSat from "../assets/before-chan-ban-sat.jpg";
 import afterChanBanSat from "../assets/after-chan-ban-sat.jpg";
+import banGheSatGiaGoNgoaiTroi from "../assets/ban-ghe-sat-gia-go-ngoai-troi.jpg";
+import sonSatGiaGoGianHoa from "../assets/son-sat-gia-go-gian-hoa.jpg";
+import satGiaGoAshLotus from "../assets/sat-gia-go-ash-lotus.jpg";
 
 export const Route = createFileRoute("/")({
   component: LandingPage,
@@ -1019,12 +1022,12 @@ function SelectField({ id, label, name, options, onChange }: { id?: string; labe
 /* ---------- Feedback ---------- */
 function Feedback() {
   const projects = [
-    { img: afterChanBanSat, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
-    { img: appRailing, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: appPergola, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
-    { img: afterChanBanSat, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Sơn Lotus có đầy đủ bảng màu nên CĐT dễ chọn và rất ưng ý." },
-    { img: appRailing, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: appPergola, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
+    { img: banGheSatGiaGoNgoaiTroi, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
+    { img: sonSatGiaGoGianHoa, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
+    { img: satGiaGoAshLotus, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
+    { img: banGheSatGiaGoNgoaiTroi, item: "Chân bàn sắt cafe", color: "Vàng-Nâu", area: "TP.HCM", quote: "Sơn Lotus có đầy đủ bảng màu nên CĐT dễ chọn và rất ưng ý." },
+    { img: sonSatGiaGoGianHoa, item: "Lan can ban công", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
+    { img: satGiaGoAshLotus, item: "Pergola sân vườn", color: "Vàng nhạt", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
   ];
   return (
     <section className="bg-secondary/40 py-14 md:py-20">
