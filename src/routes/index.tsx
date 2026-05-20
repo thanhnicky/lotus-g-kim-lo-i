@@ -97,7 +97,7 @@ function Hero() {
             style={{ fontFamily: serif }}
           >
             Khách đến nhà cứ tưởng cổng làm bằng gỗ thật — đó là sơn giả gỗ trên kim loại <span className="text-primary">Lotus</span>
-        
+
           </h1>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
             Giải pháp hoàn thiện bề mặt kim loại với hiệu ứng gỗ đẹp mắt, phù hợp cho nhiều hạng
