@@ -61,9 +61,9 @@ function LandingPage() {
 function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
-        <a href="#top" className="flex items-center gap-2">
-          <img src={logoLotus} alt="Sơn Lotus Logo" className="h-12 w-12 rounded-md object-contain" />
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-10">
+        <a href="#top" className="flex items-center gap-2 ">
+          <img src={logoLotus} alt="Sơn Lotus Logo" className="w-22  object-contain" />
         </a>
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           <a href="#ung-dung" className="hover:text-primary">Ứng dụng</a>
@@ -1143,7 +1143,7 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-3 md:px-6">
         <div>
           <div className="flex items-center gap-2">
-            <img src={logoLotus} alt="Sơn Lotus Logo" className="h-12 w-12 rounded-md object-contain" />
+            <img src={logoLotus} alt="Sơn Lotus Logo" className="w-22  object-contain" />
           </div>
           <p className="mt-3 text-sm opacity-80 leading-relaxed">
             Giải pháp sơn giả gỗ chuyên cho cổng sắt, hàng rào, lan can, pergola và chi tiết kim loại.
