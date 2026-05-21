@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import ogImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
 
 function NotFoundComponent() {
   return (
@@ -73,11 +74,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Sơn Giả Gỗ Trên Kim Loại Lotus – Biến cổng sắt, lan can thành vân gỗ sang trọng" },
-      { name: "description", content: "Sơn giả gỗ Lotus cho kim loại: cổng sắt, hàng rào, lan can, pergola. Hiệu ứng vân gỗ đẹp, tư vấn nhanh qua Zalo, đặt hàng dễ dàng." },
+      { name: "description", content: "Giải pháp hoàn thiện bề mặt kim loại với hiệu ứng gỗ đẹp mắt, phù hợp cho nhiều hạng mục nội ngoại thất. Dễ chọn màu, dễ đặt hàng, dễ nhắn Zalo để được tư vấn đúng hệ sơn" },
       { name: "author", content: "Sơn Lotus" },
       { property: "og:title", content: "Sơn Giả Gỗ Trên Kim Loại Lotus" },
-      { property: "og:description", content: "Biến bề mặt kim loại thành vân gỗ sang trọng. Tư vấn Zalo, đặt hàng nhanh." },
+      { property: "og:description", content: "Giải pháp hoàn thiện bề mặt kim loại với hiệu ứng gỗ đẹp mắt, phù hợp cho nhiều hạng mục nội ngoại thất. Dễ chọn màu, dễ đặt hàng, dễ nhắn Zalo để được tư vấn đúng hệ sơn" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: ogImage },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
