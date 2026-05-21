@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import ogImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
 
 function NotFoundComponent() {
   return (
@@ -79,9 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Sơn Giả Gỗ Trên Kim Loại Lotus" },
       { property: "og:description", content: "Giải pháp hoàn thiện bề mặt kim loại với hiệu ứng gỗ đẹp mắt, phù hợp cho nhiều hạng mục nội ngoại thất. Dễ chọn màu, dễ đặt hàng, dễ nhắn Zalo để được tư vấn đúng hệ sơn" },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: ogImage },
+      { property: "og:image", content: "/og-image.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Sơn Giả Gỗ Trên Kim Loại Lotus" },
+      { name: "twitter:description", content: "Giải pháp hoàn thiện bề mặt kim loại với hiệu ứng gỗ đẹp mắt, phù hợp cho nhiều hạng mục nội ngoại thất. Dễ chọn màu, dễ đặt hàng, dễ nhắn Zalo để được tư vấn đúng hệ sơn" },
+      { name: "twitter:image", content: "/og-image.png" },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
