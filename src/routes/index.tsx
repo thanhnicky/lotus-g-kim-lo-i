@@ -810,10 +810,25 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
     // Set loading state
     setIsSubmitting(true);
 
+    // Format selectedCombos as readable string
+    const selectedCombosStr = Object.entries(selectedCombos)
+      .map(([name, quantities]) => `${name}: nhỏ ${quantities.small}, lớn ${quantities.large}`)
+      .join("; ");
+
+    // Format comboColors as readable string
+    const comboColorsStr = Object.entries(comboColors)
+      .map(([key, color]) => {
+        const [comboName, size] = key.split('-');
+        const sizeText = size === 'small' ? 'nhỏ' : 'lớn';
+        return `${comboName} ${sizeText}: ${color}`;
+      })
+      .join("; ");
+
     // Prepare order data
     const orderData = {
-      selectedCombos,
-      comboColors,
+      source: "kll-v1",
+      selectedCombos: selectedCombosStr,
+      comboColors: comboColorsStr,
       name,
       phone,
       address,
@@ -827,7 +842,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
 
     // Send data to Google Apps Script
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbz9APlANR5iSSEFE9lvjo06P2FzSRH_I_-1QUXRFLsQENotaMKVJ9AVseFgXWYgFSj3/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbyv7gIgwksqqalJhhqqUp8KUGCM9r0LEu6LtRd8wuGE86lmFHQGXZGJp8gHWNzBaC_T/exec", {
         method: "POST",
         mode: "no-cors",
         headers: {
