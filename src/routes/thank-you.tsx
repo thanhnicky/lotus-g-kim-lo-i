@@ -20,6 +20,11 @@ function ThankYou() {
     }
   }, []);
 
+  const getOrderTime = () => {
+    if (orderData.orderTime) return new Date(orderData.orderTime).toLocaleString('vi-VN');
+    return new Date().toLocaleString('vi-VN');
+  };
+
   const formatPrice = (price: number) => {
     return (price / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ".000 đ";
   };
@@ -45,16 +50,20 @@ function ThankYou() {
   };
 
   const getSelectedItems = () => {
-    if (!orderData.selectedCombos) return [];
+    // Use object versions if available, otherwise fall back to string parsing
+    const selectedCombos = orderData.selectedCombosObj || {};
+    const comboColors = orderData.comboColorsObj || {};
+    
+    if (!selectedCombos || Object.keys(selectedCombos).length === 0) return [];
     const items: { name: string; quantity: number; size: string; color: string }[] = [];
 
-    Object.entries(orderData.selectedCombos).forEach(([comboName, quantities]: [string, any]) => {
+    Object.entries(selectedCombos).forEach(([comboName, quantities]: [string, any]) => {
       if (quantities.small > 0) {
         items.push({
           name: comboName,
           quantity: quantities.small,
           size: "nhỏ",
-          color: orderData.comboColors?.[`${comboName}-small`] || "Chưa chọn",
+          color: comboColors?.[`${comboName}-small`] || "Chưa chọn",
         });
       }
 
@@ -63,7 +72,7 @@ function ThankYou() {
           name: comboName,
           quantity: quantities.large,
           size: "lớn",
-          color: orderData.comboColors?.[`${comboName}-large`] || "Chưa chọn",
+          color: comboColors?.[`${comboName}-large`] || "Chưa chọn",
         });
       }
     });
@@ -99,6 +108,16 @@ function ThankYou() {
 
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
+                  <span className="text-muted-foreground">Mã đơn hàng:</span>
+                  <span className="font-medium">#{orderData.orderId || "Đang xử lý"}</span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Thời gian đặt:</span>
+                  <span className="font-medium">{getOrderTime()}</span>
+                </div>
+
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Họ và tên:</span>
                   <span className="font-medium">{orderData.name || "-"}</span>
                 </div>
@@ -112,6 +131,13 @@ function ThankYou() {
                   <span className="text-muted-foreground">Địa chỉ:</span>
                   <span className="font-medium">{orderData.address || "-"}</span>
                 </div>
+
+                {orderData.note && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Ghi chú:</span>
+                    <span className="font-medium">{orderData.note}</span>
+                  </div>
+                )}
 
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Hình thức thanh toán:</span>

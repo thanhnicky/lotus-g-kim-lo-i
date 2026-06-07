@@ -575,7 +575,7 @@ function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<
   ];
 
   const formatPrice = (price: number) => {
-    return (price / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ".000 đ";
+    return Math.round(price).toLocaleString("vi-VN") + " đ";
   };
 
   const updateQuantity = (comboName: string, size: "small" | "large", value: number) => {
@@ -755,7 +755,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
   const colorOptions = ["Chưa chọn", "LPCP14.LWF1018", "LMCP0.LWF103", "LPCP4.LWF101", "LPCP8.LWF103", "LPCP0.LWF1017", "LPCP0.LWF101", "LPCP0.LWF1012", "LPCP8.LWFF2", "LPCP0.LWF1013"];
 
   const formatPrice = (price: number) => {
-    return (price / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ".000 đ";
+    return Math.round(price).toLocaleString("vi-VN") + " đ";
   };
 
   const getTotalPrice = () => {
@@ -825,8 +825,11 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
       .join("; ");
 
     // Prepare order data
+    const orderId = `ORD${Date.now().toString().slice(-8)}`;
     const orderData = {
       source: "kll-v1",
+      orderId,
+      orderTime: new Date().toISOString(),
       selectedCombos: selectedCombosStr,
       comboColors: comboColorsStr,
       name,
@@ -837,8 +840,12 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
       totalPrice: getTotalPrice(),
     };
 
-    // Save order data to sessionStorage
-    sessionStorage.setItem("orderData", JSON.stringify(orderData));
+    // Save order data to sessionStorage (include object versions for thank-you page)
+    sessionStorage.setItem("orderData", JSON.stringify({
+      ...orderData,
+      selectedCombosObj: selectedCombos,
+      comboColorsObj: comboColors,
+    }));
 
     // Send data to Google Apps Script
     try {
