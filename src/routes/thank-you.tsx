@@ -26,7 +26,7 @@ function ThankYou() {
   };
 
   const formatPrice = (price: number) => {
-    return (price / 1000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ".000 đ";
+    return Math.floor(price).toLocaleString("vi-VN") + " đ";
   };
 
   const comboPrices: Record<string, { small: number; large: number }> = {

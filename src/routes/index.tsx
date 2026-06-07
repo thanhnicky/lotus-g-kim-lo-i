@@ -575,7 +575,7 @@ function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<
   ];
 
   const formatPrice = (price: number) => {
-    return Math.round(price).toLocaleString("vi-VN") + " đ";
+    return Math.floor(price).toLocaleString("vi-VN") + " đ";
   };
 
   const updateQuantity = (comboName: string, size: "small" | "large", value: number) => {
@@ -755,7 +755,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
   const colorOptions = ["Chưa chọn", "LPCP14.LWF1018", "LMCP0.LWF103", "LPCP4.LWF101", "LPCP8.LWF103", "LPCP0.LWF1017", "LPCP0.LWF101", "LPCP0.LWF1012", "LPCP8.LWFF2", "LPCP0.LWF1013"];
 
   const formatPrice = (price: number) => {
-    return Math.round(price).toLocaleString("vi-VN") + " đ";
+    return Math.floor(price).toLocaleString("vi-VN") + " đ";
   };
 
   const getTotalPrice = () => {
