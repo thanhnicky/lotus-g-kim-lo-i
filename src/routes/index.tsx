@@ -96,12 +96,11 @@ function Hero() {
             className="mt-4 text-3xl font-bold leading-tight md:text-5xl lg:text-6xl"
             style={{ fontFamily: serif }}
           >
-            Khách đến nhà cứ tưởng cổng làm bằng gỗ thật — đó là sơn giả gỗ trên kim loại <span className="text-primary">Lotus</span>
+            Biến cổng sắt thành <span className="text-primary">gỗ sang trọng</span> — Bền <span className="text-primary">5+ năm</span> ngoài trời, không cần thợ chuyên
 
           </h1>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
-            Giải pháp hoàn thiện bề mặt kim loại với hiệu ứng gỗ đẹp mắt, phù hợp cho nhiều hạng
-            mục nội ngoại thất. Dễ chọn màu, dễ đặt hàng, dễ nhắn Zalo để được tư vấn đúng hệ sơn.
+            Chỉ cần sơn đúng combo — cổng sắt thô bỗng trở thành điểm nhấn sang trọng nhất của ngôi nhà. Không cần phá cổng cũ, không cần mua gỗ mới
           </p>
 
           <ul className="mt-6 space-y-2 text-sm md:text-base">
@@ -659,7 +658,8 @@ function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<
                 <div className="flex items-center justify-between rounded-lg bg-secondary/50 p-3">
                   <div>
                     <div className="text-sm font-medium">Combo lớn (5kg mỗi loại)</div>
-                    <div className="text-xs text-muted-foreground">{formatPrice(c.prices.large)}</div>
+                    <span className="mt-1 inline-block rounded-md bg-gradient-to-r from-amber-500 to-orange-500 px-2.5 py-0.5 text-xs font-bold text-white shadow-md">Tiết kiệm 18%+</span>
+                    <div className="mt-1 text-xs text-muted-foreground">{formatPrice(c.prices.large)}</div>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
@@ -728,7 +728,7 @@ function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<
           </div>
         )}
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          Hơn 600+ đơn hàng được giao thành công{" "}
+          Combo lớn (5kg mỗi loại) — đủ cho ~25-30m² bề mặt, tương đương 1 cổng đôi tiêu chuẩn. Hơn 600+ đơn hàng được giao thành công{" "}
           <a href={ZALO_URL} className="font-semibold text-primary hover:underline">
             Nhắn Zalo gửi ảnh hạng mục
           </a>{" "}
@@ -984,8 +984,8 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                     "Xác nhận đặt hàng"
                   )}
                 </button>
-                <p className="text-xs text-muted-foreground">
-                  Bằng cách đặt hàng, bạn đồng ý để Lotus liên hệ xác nhận đơn hàng và giao hàng. Đổi trà/hoàn tiền trong vòng 7 ngày nếu sơn không đúng màu đã chọn. 
+                <p className="mt-4 text-sm font-semibold text-primary">
+                  ✅ Cam kết 7 ngày đổi trả nếu sai màu — Không hỏi, không khó dễ
                 </p>
               </form>
           </div>
