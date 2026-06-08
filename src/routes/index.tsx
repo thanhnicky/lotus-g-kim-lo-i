@@ -40,9 +40,8 @@ function LandingPage() {
       <Hero />
       <TrustBar />
       <Problem />
-      <Solution />
       <Applications />
-      <Benefits />
+      <TrustSignals />
       <BeforeAfter />
       <Process />
       <ColorPalette />
@@ -229,49 +228,6 @@ function Problem() {
   );
 }
 
-/* ---------- Solution ---------- */
-function Solution() {
-  const items = [
-    {
-      t: "Hoàn thiện bề mặt theo phong cách vân gỗ",
-      d: "Hệ sơn giả gỗ Lotus giúp kim loại lên màu vân gỗ tự nhiên, sống động.",
-    },
-    {
-      t: "Tăng thẩm mỹ cho công trình",
-      d: "Mang cảm giác ấm, sang trọng – phù hợp nhà phố, biệt thự, resort.",
-    },
-    {
-      t: "Dùng được nội thất & ngoại thất",
-      d: "Có hệ sơn phủ bảo vệ riêng cho ngoài trời, chống nắng và thời tiết.",
-    },
-    {
-      t: "Tư vấn đúng quy trình & combo",
-      d: "Đội ngũ Lotus hỗ trợ chọn combo phù hợp theo từng hạng mục.",
-    },
-  ];
-  return (
-    <section className="bg-secondary/40 py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Giải pháp Lotus</span>
-          <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-            Lotus giúp kim loại mang vẻ đẹp ấm và sang của gỗ
-          </h2>
-        </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {items.map((it) => (
-            <div key={it.t} className="rounded-xl bg-background p-6 shadow-sm ring-1 ring-border">
-              <CheckIcon className="h-6 w-6 text-primary" />
-              <h3 className="mt-3 text-base font-semibold">{it.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{it.d}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ---------- Applications ---------- */
 function Applications() {
   const apps = [
@@ -320,28 +276,28 @@ function Applications() {
   );
 }
 
-/* ---------- Benefits ---------- */
-function Benefits() {
+/* ---------- Trust Signals ---------- */
+function TrustSignals() {
   const items = [
-    "Đẹp như gỗ nhưng trên nền kim loại bền bỉ",
-    "Tăng tính thẩm mỹ cho cổng, hàng rào, lan can",
-    "Cảm giác sang trọng, ấm hơn kim loại sơn màu thường",
-    "Phù hợp nhiều phong cách kiến trúc: tân cổ điển, hiện đại, resort",
-    "Tư vấn đúng hệ sơn theo từng hạng mục cụ thể",
-    "Dễ phối với cửa gỗ, đá tự nhiên và nội thất ấm",
+    "Bảng màu giả gỗ độc quyền từ Lotus — 10+ màu vân gỗ chuẩn",
+    "Tư vấn đúng hệ sơn theo từng hạng mục — không mua thừa, không thiếu",
+    "Giao hàng trong 24–48h tại TP.HCM và các tỉnh lân cận",
+    "Cam kết 7 ngày đổi trả nếu sai màu — Không hỏi, không khó dễ",
+    "Đội ngũ hỗ trợ Zalo trả lời trong 15 phút",
+    "Hơn 600+ đơn hàng được giao thành công",
   ];
   return (
     <section className="bg-[oklch(0.95_0.02_75)] py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">Lợi ích</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-primary">Tại sao chọn Lotus</span>
             <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-              Vì sao chọn hiệu ứng giả gỗ trên kim loại?
+              Mua sơn an tâm — Lotus đồng hành từ A-Z
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Kết hợp độ bền của kim loại và vẻ đẹp ấm áp của gỗ. Một lựa chọn thông minh cho công
-              trình muốn nâng tầm thẩm mỹ mà vẫn giữ tính thực tế.
+              Không chỉ bán sơn, Lotus tư vấn đúng combo, giao nhanh, và cam kết đổi trả nếu sai màu.
+              Bạn không cần lo về rủi ro khi mua hàng.
             </p>
             <a
               href={ZALO_URL}
@@ -608,6 +564,13 @@ function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<
           <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
             Chọn combo phù hợp với hạng mục của bạn
           </h2>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Hơn 600+ đơn hàng được giao thành công{" "}
+            <a href={ZALO_URL} className="font-semibold text-primary hover:underline">
+              Nhắn Zalo gửi ảnh hạng mục
+            </a>{" "}
+            để được tư vấn nhanh.
+          </p>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {combos.map((c) => (
@@ -727,12 +690,8 @@ function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<
             </a>
           </div>
         )}
-        <p className="mt-6 text-center text-sm text-muted-foreground">
-          Combo lớn (5kg mỗi loại) — đủ cho ~25-30m² bề mặt, tương đương 1 cổng đôi tiêu chuẩn. Hơn 600+ đơn hàng được giao thành công{" "}
-          <a href={ZALO_URL} className="font-semibold text-primary hover:underline">
-            Nhắn Zalo gửi ảnh hạng mục
-          </a>{" "}
-          để được tư vấn nhanh.
+        <p className="mt-6 text-center text-base font-medium text-muted-foreground">
+          Combo lớn (5kg mỗi loại) — đủ cho ~25-30m² bề mặt, tương đương 1 cổng đôi tiêu chuẩn.
         </p>
       </div>
     </section>
@@ -874,10 +833,10 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
           <div className="lg:col-span-3">
             <span className="text-xs font-bold uppercase tracking-widest text-primary">Đặt hàng ngay</span>
             <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-              Hoàn tất đơn hàng – Lotus giao hàng tận nơi
+              Đặt hôm nay — nhận sơn sớm để thi công ngay cuối tuần này
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Đặt ngay hôm nay – Nhận sơn tại nhà, bắt đầu thi công cuối tuần này. Giao hàng trong 24–48h tại TP.HCM và các tỉnh lân cận
+              Giao hàng trong 24–48h tại TP.HCM và các tỉnh lân cận.
             </p>
 
             <form
