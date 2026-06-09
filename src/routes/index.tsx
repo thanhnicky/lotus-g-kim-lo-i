@@ -12,20 +12,16 @@ import appLouver from "../assets/app-louver.jpg";
 import appKhungKeoThep from "../assets/khung-keo-thep-gia-go-lotus.jpg";
 import sonChanBanSatGiaGo from "../assets/son-chan-ban-sat-gia-go.jpg";
 import cuaCongSatGiaGo from "../assets/cua-cong-sat-gia-go.jpg";
-import beforeChanBanSat from "../assets/before-chan-ban-sat.jpg";
-import afterChanBanSat from "../assets/after-chan-ban-sat.jpg";
+import beforeGate from "../assets/before-gate.jpg";
+import afterGate from "../assets/after-gate.jpg";
 import banGheSatGiaGoNgoaiTroi from "../assets/ban-ghe-sat-gia-go-ngoai-troi.jpg";
 import sonSatGiaGoGianHoa from "../assets/son-sat-gia-go-gian-hoa.jpg";
 import satGiaGoAshLotus from "../assets/sat-gia-go-ash-lotus.jpg";
 
-export const Route = createFileRoute("/")({
-  component: LandingPage,
-});
+export const Route = createFileRoute("/")({ component: LandingPage });
 
 const ZALO_URL = "https://zalo.me/0943966662";
 const HOTLINE = "0943 966 662";
-
-const serif = "'Playfair Display', serif";
 
 function LandingPage() {
   const [selectedCombos, setSelectedCombos] = useState<Record<string, { small: number; large: number }>>({
@@ -33,21 +29,18 @@ function LandingPage() {
     "Combo thông dụng": { small: 0, large: 0 },
     "Combo cao cấp 2K": { small: 0, large: 0 },
   });
-
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased">
+    <div className="min-h-screen bg-cream text-charcoal antialiased font-sans">
       <Header />
       <Hero />
-      <TrustBar />
-      <Problem />
       <Applications />
-      <TrustSignals />
+      <WhyStatement />
       <BeforeAfter />
       <Process />
       <ColorPalette />
       <Combos selectedCombos={selectedCombos} setSelectedCombos={setSelectedCombos} />
       <LeadForm selectedCombos={selectedCombos} />
-      <Feedback />
+      <Projects />
       <FAQ />
       <FinalCTA />
       <Footer />
@@ -56,25 +49,20 @@ function LandingPage() {
   );
 }
 
-/* ---------- Header ---------- */
+/* ── Header ─────────────────────────────────────────── */
 function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-10">
-        <a href="#top" className="flex items-center gap-2 ">
-          <img src={logoLotus} alt="Sơn Lotus Logo" className="w-22  object-contain" />
+    <header className="sticky top-0 z-40 border-b border-walnut/15 bg-cream/90 backdrop-blur-sm">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-3 md:px-12">
+        <a href="#top">
+          <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain" />
         </a>
-        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
-          <a href="#ung-dung" className="hover:text-primary">Ứng dụng</a>
-          <a href="#bang-mau" className="hover:text-primary">Bảng màu</a>
-          <a href="#combo" className="hover:text-primary">Combo</a>
-          <a href="#tu-van" className="hover:text-primary">Đặt Hàng</a>
-          <a href="#faq" className="hover:text-primary">FAQ</a>
+        <nav className="hidden items-center gap-8 text-[11px] uppercase tracking-[0.22em] text-walnut/65 md:flex">
+          {[["#ung-dung","Ứng dụng"],["#bang-mau","Bảng màu"],["#combo","Combo"],["#tu-van","Tư vấn"],["#faq","FAQ"]].map(([h,l]) => (
+            <a key={h} href={h} className="transition hover:text-charcoal">{l}</a>
+          ))}
         </nav>
-        <a
-          href={ZALO_URL}
-          className="hidden rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90 md:inline-flex"
-        >
+        <a href={ZALO_URL} className="hidden text-[11px] uppercase tracking-[0.22em] text-clay border-b border-clay pb-0.5 transition hover:text-walnut hover:border-walnut md:block">
           Nhắn Zalo tư vấn
         </a>
       </div>
@@ -82,192 +70,114 @@ function Header() {
   );
 }
 
-/* ---------- Hero ---------- */
+/* ── Hero ────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 md:grid-cols-2 md:gap-12 md:px-6 md:py-16 lg:py-20">
-        <div>
-          <span className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-secondary-foreground">
-            Sơn Lotus · Hệ giả gỗ chuyên cho kim loại
-          </span>
-          <h1
-            className="mt-4 text-3xl font-bold leading-tight md:text-5xl lg:text-6xl"
-            style={{ fontFamily: serif }}
-          >
-            Biến cổng sắt thành <span className="text-primary">gỗ sang trọng</span> — Bền <span className="text-primary">5+ năm</span> ngoài trời, không cần thợ chuyên
-
-          </h1>
-          <p className="mt-5 text-base text-muted-foreground md:text-lg">
-            Chỉ cần sơn đúng combo — cổng sắt thô bỗng trở thành điểm nhấn sang trọng nhất của ngôi nhà. Không cần phá cổng cũ, không cần mua gỗ mới
-          </p>
-
-          <ul className="mt-6 space-y-2 text-sm md:text-base">
-            {[
-              "Vân gỗ tự nhiên, người xem không nhận ra đây là kim loại",
-              "Bền trên 5+ năm ngoài trời — không phai, không bong dù nắng mưa",
-              "Bảng màu giả gỗ độc quyền từ Lotus",
-            ].map((t) => (
-              <li key={t} className="flex items-start gap-3">
-                <CheckIcon className="mt-0.5 h-5 w-5 flex-none text-primary" />
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={ZALO_URL}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground shadow-md transition hover:bg-primary/90"
-            >
-              <ZaloIcon className="h-5 w-5" />
-              Nhắn Zalo để được tư vấn
-            </a>
-            <a
-              href="#bang-mau"
-              className="inline-flex items-center justify-center rounded-lg border-2 border-primary bg-background px-6 py-4 text-base font-semibold text-primary transition hover:bg-secondary"
-            >
-              Xem bảng màu & đặt hàng
-            </a>
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-            <span>Hotline: <strong className="text-foreground">{HOTLINE}</strong></span>
-            <span>·</span>
-            <span>Tư vấn miễn phí 8h–20h</span>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5">
-            <img
-              src={heroGate}
-              alt="Cổng sắt sơn giả gỗ Lotus hiệu ứng vân gỗ sang trọng"
-              width={1920}
-              height={1080}
-              className="aspect-[4/3] w-full object-cover"
-            />
-          </div>
-          <div className="absolute -bottom-5 -left-3 hidden rounded-xl bg-background p-3 shadow-lg ring-1 ring-border md:block">
-            <div className="flex items-center gap-3">
-              <img src={appDoor} alt="Cửa sắt giả gỗ" className="h-16 w-16 rounded-md object-cover" loading="lazy" />
-              <div className="text-xs">
-                <div className="font-semibold">Hơn 200+ công trình</div>
-                <div className="text-muted-foreground">Cổng, lan can, pergola...</div>
-              </div>
+    <section id="top" className="border-b border-walnut/10">
+      <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-12 md:pt-16 md:pb-24">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-10">
+          <div className="col-span-12 flex flex-col md:col-span-5 lg:col-span-4">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">Lotus · Hoàn thiện bề mặt kim loại</span>
+            <h1 className="mt-6 font-serif text-[42px] leading-[1.05] tracking-tight text-charcoal sm:text-[52px] md:text-[60px] lg:text-[70px]">
+              Kim loại<br />
+              mang vẻ đẹp<br />
+              <em className="not-italic text-clay">gỗ tự nhiên.</em>
+            </h1>
+            <p className="mt-7 max-w-md text-[14px] leading-relaxed text-walnut/70">
+              Hệ sơn giả gỗ Lotus biến cổng sắt, hàng rào, lam che nắng, pergola và khung kim loại thành bề mặt có vân gỗ đẹp, ấm, sang — bền ngoài trời nhiều năm.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7">
+                Gửi ảnh hạng mục qua Zalo <ArrowRightIcon className="h-4 w-4" />
+              </a>
+              <a href="#ung-dung" className="text-[12px] font-medium uppercase tracking-[0.18em] text-walnut underline-offset-8 hover:underline">
+                Xem ứng dụng thực tế
+              </a>
+            </div>
+            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-1.5 border-t border-walnut/15 pt-6 text-[10px] uppercase tracking-[0.22em] text-walnut/50">
+              <span>Bền 5+ năm ngoài trời</span>
+              <span className="text-walnut/25">/</span>
+              <span>Hệ lớp đúng kỹ thuật</span>
+              <span className="text-walnut/25">/</span>
+              <span>Tư vấn theo công trình thật</span>
             </div>
           </div>
+          <figure className="col-span-12 md:col-span-7 lg:col-span-8">
+            <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10]" width={1920} height={1080} />
+            <figcaption className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-walnut/45">
+              <span>Cổng sắt hoàn thiện giả gỗ · Lotus</span>
+              <span>— 001</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- Trust Bar ---------- */
-function TrustBar() {
-  const items = [
-    "Dùng cho nhiều bề mặt kim loại",
-    "Hiệu ứng gỗ đẹp, sang hơn",
-    "Hỗ trợ chọn đúng hệ sơn",
-    "Tư vấn nhanh qua Zalo",
-  ];
-  return (
-    <section className="border-y border-border bg-secondary/50">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-4 py-5 md:grid-cols-4 md:gap-6 md:px-6 md:py-6">
-        {items.map((t) => (
-          <div key={t} className="flex items-start gap-2 text-sm font-medium md:items-center">
-            <CheckIcon className="h-5 w-5 flex-none text-primary" />
-            <span>{t}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Problem ---------- */
-function Problem() {
-  const pains = [
-    "Cổng sắt hoặc lan can nhìn cứng và thô",
-    "Muốn đẹp như gỗ nhưng không muốn dùng gỗ thật",
-    "Không biết sơn giả gỗ trên kim loại có phù hợp không",
-    "Sợ chọn sai màu hoặc sai hệ sơn",
-    "Muốn được tư vấn nhanh trước khi mua",
-  ];
-  return (
-    <section className="py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Vấn đề thường gặp</span>
-          <h2
-            className="mt-2 text-2xl font-bold leading-tight md:text-4xl"
-            style={{ fontFamily: serif }}
-          >
-            Bề mặt kim loại bền – nhưng thường thiếu cảm giác sang và ấm như gỗ
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Nhiều khách hàng muốn cổng, hàng rào, lan can đẹp như gỗ tự nhiên nhưng vẫn giữ độ bền của
-            kim loại. Đây là lý do hệ sơn giả gỗ Lotus được lựa chọn.
-          </p>
-        </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {pains.map((p, i) => (
-            <div
-              key={p}
-              className="rounded-xl border border-border bg-card p-5 shadow-sm transition hover:shadow-md"
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-sm font-bold text-primary">
-                {i + 1}
-              </div>
-              <p className="mt-3 text-sm font-medium leading-relaxed md:text-base">{p}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Applications ---------- */
+/* ── Applications ─────────────────────────────────────── */
 function Applications() {
-  const apps = [
-    { img: heroGate, t: "Cổng sắt giả gỗ" },
-    { img: appFence, t: "Hàng rào sắt giả gỗ" },
-    { img: appRailing, t: "Lan can giả gỗ" },
-    { img: appFrame, t: "Khung thép trang trí" },
-    { img: appDoor, t: "Cửa sắt giả gỗ" },
-    { img: appPergola, t: "Pergola / mái hiên" },
-    { img: appLouver, t: "Lam sắt trang trí" },
-    { img: appKhungKeoThep, t: "Khung kèo thép giả gỗ" },
-  ];
   return (
-    <section id="ung-dung" className="py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">Ứng dụng thực tế</span>
-            <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-              Phù hợp nhiều hạng mục kim loại nội & ngoại thất
+    <section id="ung-dung" className="border-t border-walnut/10">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">02 — Ứng dụng</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">
+              Kim loại nào cũng có thể<br />mang vẻ đẹp gỗ.
             </h2>
           </div>
-          <a href={ZALO_URL} className="text-sm font-semibold text-primary hover:underline">
-            Gửi ảnh hạng mục qua Zalo →
+          <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+            Gửi ảnh hạng mục để tư vấn <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5 lg:grid-cols-4">
-          {apps.map((a) => (
-            <figure key={a.t} className="group overflow-hidden rounded-xl bg-card shadow-sm ring-1 ring-border">
-              <div className="aspect-square overflow-hidden">
-                <img
-                  src={a.img}
-                  alt={a.t}
-                  loading="lazy"
-                  width={1024}
-                  height={1024}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                />
+
+        {/* 1 large + 4 small */}
+        <div className="mt-14 grid grid-cols-12 gap-3 md:gap-5">
+          <figure className="col-span-12 md:col-span-7 group">
+            <div className="overflow-hidden">
+              <img src={appPergola} alt="Pergola kim loại sơn giả gỗ" loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1600} height={1200} />
+            </div>
+            <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
+              <span className="font-serif text-[18px] text-charcoal">Pergola / giàn mái kim loại</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-walnut/45">Ngoại thất</span>
+            </figcaption>
+          </figure>
+          <div className="col-span-12 grid grid-cols-2 gap-3 md:col-span-5 md:gap-5">
+            {[
+              { img: heroGate, label: "Cổng sắt", ctx: "Ngoại thất" },
+              { img: appFence, label: "Hàng rào", ctx: "Sân vườn" },
+              { img: appLouver, label: "Lam che nắng", ctx: "Mặt dựng" },
+              { img: appRailing, label: "Lan can, tay vịn", ctx: "Cầu thang" },
+            ].map((a) => (
+              <figure key={a.label} className="group">
+                <div className="overflow-hidden">
+                  <img src={a.img} alt={a.label} loading="lazy" className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={800} height={800} />
+                </div>
+                <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
+                  <span className="text-[13px] font-medium text-charcoal">{a.label}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-walnut/40">{a.ctx}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        {/* 3 equal */}
+        <div className="mt-5 grid grid-cols-3 gap-3 md:gap-5">
+          {[
+            { img: appKhungKeoThep, label: "Khung kèo thép", ctx: "Kết cấu nội thất" },
+            { img: appDoor, label: "Cửa sắt / pano cửa", ctx: "Khung mặt tiền" },
+            { img: appFrame, label: "Khung trang trí", ctx: "Chi tiết kiến trúc" },
+          ].map((a) => (
+            <figure key={a.label} className="group col-span-3 md:col-span-1">
+              <div className="overflow-hidden">
+                <img src={a.img} alt={a.label} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1024} height={768} />
               </div>
-              <figcaption className="px-3 py-3 text-sm font-semibold md:text-base">{a.t}</figcaption>
+              <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
+                <span className="font-serif text-[16px] text-charcoal">{a.label}</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-walnut/45">{a.ctx}</span>
+              </figcaption>
             </figure>
           ))}
         </div>
@@ -276,124 +186,81 @@ function Applications() {
   );
 }
 
-/* ---------- Trust Signals ---------- */
-function TrustSignals() {
-  const items = [
-    "Bảng màu giả gỗ độc quyền từ Lotus — 10+ màu vân gỗ chuẩn",
-    "Tư vấn đúng hệ sơn theo từng hạng mục — không mua thừa, không thiếu",
-    "Giao hàng trong 24–48h tại TP.HCM và các tỉnh lân cận",
-    "Cam kết 7 ngày đổi trả nếu sai màu — Không hỏi, không khó dễ",
-    "Đội ngũ hỗ trợ Zalo trả lời trong 15 phút",
-    "Hơn 600+ đơn hàng được giao thành công",
+/* ── Why Statement ────────────────────────────────────── */
+function WhyStatement() {
+  const points = [
+    { n: "01", t: "Vân gỗ thuyết phục", d: "Lớp hoàn thiện tạo chiều sâu và vân gỗ tự nhiên. Người xem không dễ nhận ra đây là kim loại." },
+    { n: "02", t: "Bám dính đúng kỹ thuật", d: "Primer phù hợp cho thép, mạ kẽm, nhôm, inox — đảm bảo độ bám lâu dài trên từng loại nền kim loại." },
+    { n: "03", t: "Phù hợp ngoại thất", d: "Lớp phủ bảo vệ chịu UV, chịu ẩm, bền nhiều năm trên cổng, hàng rào, lam, giàn ngoài trời." },
+    { n: "04", t: "Cảm giác ấm hơn cho công trình", d: "Thay đổi tone vật liệu từ công nghiệp lạnh về gần nội ngoại thất ấm, có chiều sâu và kiến trúc hơn." },
   ];
   return (
-    <section className="bg-[oklch(0.95_0.02_75)] py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="grid gap-10 md:grid-cols-2 md:items-center">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">Tại sao chọn Lotus</span>
-            <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-              Mua sơn an tâm — Lotus đồng hành từ A-Z
+    <section className="border-t border-walnut/10 bg-charcoal text-cream">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-10">
+          <div className="col-span-12 md:col-span-4">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-cream/60">03 — Vì sao chọn giả gỗ</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight sm:text-4xl md:text-5xl">
+              Giữ độ chắc<br />của kim loại.<br /><em className="not-italic text-clay">Đưa bề mặt<br />về phía gỗ.</em>
             </h2>
-            <p className="mt-3 text-muted-foreground">
-              Không chỉ bán sơn, Lotus tư vấn đúng combo, giao nhanh, và cam kết đổi trả nếu sai màu.
-              Bạn không cần lo về rủi ro khi mua hàng.
-            </p>
-            <a
-              href={ZALO_URL}
-              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-            >
-              <ZaloIcon className="h-4 w-4" /> Nhắn Zalo để được tư vấn
-            </a>
           </div>
-          <ul className="grid gap-3">
-            {items.map((b) => (
-              <li
-                key={b}
-                className="flex items-start gap-3 rounded-lg bg-background p-4 shadow-sm ring-1 ring-border"
-              >
-                <CheckIcon className="mt-0.5 h-5 w-5 flex-none text-primary" />
-                <span className="text-sm md:text-base">{b}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="col-span-12 md:col-span-8 md:pt-2">
+            <p className="font-serif text-[20px] leading-[1.65] text-cream/90 md:text-[22px]">
+              Cổng sắt, hàng rào, lam, pergola — kim loại bền nhưng lạnh. Hệ sơn giả gỗ Lotus không thay vật liệu, không phá kết cấu. Nó chỉ thay đổi bề mặt — theo hướng ấm hơn, sang hơn, gần với ngôn ngữ gỗ và kiến trúc hơn.
+            </p>
+            <ul className="mt-14 divide-y divide-cream/15 border-t border-cream/15">
+              {points.map((b) => (
+                <li key={b.n} className="flex gap-8 py-7">
+                  <span className="mt-0.5 shrink-0 text-[10px] uppercase tracking-[0.25em] text-clay">{b.n}</span>
+                  <div>
+                    <div className="font-serif text-[19px] text-cream">{b.t}</div>
+                    <p className="mt-2 text-[13px] leading-relaxed text-cream/75">{b.d}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- Before / After ---------- */
+/* ── Before / After ───────────────────────────────────── */
 function BeforeAfter() {
-  const [sliderPosition, setSliderPosition] = useState(50);
-
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSliderPosition(Number(e.target.value));
-  };
-
+  const [pos, setPos] = useState(50);
   return (
-    <section className="py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Trước & sau</span>
-          <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-            Sự thay đổi rõ rệt sau khi hoàn thiện giả gỗ Lotus
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Kéo thanh trượt để so sánh sự khác biệt trước và sau khi sơn giả gỗ.
-          </p>
-        </div>
-        <div className="mt-8 mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-2xl shadow-lg">
-            {/* After image (background) */}
-            <img
-              src={afterChanBanSat}
-              alt="Sau khi sơn giả gỗ"
-              className="aspect-[4/3] w-full object-cover"
-            />
-            {/* Before image (foreground with clipping) */}
-            <div
-              className="absolute inset-0 overflow-hidden"
-              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-            >
-              <img
-                src={beforeChanBanSat}
-                alt="Trước khi sơn giả gỗ"
-                className="aspect-[4/3] w-full object-cover"
-              />
-            </div>
-            {/* Slider handle */}
-            <div
-              className="absolute inset-y-0 w-1 bg-white cursor-ew-resize"
-              style={{ left: `${sliderPosition}%` }}
-            >
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg">
-                <svg className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+    <section className="border-t border-walnut/10">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-10">
+          <div className="col-span-12 md:col-span-4">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">04 — Trước & Sau</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">
+              Sắt thô<br />thành bề mặt<br /><em className="not-italic text-clay">có chiều sâu.</em>
+            </h2>
+            <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/60">
+              Cùng cấu kiện. Cùng kích thước. Chỉ khác lớp hoàn thiện — cảm giác hoàn toàn khác biệt.
+            </p>
+            <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
+              Tư vấn hạng mục tương tự <ArrowRightIcon className="h-3.5 w-3.5" />
+            </a>
+          </div>
+          <div className="col-span-12 md:col-span-8">
+            <div className="relative select-none overflow-hidden">
+              <img src={afterGate} alt="Sau hoàn thiện giả gỗ" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} />
+              <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+                <img src={beforeGate} alt="Trước hoàn thiện" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} />
+              </div>
+              <div className="pointer-events-none absolute inset-y-0 w-px bg-cream/60" style={{ left: `${pos}%` }} />
+              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-10 w-10 cursor-ew-resize items-center justify-center bg-cream shadow" style={{ left: `${pos}%` }}>
+                <svg className="h-5 w-5 text-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
                 </svg>
               </div>
+              <input type="range" min="0" max="100" value={pos} onChange={(e) => setPos(Number(e.target.value))} className="absolute inset-0 w-full cursor-ew-resize opacity-0" />
+              <div className="pointer-events-none absolute bottom-4 left-5 text-[10px] uppercase tracking-[0.25em] text-cream/75">Trước</div>
+              <div className="pointer-events-none absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.25em] text-cream/75">Sau</div>
             </div>
-            {/* Labels */}
-            <span className="absolute left-4 top-4 rounded bg-foreground/80 px-3 py-1 text-xs font-bold text-background">
-              TRƯỚC
-            </span>
-            <span className="absolute right-4 top-4 rounded bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
-              SAU
-            </span>
-            {/* Hidden slider input */}
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={sliderPosition}
-              onChange={handleSliderChange}
-              className="absolute inset-0 w-full cursor-ew-resize opacity-0"
-            />
-          </div>
-          <div className="mt-6 text-center">
-            <a href={ZALO_URL} className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground shadow-md transition hover:bg-primary/90">
-              Tư vấn hạng mục tương tự →
-            </a>
           </div>
         </div>
       </div>
@@ -401,304 +268,162 @@ function BeforeAfter() {
   );
 }
 
-/* ---------- Color Palette ---------- */
-const COLORS = [
-  { name: "Teak", hex: "#a0633a" },
-  { name: "Walnut", hex: "#5b3a22" },
-  { name: "Cánh gián", hex: "#7a3b1a" },
-  { name: "Sồi sáng", hex: "#c89466" },
-  { name: "Cherry", hex: "#8a3324" },
-  { name: "Gỗ đỏ đậm", hex: "#4a1d12" },
-];
-
-function ColorPalette() {
-  const [isZoomed, setIsZoomed] = useState(false);
-
-  const handleDoubleClick = () => {
-    setIsZoomed(!isZoomed);
-  };
-
-  return (
-    <section id="bang-mau" className="bg-secondary/40 py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Bảng màu</span>
-          <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-            Chọn tông gỗ phù hợp cho hạng mục của bạn
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Các tông gỗ phổ biến được khách hàng Lotus lựa chọn nhiều nhất. Xem bảng màu chi tiết và
-            gửi cho chúng tôi để nhận tư vấn đúng combo.
-          </p>
-        </div>
-        <div className="mt-8 flex justify-center">
-          <div 
-            className="relative overflow-hidden rounded-2xl shadow-lg cursor-pointer md:cursor-default"
-            onDoubleClick={handleDoubleClick}
-          >
-            <img
-              src={colorPaletteImage}
-              alt="Bảng màu sơn giả gỗ trên kim loại Lotus"
-              className={`w-full max-w-5xl transition-transform duration-300 ${isZoomed ? 'scale-150' : 'scale-100'}`}
-              style={{ transformOrigin: 'center center' }}
-            />
-            <div className="md:hidden absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
-              Đúp tap để zoom
-            </div>
-          </div>
-        </div>
-        <div className="mt-8 text-center">
-          <a
-            href="#tu-van"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground shadow-md transition hover:bg-primary/90"
-          >
-            Đặt hàng / Nhận tư vấn
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Process ---------- */
+/* ── Process ──────────────────────────────────────────── */
 function Process() {
   const steps = [
-    { n: 1, t: "Xử lý bề mặt kim loại", d: "Làm sạch, đánh nhám, loại bỏ gỉ và dầu mỡ." },
-    { n: 2, t: "Sơn lót chống gỉ tạo màu nền Lotus", d: "Bám dính tốt, chống gỉ và làm nền cho vân gỗ." },
-    { n: 3, t: "Dùng cọ quét tạo vân gỗ tự nhiên", d: "Thợ Lotus tạo vân gỗ sống động theo từng loại gỗ." },
-    { n: 4, t: "Phủ bảo vệ hoàn thiện ngoài trời", d: "Lớp phủ bảo vệ chống tia UV, chống thời tiết." },
+    { n: "I", t: "Chuẩn bị bề mặt", d: "Vệ sinh sạch, loại bỏ dầu mỡ và gỉ sét. Đánh nhám hoặc xử lý bề mặt tạo độ bám phù hợp cho kim loại." },
+    { n: "II", t: "Lớp lót kim loại", d: "Primer chuyên dụng cho thép, mạ kẽm, nhôm hoặc inox — tạo nền bám dính và chống gỉ từ bên trong." },
+    { n: "III", t: "Tạo màu nền & vân gỗ", d: "Phủ màu nền, sau đó dùng kỹ thuật cọ tạo vân gỗ sống động theo từng loại gỗ được chọn." },
+    { n: "IV", t: "Phủ bảo vệ hoàn thiện", d: "Lớp phủ trong suốt chống UV, chống ẩm — đóng rắn bề mặt và bảo vệ vân gỗ bền theo thời gian." },
   ];
   return (
-    <section className="py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Quy trình</span>
-          <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-            4 bước thi công sơn giả gỗ Lotus trên kim loại
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            Quy trình đúng giúp bề mặt kim loại lên vân gỗ đẹp, bám tốt và bền hơn khi sử dụng thực tế.
-          </p>
-        </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.n} className="relative rounded-xl border border-border bg-card p-6 shadow-sm">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-base font-bold text-primary-foreground">
-                {s.n}
-              </div>
-              <div className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Bước {s.n}
-              </div>
-              <h3 className="mt-1 text-base font-bold leading-snug">{s.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
-            </div>
-          ))}
+    <section className="border-t border-walnut/10 bg-sand/40">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="grid grid-cols-12 gap-6">
+          <div className="col-span-12 md:col-span-4">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">05 — Hệ lớp</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">
+              Bốn bước.<br />Một hệ hoàn<br />thiện bài bản.
+            </h2>
+            <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/60">
+              Không phải quét một lớp màu. Đây là một finish system được thiết kế cho từng loại kim loại và điều kiện sử dụng.
+            </p>
+          </div>
+          <div className="col-span-12 md:col-span-8 md:pl-4">
+            <ol>
+              {steps.map((s, i) => (
+                <li key={s.n} className={`flex gap-6 py-8 md:gap-10 ${i > 0 ? "border-t border-walnut/15" : ""}`}>
+                  <span className="mt-0.5 w-10 shrink-0 font-serif text-[3rem] leading-none text-clay/45 sm:text-[3.5rem]">{s.n}</span>
+                  <div className="pt-1">
+                    <h3 className="font-serif text-[20px] leading-tight text-charcoal sm:text-[24px]">{s.t}</h3>
+                    <p className="mt-2.5 text-[13px] leading-relaxed text-walnut/58">{s.d}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-2 border-t border-walnut/15 pt-6 font-serif text-[15px] italic text-walnut/40">
+              Đúng hệ lớp — bề mặt bám tốt, giữ màu lâu và bền ngoài trời nhiều năm.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- Combos ---------- */
-function Combos({ selectedCombos, setSelectedCombos }: { selectedCombos: Record<string, { small: number; large: number }>; setSelectedCombos: React.Dispatch<React.SetStateAction<Record<string, { small: number; large: number }>>>; }) {
-
-  const combos = [
-    {
-      name: "Combo tiết kiệm",
-      tag: "Cơ bản",
-      desc: "Sơn lót kim loại + sơn phủ màu giả gỗ kim loại.",
-      items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ"],
-      prices: { small: 515000, large: 2350000 },
-      highlight: false,
-    },
-    {
-      name: "Combo thông dụng",
-      tag: "Phổ biến nhất",
-      desc: "Sơn lót kim loại + sơn phủ màu giả gỗ + sơn phủ trong suốt bảo vệ ngoài trời.",
-      items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ bảo vệ ngoài trời"],
-      prices: { small: 751000, large: 3420000 },
-      highlight: true,
-    },
-    {
-      name: "Combo cao cấp 2K",
-      tag: "Bền cao cấp",
-      desc: "Sơn lót kim loại + sơn phủ màu giả gỗ + sơn phủ trong suốt 2K bảo vệ ngoài trời.",
-      items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ 2K bảo vệ cao cấp"],
-      prices: { small: 888000, large: 4050000 },
-      highlight: false,
-    },
-  ];
-
-  const formatPrice = (price: number) => {
-    return Math.floor(price).toLocaleString("vi-VN") + " đ";
-  };
-
-  const updateQuantity = (comboName: string, size: "small" | "large", value: number) => {
-    setSelectedCombos(prev => ({
-      ...prev,
-      [comboName]: {
-        ...prev[comboName],
-        [size]: Math.max(0, value),
-      },
-    }));
-  };
-
-  const getComboTotal = (comboName: string) => {
-    const combo = combos.find(c => c.name === comboName);
-    if (!combo) return 0;
-    const selected = selectedCombos[comboName];
-    return (selected.small * combo.prices.small) + (selected.large * combo.prices.large);
-  };
-
-  const getTotalPrice = () => {
-    return combos.reduce((total, combo) => {
-      const selected = selectedCombos[combo.name];
-      return total + (selected.small * combo.prices.small) + (selected.large * combo.prices.large);
-    }, 0);
-  };
+/* ── Color Palette ────────────────────────────────────── */
+function ColorPalette() {
   return (
-    <section id="combo" className="bg-secondary/40 py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Combo sản phẩm</span>
-          <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-            Chọn combo phù hợp với hạng mục của bạn
-          </h2>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Hơn 600+ đơn hàng được giao thành công{" "}
-            <a href={ZALO_URL} className="font-semibold text-primary hover:underline">
-              Nhắn Zalo gửi ảnh hạng mục
-            </a>{" "}
-            để được tư vấn nhanh.
-          </p>
-        </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {combos.map((c) => (
-            <div
-              key={c.name}
-              className={`relative flex flex-col rounded-2xl bg-background p-6 shadow-sm ring-1 transition ${
-                c.highlight ? "ring-2 ring-primary md:scale-[1.03]" : "ring-border"
-              }`}
-            >
-              {c.highlight && (
-                <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary-foreground">
-                  Phổ biến nhất
-                </span>
-              )}
-              <div className="text-xs font-semibold uppercase tracking-wider text-primary">{c.tag}</div>
-              <h3 className="mt-1 text-xl font-bold" style={{ fontFamily: serif }}>{c.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-              <div className="mt-4 space-y-3">
-                <div className="flex items-center justify-between rounded-lg bg-secondary/50 p-3">
-                  <div>
-                    <div className="text-sm font-medium">Combo nhỏ (1kg mỗi loại)</div>
-                    <div className="text-xs text-muted-foreground">{formatPrice(c.prices.small)}</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => updateQuantity(c.name, "small", selectedCombos[c.name].small - 1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
-                    >
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      min="0"
-                      value={selectedCombos[c.name].small}
-                      onChange={(e) => updateQuantity(c.name, "small", parseInt(e.target.value) || 0)}
-                      className="w-12 rounded-md border border-input bg-background px-2 py-1 text-center text-sm"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => updateQuantity(c.name, "small", selectedCombos[c.name].small + 1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between rounded-lg bg-secondary/50 p-3">
-                  <div>
-                    <div className="text-sm font-medium">Combo lớn (5kg mỗi loại)</div>
-                    <span className="mt-1 inline-block rounded-md bg-gradient-to-r from-amber-500 to-orange-500 px-2.5 py-0.5 text-xs font-bold text-white shadow-md">Tiết kiệm 18%+</span>
-                    <div className="mt-1 text-xs text-muted-foreground">{formatPrice(c.prices.large)}</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => updateQuantity(c.name, "large", selectedCombos[c.name].large - 1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
-                    >
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      min="0"
-                      value={selectedCombos[c.name].large}
-                      onChange={(e) => updateQuantity(c.name, "large", parseInt(e.target.value) || 0)}
-                      className="w-12 rounded-md border border-input bg-background px-2 py-1 text-center text-sm"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => updateQuantity(c.name, "large", selectedCombos[c.name].large + 1)}
-                      className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                {getComboTotal(c.name) > 0 && (
-                  <div className="flex items-center justify-between rounded-lg bg-primary/10 p-3">
-                    <span className="text-sm font-semibold">Tổng:</span>
-                    <span className="text-lg font-bold text-primary">{formatPrice(getComboTotal(c.name))}</span>
-                  </div>
-                )}
-              </div>
-              <ul className="mt-5 space-y-2 text-sm">
-                {c.items.map((i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <CheckIcon className="mt-0.5 h-4 w-4 flex-none text-primary" />
-                    <span>{i}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        {getTotalPrice() > 0 && (
-          <div className="mt-8 rounded-2xl border-2 border-primary bg-secondary/50 p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-lg font-bold">Tổng giá trị đơn hàng</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Định mức Combo nhỏ 1kg ~ 5m²; Combo lớn loại 5kg là 25m²
-                </p>
-              </div>
-              <div className="text-right">
-                <div className="text-3xl font-bold text-primary">{formatPrice(getTotalPrice())}</div>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  * Giá trên chưa bao gồm phí vận chuyển
-                </p>
-              </div>
-            </div>
-            <a
-              href="#tu-van"
-              className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-md transition hover:bg-primary/90"
-            >
-              Tiếp tục điền thông tin đặt hàng
-            </a>
+    <section id="bang-mau" className="border-t border-walnut/10">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">06 — Bảng màu</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">
+              Chọn tông gỗ<br />phù hợp công trình.
+            </h2>
           </div>
-        )}
-        <p className="mt-6 text-center text-base font-medium text-muted-foreground">
-          Combo lớn (5kg mỗi loại) — đủ cho ~25-30m² bề mặt, tương đương 1 cổng đôi tiêu chuẩn.
+          <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+            Gửi ảnh để được tư vấn màu <ArrowRightIcon className="h-3.5 w-3.5" />
+          </a>
+        </div>
+        <div className="mt-12">
+          <img src={colorPaletteImage} alt="Bảng màu sơn giả gỗ trên kim loại Lotus" className="w-full" loading="lazy" width={2400} height={1200} />
+        </div>
+        <p className="mt-6 text-[13px] leading-relaxed text-walnut/55">
+          Các tông phổ biến: Teak, Walnut, Cánh gián, Sồi sáng, Cherry, Gỗ đỏ đậm và nhiều màu theo yêu cầu. Gửi ảnh công trình qua Zalo để được tư vấn màu cụ thể.
         </p>
       </div>
     </section>
   );
 }
 
-/* ---------- Lead Form ---------- */
+/* ── Combos ───────────────────────────────────────────── */
+function Combos({ selectedCombos, setSelectedCombos }: {
+  selectedCombos: Record<string, { small: number; large: number }>;
+  setSelectedCombos: React.Dispatch<React.SetStateAction<Record<string, { small: number; large: number }>>>;
+}) {
+  const combos = [
+    { name: "Combo tiết kiệm", tag: "Cơ bản", desc: "Sơn lót kim loại + sơn phủ màu giả gỗ.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ"], prices: { small: 515000, large: 2350000 }, highlight: false },
+    { name: "Combo thông dụng", tag: "Phổ biến nhất", desc: "Sơn lót + sơn phủ màu giả gỗ + lớp phủ bảo vệ ngoài trời.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ bảo vệ ngoài trời"], prices: { small: 751000, large: 3420000 }, highlight: true },
+    { name: "Combo cao cấp 2K", tag: "Bền cao cấp", desc: "Sơn lót + sơn phủ màu giả gỗ + lớp phủ 2K cao cấp ngoài trời.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ 2K bảo vệ cao cấp"], prices: { small: 888000, large: 4050000 }, highlight: false },
+  ];
+  const fmt = (p: number) => Math.floor(p).toLocaleString("vi-VN") + " đ";
+  const upd = (name: string, size: "small" | "large", v: number) =>
+    setSelectedCombos(prev => ({ ...prev, [name]: { ...prev[name], [size]: Math.max(0, v) } }));
+  const comboTotal = (name: string) => { const c = combos.find(x => x.name === name)!; const s = selectedCombos[name]; return s.small * c.prices.small + s.large * c.prices.large; };
+  const total = () => combos.reduce((t, c) => { const s = selectedCombos[c.name]; return t + s.small * c.prices.small + s.large * c.prices.large; }, 0);
+
+  return (
+    <section id="combo" className="border-t border-walnut/10 bg-sand/40">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div>
+          <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">07 — Combo sản phẩm</span>
+          <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Chọn combo<br />phù hợp hạng mục.</h2>
+          <p className="mt-4 text-[13px] text-walnut/60">
+            Chưa chắc combo nào phù hợp?{" "}
+            <a href={ZALO_URL} className="text-clay underline-offset-4 hover:underline">Nhắn Zalo gửi ảnh hạng mục</a> để được tư vấn.
+          </p>
+        </div>
+        <div className="mt-14 border border-walnut/15 grid md:grid-cols-3 md:divide-x md:divide-walnut/15">
+          {combos.map((c) => (
+            <div key={c.name} className={`relative flex flex-col p-6 bg-cream ${c.highlight ? "outline outline-2 outline-clay -outline-offset-2" : ""}`}>
+              {c.highlight && <span className="absolute -top-px left-6 bg-clay px-3 py-0.5 text-[10px] uppercase tracking-[0.2em] text-cream">Phổ biến nhất</span>}
+              <div className="text-[10px] uppercase tracking-[0.25em] text-clay">{c.tag}</div>
+              <h3 className="mt-2 font-serif text-[22px] text-charcoal">{c.name}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-walnut/60">{c.desc}</p>
+              <ul className="mt-5 space-y-1.5 border-t border-walnut/12 pt-4">
+                {c.items.map(item => <li key={item} className="flex items-center gap-2 text-[12px] text-walnut/70"><span className="h-px w-3 bg-clay/55 shrink-0" />{item}</li>)}
+              </ul>
+              <div className="mt-6 space-y-3 border-t border-walnut/12 pt-4">
+                {(["small", "large"] as const).map(size => (
+                  <div key={size} className="flex items-center justify-between">
+                    <div>
+                      <div className="text-[12px] font-medium text-charcoal">{size === "small" ? "Nhỏ · 1kg mỗi loại" : "Lớn · 5kg mỗi loại"}</div>
+                      <div className="text-[11px] text-walnut/50">{fmt(c.prices[size])}{size === "large" && <span className="ml-1.5 text-clay text-[10px]">Tiết kiệm 18%</span>}</div>
+                    </div>
+                    <QtyCtrl value={selectedCombos[c.name][size]} onChange={v => upd(c.name, size, v)} />
+                  </div>
+                ))}
+                {comboTotal(c.name) > 0 && (
+                  <div className="flex items-center justify-between border-t border-walnut/12 pt-3">
+                    <span className="text-[12px] text-walnut">Tổng combo</span>
+                    <span className="font-serif text-[18px] text-clay">{fmt(comboTotal(c.name))}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        {total() > 0 && (
+          <div className="mt-8 flex flex-col items-start justify-between gap-5 border border-walnut/20 p-6 md:flex-row md:items-center">
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.22em] text-walnut/55">Tổng đơn hàng</div>
+              <div className="mt-1 font-serif text-[32px] text-clay">{fmt(total())}</div>
+              <p className="mt-1 text-[11px] text-walnut/45">Nhỏ 1kg ≈ 5m² · Lớn 5kg ≈ 25m² · Chưa bao gồm phí vận chuyển</p>
+            </div>
+            <a href="#tu-van" className="inline-flex items-center gap-3 bg-clay px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream transition hover:bg-walnut">
+              Điền thông tin đặt hàng <ArrowRightIcon className="h-4 w-4" />
+            </a>
+          </div>
+        )}
+        <p className="mt-4 text-[12px] text-walnut/45">Combo lớn (5kg mỗi loại) đủ cho ~25–30m² bề mặt, tương đương 1 cổng đôi tiêu chuẩn.</p>
+      </div>
+    </section>
+  );
+}
+
+function QtyCtrl({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+  return (
+    <div className="flex items-center gap-1">
+      <button type="button" onClick={() => onChange(value - 1)} className="flex h-7 w-7 items-center justify-center border border-walnut/25 text-walnut transition hover:border-clay hover:text-clay text-[16px]">−</button>
+      <input type="number" min="0" value={value} onChange={e => onChange(parseInt(e.target.value) || 0)} className="w-10 border-b border-walnut/25 bg-transparent py-0.5 text-center text-[13px] outline-none focus:border-clay" />
+      <button type="button" onClick={() => onChange(value + 1)} className="flex h-7 w-7 items-center justify-center border border-walnut/25 text-walnut transition hover:border-clay hover:text-clay text-[16px]">+</button>
+    </div>
+  );
+}
+
+/* ── Lead Form ────────────────────────────────────────── */
 function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: number; large: number }> }) {
   const navigate = useNavigate();
   const [comboColors, setComboColors] = useState<Record<string, string>>({});
@@ -710,345 +435,162 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
     "Combo thông dụng": { small: 751000, large: 3420000 },
     "Combo cao cấp 2K": { small: 888000, large: 4050000 },
   };
+  const colorOptions = ["Chưa chọn","LPCP14.LWF1018","LMCP0.LWF103","LPCP4.LWF101","LPCP8.LWF103","LPCP0.LWF1017","LPCP0.LWF101","LPCP0.LWF1012","LPCP8.LWFF2","LPCP0.LWF1013"];
+  const fmt = (p: number) => Math.floor(p).toLocaleString("vi-VN") + " đ";
 
-  const colorOptions = ["Chưa chọn", "LPCP14.LWF1018", "LMCP0.LWF103", "LPCP4.LWF101", "LPCP8.LWF103", "LPCP0.LWF1017", "LPCP0.LWF101", "LPCP0.LWF1012", "LPCP8.LWFF2", "LPCP0.LWF1013"];
+  const getBase = () => Object.entries(selectedCombos).reduce((t, [n, q]) => {
+    const c = comboPrices[n]; return c ? t + q.small * c.small + q.large * c.large : t;
+  }, 0);
+  const getTotal = () => { const b = getBase(); return paymentMethod === "online" ? b * 0.9 : b; };
 
-  const formatPrice = (price: number) => {
-    return Math.floor(price).toLocaleString("vi-VN") + " đ";
-  };
-
-  const getTotalPrice = () => {
-    const basePrice = Object.entries(selectedCombos).reduce((total, [comboName, quantities]) => {
-      const combo = comboPrices[comboName];
-      if (!combo) return total;
-      return total + (quantities.small * combo.small) + (quantities.large * combo.large);
-    }, 0);
-    
-    // Apply 10% discount for online payment
-    if (paymentMethod === "online") {
-      return basePrice * 0.9;
-    }
-    return basePrice;
-  };
-
-  const getBasePrice = () => {
-    return Object.entries(selectedCombos).reduce((total, [comboName, quantities]) => {
-      const combo = comboPrices[comboName];
-      if (!combo) return total;
-      return total + (quantities.small * combo.small) + (quantities.large * combo.large);
-    }, 0);
-  };
-
-  const getSelectedItems = () => {
+  const getItems = () => {
     const items: { name: string; quantity: number; size: string; key: string }[] = [];
-    Object.entries(selectedCombos).forEach(([comboName, quantities]) => {
-      if (quantities.small > 0) items.push({ name: comboName, quantity: quantities.small, size: "nhỏ", key: `${comboName}-small` });
-      if (quantities.large > 0) items.push({ name: comboName, quantity: quantities.large, size: "lớn", key: `${comboName}-large` });
+    Object.entries(selectedCombos).forEach(([n, q]) => {
+      if (q.small > 0) items.push({ name: n, quantity: q.small, size: "nhỏ", key: `${n}-small` });
+      if (q.large > 0) items.push({ name: n, quantity: q.large, size: "lớn", key: `${n}-large` });
     });
     return items;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const phone = formData.get("phone") as string;
-    const name = formData.get("name") as string;
-    const address = formData.get("address") as string;
-    const note = formData.get("note") as string;
-
-    // Validate color selection for all selected combos
-    const selectedItems = getSelectedItems();
-    for (const item of selectedItems) {
-      const color = comboColors[item.key];
-      if (!color || color === "Chưa chọn") {
-        alert(`Vui lòng chọn màu cho ${item.name} (${item.size})`);
-        return;
-      }
+    const fd = new FormData(e.currentTarget);
+    const phone = fd.get("phone") as string;
+    const name = fd.get("name") as string;
+    const address = fd.get("address") as string;
+    const note = fd.get("note") as string;
+    for (const item of getItems()) {
+      if (!comboColors[item.key] || comboColors[item.key] === "Chưa chọn") { alert(`Vui lòng chọn màu cho ${item.name} (${item.size})`); return; }
     }
-
-    // Set loading state
     setIsSubmitting(true);
-
-    // Format selectedCombos as readable string
-    const selectedCombosStr = Object.entries(selectedCombos)
-      .map(([name, quantities]) => `${name}: nhỏ ${quantities.small}, lớn ${quantities.large}`)
-      .join("; ");
-
-    // Format comboColors as readable string
-    const comboColorsStr = Object.entries(comboColors)
-      .map(([key, color]) => {
-        const [comboName, size] = key.split('-');
-        const sizeText = size === 'small' ? 'nhỏ' : 'lớn';
-        return `${comboName} ${sizeText}: ${color}`;
-      })
-      .join("; ");
-
-    // Prepare order data
+    const selStr = Object.entries(selectedCombos).map(([n, q]) => `${n}: nhỏ ${q.small}, lớn ${q.large}`).join("; ");
+    const colStr = Object.entries(comboColors).map(([k, c]) => { const [cn, s] = k.split('-'); return `${cn} ${s === 'small' ? 'nhỏ' : 'lớn'}: ${c}`; }).join("; ");
     const orderId = `ORD${Date.now().toString().slice(-8)}`;
-    const orderData = {
-      source: "kll-v1",
-      orderId,
-      orderTime: new Date().toISOString(),
-      selectedCombos: selectedCombosStr,
-      comboColors: comboColorsStr,
-      name,
-      phone,
-      address,
-      note,
-      paymentMethod,
-      totalPrice: getTotalPrice(),
-    };
-
-    // Save order data to sessionStorage (include object versions for thank-you page)
-    sessionStorage.setItem("orderData", JSON.stringify({
-      ...orderData,
-      selectedCombosObj: selectedCombos,
-      comboColorsObj: comboColors,
-    }));
-
-    // Send data to Google Apps Script
+    const orderData = { source: "kll-v1", orderId, orderTime: new Date().toISOString(), selectedCombos: selStr, comboColors: colStr, name, phone, address, note, paymentMethod, totalPrice: getTotal() };
+    sessionStorage.setItem("orderData", JSON.stringify({ ...orderData, selectedCombosObj: selectedCombos, comboColorsObj: comboColors }));
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbyv7gIgwksqqalJhhqqUp8KUGCM9r0LEu6LtRd8wuGE86lmFHQGXZGJp8gHWNzBaC_T/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-      });
-    } catch (error) {
-      console.error("Error sending data to Google Sheets:", error);
-      setIsSubmitting(false);
-      return;
-    }
-
-    // Navigate to thank-you page
+      await fetch("https://script.google.com/macros/s/AKfycbyv7gIgwksqqalJhhqqUp8KUGCM9r0LEu6LtRd8wuGE86lmFHQGXZGJp8gHWNzBaC_T/exec", { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(orderData) });
+    } catch (err) { console.error(err); setIsSubmitting(false); return; }
     navigate({ to: `/thank-you?phone=${phone}` });
   };
 
   return (
-    <section id="tu-van" className="py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="grid gap-8 lg:grid-cols-5">
-          <div className="lg:col-span-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">Đặt hàng ngay</span>
-            <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-              Đặt hôm nay — nhận sơn sớm để thi công ngay cuối tuần này
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              Giao hàng trong 24–48h tại TP.HCM và các tỉnh lân cận.
+    <section id="tu-van" className="border-t border-walnut/10">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">08 — Tư vấn & Đặt hàng</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl">Gửi ảnh<br />hạng mục<br /><em className="not-italic text-clay">qua Zalo.</em></h2>
+            <p className="mt-6 text-[14px] leading-relaxed text-walnut/60">
+              Gửi ảnh cổng, hàng rào, lam, hoặc hạng mục kim loại để được gợi ý màu giả gỗ, hệ lớp và cách thi công phù hợp — miễn phí.
             </p>
-
-            <form
-              onSubmit={handleSubmit}
-              className="mt-6 grid gap-4 rounded-2xl bg-card p-5 ring-1 ring-border md:p-6"
-            >
-                <div className="grid gap-4 md:grid-cols-2">
-                  <Field label="Họ và tên" name="name" required placeholder="Nguyễn Văn A" />
-                  <Field label="Số điện thoại" name="phone" required type="tel" placeholder="09xx xxx xxx" />
+            <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
+              <ZaloIcon className="h-5 w-5" /> Nhắn Zalo ngay
+            </a>
+            <div className="mt-5 border-t border-walnut/15 pt-5 text-[12px] text-walnut/55">
+              Hotline: <strong className="text-charcoal">{HOTLINE}</strong><br />Phản hồi trong 15 phút · Tư vấn 8h–20h
+            </div>
+          </div>
+          <div className="lg:col-span-8">
+            <div className="border border-walnut/20 p-6 md:p-8">
+              <div className="mb-6 text-[11px] uppercase tracking-[0.25em] text-walnut/55">Hoặc đặt hàng trực tuyến</div>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid gap-5 md:grid-cols-2">
+                  <FField label="Họ và tên" name="name" required placeholder="Nguyễn Văn A" />
+                  <FField label="Số điện thoại" name="phone" required type="tel" placeholder="09xx xxx xxx" />
                 </div>
-                <Field label="Địa chỉ giao hàng" name="address" required placeholder="Số nhà, đường, phường/xã, quận/huyện, thành phố" />
-                <Field label="Ghi chú" name="note" placeholder="Yêu cầu độ bóng hay mờ của lớp phủ trong suốt" />
-                {getTotalPrice() > 0 && (
-                  <div className="rounded-xl border-2 border-primary bg-secondary/50 p-5">
-                    <h4 className="mb-4 text-base font-bold text-primary">Thông tin đơn hàng</h4>
-                    <div className="space-y-3 text-sm">
-                      {getSelectedItems().map((item) => (
-                        <div key={item.key} className="rounded-lg bg-background p-3">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="font-medium">{item.name} ({item.size}) x{item.quantity}</span>
-                          </div>
-                          <div>
-                            <label className="mb-1 block text-xs text-muted-foreground">Mã màu giả gỗ:</label>
-                            <select
-                              value={comboColors[item.key] || "Chưa chọn"}
-                              onChange={(e) => setComboColors(prev => ({ ...prev, [item.key]: e.target.value }))}
-                              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20"
-                            >
-                              {colorOptions.map(color => (
-                                <option key={color} value={color}>{color}</option>
-                              ))}
-                            </select>
-                          </div>
+                <FField label="Địa chỉ giao hàng" name="address" required placeholder="Số nhà, đường, phường/xã, quận/huyện, thành phố" />
+                <FField label="Ghi chú" name="note" placeholder="Yêu cầu độ bóng hay mờ của lớp phủ" />
+                {getTotal() > 0 && (
+                  <div className="border border-walnut/15 p-5 space-y-4">
+                    <div className="text-[11px] uppercase tracking-[0.22em] text-walnut/55">Đơn hàng</div>
+                    {getItems().map(item => (
+                      <div key={item.key} className="space-y-2">
+                        <div className="text-[13px] font-medium">{item.name} ({item.size}) ×{item.quantity}</div>
+                        <div>
+                          <label className="mb-1 block text-[10px] uppercase tracking-[0.15em] text-walnut/50">Mã màu giả gỗ</label>
+                          <select value={comboColors[item.key] || "Chưa chọn"} onChange={e => setComboColors(p => ({ ...p, [item.key]: e.target.value }))} className="w-full border border-walnut/25 bg-cream px-3 py-2 text-[13px] outline-none focus:border-clay">
+                            {colorOptions.map(c => <option key={c}>{c}</option>)}
+                          </select>
                         </div>
-                      ))}
-                      <div className="mt-4 flex items-center justify-between border-t-2 border-primary pt-4">
-                        <span className="text-lg font-bold">Thành tiền:</span>
-                        <div className="text-right">
-                          {paymentMethod === "online" && (
-                            <span className="text-sm text-muted-foreground line-through mr-2">
-                              {formatPrice(getBasePrice())}
-                            </span>
-                          )}
-                          <span className="text-2xl font-bold text-primary">
-                            {formatPrice(getTotalPrice())}
-                          </span>
-                        </div>
+                      </div>
+                    ))}
+                    <div className="flex items-center justify-between border-t border-walnut/15 pt-3">
+                      <span className="text-[13px] font-medium">Thành tiền</span>
+                      <div>
+                        {paymentMethod === "online" && <span className="mr-2 text-[11px] line-through text-walnut/35">{fmt(getBase())}</span>}
+                        <span className="font-serif text-[24px] text-clay">{fmt(getTotal())}</span>
                       </div>
                     </div>
-                    <p className="mt-3 text-xs text-muted-foreground">
-                      * Giá trên chưa bao gồm phí vận chuyển và có thể thay đổi tùy theo diện tích thực tế.
-                    </p>
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      Định mức Combo nhỏ 1kg ~ 5m²; Combo lớn loại 5kg là 25m²
-                    </p>
+                    <p className="text-[11px] text-walnut/40">* Chưa bao gồm phí vận chuyển</p>
                   </div>
                 )}
-                <div className="mt-4 rounded-xl border-2 border-primary bg-secondary/50 p-4">
-                  <h4 className="mb-3 text-sm font-bold text-primary">Hình thức thanh toán</h4>
-                  <div className="space-y-3">
-                    <label className="flex cursor-pointer items-start gap-3 rounded-lg bg-background p-3 ring-1 ring-border transition hover:ring-primary">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="cod"
-                        checked={paymentMethod === "cod"}
-                        onChange={(e) => setPaymentMethod(e.target.value as "cod" | "online")}
-                        className="mt-1 h-4 w-4"
-                      />
-                      <div>
-                        <span className="font-semibold">COD - Thanh toán khi nhận hàng</span>
-                      </div>
-                    </label>
-                    <label className="flex cursor-pointer items-start gap-3 rounded-lg bg-background p-3 ring-1 ring-border transition hover:ring-primary">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="online"
-                        checked={paymentMethod === "online"}
-                        onChange={(e) => setPaymentMethod(e.target.value as "cod" | "online")}
-                        className="mt-1 h-4 w-4"
-                      />
-                      <div>
-                        <span className="font-semibold">Chuyển khoản Online</span>
-                        <p className="mt-1 text-xs text-primary">Miễn phí giao hàng và giảm 10%</p>
-                      </div>
-                    </label>
+                <div>
+                  <div className="mb-3 text-[11px] uppercase tracking-[0.22em] text-walnut/55">Hình thức thanh toán</div>
+                  <div className="space-y-2">
+                    {[{v:"cod",l:"COD — Thanh toán khi nhận hàng"},{v:"online",l:"Chuyển khoản Online — Miễn phí ship, giảm 10%"}].map(opt => (
+                      <label key={opt.v} className="flex cursor-pointer items-center gap-3 border border-walnut/20 p-3 transition hover:border-clay">
+                        <input type="radio" name="paymentMethod" value={opt.v} checked={paymentMethod === opt.v} onChange={e => setPaymentMethod(e.target.value as "cod" | "online")} className="h-4 w-4 accent-clay" />
+                        <span className="text-[13px]">{opt.l}</span>
+                      </label>
+                    ))}
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="mt-2 inline-flex items-center justify-center rounded-lg bg-primary px-6 py-4 text-base font-bold text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="mr-2 h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Đang xử lý...
-                    </>
-                  ) : (
-                    "Xác nhận đặt hàng"
-                  )}
+                <button type="submit" disabled={isSubmitting} className="mt-2 inline-flex w-full items-center justify-center gap-3 bg-clay py-4 text-[12px] uppercase tracking-[0.18em] text-cream transition hover:bg-walnut disabled:opacity-50">
+                  {isSubmitting ? "Đang xử lý..." : "Xác nhận đặt hàng"}
                 </button>
-                <p className="mt-4 text-sm font-semibold text-primary">
-                  ✅ Cam kết 7 ngày đổi trả nếu sai màu — Không hỏi, không khó dễ
-                </p>
+                <p className="text-[12px] text-walnut/50">Cam kết đổi trả 7 ngày nếu sai màu.</p>
               </form>
-          </div>
-
-          <aside className="lg:col-span-2">
-            <div className="sticky top-24 rounded-2xl bg-[oklch(0.25_0.04_50)] p-6 text-background shadow-lg">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0068FF] text-white">
-                  <ZaloIcon className="h-6 w-6" />
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-wider opacity-80">Tư vấn nhanh nhất</div>
-                  <div className="text-lg font-bold">Nhắn Zalo Lotus</div>
-                </div>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed opacity-90">
-                Gửi ảnh hạng mục qua Zalo để được tư vấn đúng hệ sơn, đúng combo và bảng màu phù hợp.
-              </p>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Phản hồi nhanh trong vòng 15 phút</li>
-                <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Tư vấn đúng hệ theo từng hạng mục</li>
-                <li className="flex items-start gap-2"><CheckIcon className="mt-0.5 h-4 w-4 flex-none text-[#f0c98a]" /> Báo giá rõ ràng, hướng dẫn kỹ thuật chi tiết </li>
-              </ul>
-              <a
-                href={ZALO_URL}
-                className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-[#0068FF] px-5 py-3 text-sm font-bold text-white hover:bg-[#0056d6]"
-              >
-                <ZaloIcon className="h-4 w-4" /> Gửi ảnh qua Zalo
-              </a>
-              <div className="mt-4 border-t border-white/15 pt-4 text-sm">
-                Hotline: <strong>{HOTLINE}</strong>
-              </div>
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function Field({ label, name, type = "text", required, placeholder }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string; }) {
+function FField({ label, name, type = "text", required, placeholder }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-sm font-semibold">{label}{required && <span className="text-primary"> *</span>}</span>
-      <input
-        type={type}
-        name={name}
-        required={required}
-        placeholder={placeholder}
-        className="w-full rounded-lg border border-input bg-background px-4 py-3 text-base outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-      />
+      <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-walnut/60">{label}{required && <span className="ml-0.5 text-clay">*</span>}</span>
+      <input type={type} name={name} required={required} placeholder={placeholder} className="w-full border border-walnut/25 bg-cream px-4 py-3 text-[14px] outline-none placeholder:text-walnut/25 focus:border-clay" />
     </label>
   );
 }
 
-function SelectField({ id, label, name, options, onChange }: { id?: string; label: string; name: string; options: string[]; onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void; }) {
-  return (
-    <label className="block">
-      <span className="mb-1.5 block text-sm font-semibold">{label}</span>
-      <select
-        id={id}
-        name={name}
-        defaultValue={options[0]}
-        onChange={onChange}
-        className="w-full rounded-lg border border-input bg-background px-4 py-3 text-base outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-      >
-        {options.map((o) => <option key={o}>{o}</option>)}
-      </select>
-    </label>
-  );
-}
-
-/* ---------- Feedback ---------- */
-function Feedback() {
+/* ── Projects ─────────────────────────────────────────── */
+function Projects() {
   const projects = [
-    { img: appKhungKeoThep, item: "Khung kèo thép giả gỗ", color: "Gõ đỏ", area: "TP.HCM", quote: "Mình bất ngờ về độ hoàn thiện về màu sắc, khách đến ai cũng tưởng gỗ thật." },
-    { img: sonChanBanSatGiaGo, item: "Sơn chân bàn sắt giả gỗ", color: "Teak", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: cuaCongSatGiaGo, item: "Cửa cổng sắt giả gỗ", color: "Vàng-đỏ", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, dùng ngoài trời gần 3 năm vẫn đẹp như mới." },
-    { img: banGheSatGiaGoNgoaiTroi, item: "Bàn ghế outdoor XK", color: "Vàng-Nâu", area: "Bình Dương", quote: "Sơn Lotus có đầy đủ bảng màu nên CĐT dễ chọn và rất ưng ý." },
-    { img: sonSatGiaGoGianHoa, item: "Giàn hoa công viên", color: "Nâu-đỏ", area: "Bình Dương", quote: "Tư vấn qua Zalo nhanh, chọn đúng combo nên thi công gọn." },
-    { img: satGiaGoAshLotus, item: "Bàn ghế sắt cafe", color: "Nâu-đen", area: "Đồng Nai", quote: "Vân gỗ tự nhiên, thích cách tạo màu của sơn Lotus." },
+    { img: appKhungKeoThep, label: "Khung kèo thép giả gỗ", detail: "Tông Gõ đỏ · TP.HCM" },
+    { img: cuaCongSatGiaGo, label: "Cửa cổng sắt giả gỗ", detail: "Tông Vàng-đỏ · Đồng Nai" },
+    { img: sonChanBanSatGiaGo, label: "Chân bàn sắt giả gỗ", detail: "Tông Teak · Bình Dương" },
+    { img: banGheSatGiaGoNgoaiTroi, label: "Bàn ghế outdoor sắt giả gỗ", detail: "Tông Vàng-Nâu · Bình Dương" },
+    { img: sonSatGiaGoGianHoa, label: "Giàn hoa công viên", detail: "Tông Nâu-đỏ · Bình Dương" },
+    { img: satGiaGoAshLotus, label: "Bàn ghế cafe sắt giả gỗ", detail: "Tông Nâu-đen · Đồng Nai" },
   ];
   return (
-    <section className="bg-secondary/40 py-14 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-6">
-        <div className="max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Công trình thực tế</span>
-          <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-            Khách hàng & công trình đã hoàn thiện cùng Lotus
-          </h2>
+    <section className="border-t border-walnut/10 bg-sand/40">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">09 — Công trình thực tế</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Hoàn thiện thật.<br />Vật liệu thật.</h2>
+          </div>
+          <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+            Tư vấn công trình tương tự <ArrowRightIcon className="h-3.5 w-3.5" />
+          </a>
         </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5 lg:gap-6">
           {projects.map((p, i) => (
-            <article key={i} className="overflow-hidden rounded-xl bg-background ring-1 ring-border shadow-sm">
-              <img src={p.img} alt={p.item} loading="lazy" width={1024} height={1024} className="aspect-[4/3] w-full object-cover" />
-              <div className="p-5">
-                <p className="text-sm italic text-foreground">“{p.quote}”</p>
-                <dl className="mt-4 grid grid-cols-3 gap-2 text-xs">
-                  <div><dt className="text-muted-foreground">Hạng mục</dt><dd className="font-semibold">{p.item}</dd></div>
-                  <div><dt className="text-muted-foreground">Màu</dt><dd className="font-semibold">{p.color}</dd></div>
-                  <div><dt className="text-muted-foreground">Khu vực</dt><dd className="font-semibold">{p.area}</dd></div>
-                </dl>
+            <figure key={i} className="group">
+              <div className="overflow-hidden">
+                <img src={p.img} alt={p.label} loading="lazy" className={`w-full object-cover transition duration-700 group-hover:scale-[1.02] ${i % 3 === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`} width={1024} height={768} />
               </div>
-            </article>
+              <figcaption className="mt-3 border-t border-walnut/15 pt-3">
+                <div className="font-serif text-[16px] text-charcoal">{p.label}</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-walnut/45">{p.detail}</div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
@@ -1056,127 +598,129 @@ function Feedback() {
   );
 }
 
-/* ---------- FAQ ---------- */
+/* ── FAQ ──────────────────────────────────────────────── */
 function FAQ() {
   const faqs = [
     { q: "Sơn giả gỗ trên kim loại có bền không?", a: "Khi thi công đúng quy trình và dùng đủ lớp phủ bảo vệ, hệ sơn giả gỗ Lotus có độ bền cao, bám dính tốt trên kim loại và giữ được màu lâu." },
     { q: "Có dùng ngoài trời được không?", a: "Có. Combo thông dụng và combo cao cấp 2K có lớp phủ bảo vệ chuyên dụng cho ngoài trời, chống tia UV và thời tiết." },
     { q: "Phù hợp với những hạng mục nào?", a: "Cổng sắt, hàng rào, lan can, khung thép trang trí, cửa sắt, mái hiên, pergola, lam sắt và các chi tiết kim loại nội ngoại thất." },
     { q: "Tôi chưa biết chọn combo nào thì làm sao?", a: "Bạn chỉ cần nhắn Zalo gửi ảnh hạng mục và mô tả nhu cầu, Lotus sẽ tư vấn combo phù hợp." },
-    { q: "Có những màu gỗ nào để lựa chọn?", a: "Các tông phổ biến gồm: Teak, Walnut, Cánh gián, Sồi sáng, Cherry, Gỗ đỏ đậm và nhiều màu khác theo yêu cầu." },
-    { q: "Tôi có thể gửi ảnh công trình để được tư vấn không?", a: "Hoàn toàn có thể. Gửi ảnh hạng mục qua Zalo là cách nhanh nhất để Lotus chọn đúng hệ sơn cho bạn." },
-    { q: "Mua lẻ có được không?", a: "Có. Lotus hỗ trợ cả khách lẻ và khách công trình. Vui lòng nhắn Zalo để được báo giá nhanh." },
-    { q: "Có hỗ trợ tư vấn qua Zalo không?", a: "Có. Tư vấn Zalo là kênh chính, giúp bạn được hỗ trợ nhanh và đúng nhu cầu nhất." },
+    { q: "Có những màu gỗ nào để lựa chọn?", a: "Các tông phổ biến: Teak, Walnut, Cánh gián, Sồi sáng, Cherry, Gỗ đỏ đậm và nhiều màu khác theo yêu cầu." },
+    { q: "Tôi có thể gửi ảnh công trình để được tư vấn không?", a: "Hoàn toàn có thể. Gửi ảnh hạng mục qua Zalo là cách nhanh nhất để Lotus chọn đúng hệ sơn." },
+    { q: "Mua lẻ có được không?", a: "Có. Lotus hỗ trợ cả khách lẻ và khách công trình. Nhắn Zalo để được báo giá nhanh." },
   ];
   return (
-    <section id="faq" className="py-14 md:py-20">
-      <div className="mx-auto max-w-3xl px-4 md:px-6">
-        <span className="text-xs font-bold uppercase tracking-widest text-primary">Câu hỏi thường gặp</span>
-        <h2 className="mt-2 text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-          Bạn đang băn khoăn điều gì?
-        </h2>
-        <div className="mt-6 divide-y divide-border rounded-2xl bg-card ring-1 ring-border">
-          {faqs.map((f, i) => (
-            <details key={i} className="group p-5 [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold">
-                <span>{f.q}</span>
-                <span className="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-secondary text-primary transition group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
-            </details>
-          ))}
+    <section id="faq" className="border-t border-walnut/10">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-4">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">10 — FAQ</span>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl">Câu hỏi<br />thường gặp.</h2>
+          </div>
+          <div className="col-span-12 md:col-span-8 divide-y divide-walnut/12">
+            {faqs.map((f, i) => (
+              <details key={i} className="group py-5 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-[15px] font-medium text-charcoal">
+                  <span>{f.q}</span>
+                  <span className="mt-0.5 shrink-0 text-[18px] leading-none text-walnut/35 transition group-open:rotate-45 group-open:text-clay">+</span>
+                </summary>
+                <p className="mt-3 text-[13px] leading-relaxed text-walnut/60">{f.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- Final CTA ---------- */
+/* ── Final CTA ────────────────────────────────────────── */
 function FinalCTA() {
   return (
-    <section className="bg-[oklch(0.25_0.04_50)] py-14 text-background md:py-20">
-      <div className="mx-auto max-w-4xl px-4 text-center md:px-6">
-        <h2 className="text-2xl font-bold leading-tight md:text-4xl" style={{ fontFamily: serif }}>
-          Đừng để cổng sắt thô kéo lùi diện mạo ngôi nhà bạn thêm một ngày nào nữa.
-        </h2>
-        <p className="mt-4 text-sm opacity-85 md:text-base">
-          Đội ngũ Lotus sẵn sàng hỗ trợ – chọn cách liên hệ thuận tiện nhất cho bạn.
-        </p>
-        <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href={ZALO_URL} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0068FF] px-7 py-4 text-base font-bold text-white hover:bg-[#0056d6]">
-            <ZaloIcon className="h-5 w-5" /> Nhắn Zalo ngay
-          </a>
-          <a href="#tu-van" className="inline-flex items-center justify-center rounded-lg bg-background px-7 py-4 text-base font-bold text-foreground hover:bg-secondary">
-            Đặt Hàng Nhanh
-          </a>
+    <section className="border-t border-walnut/10 bg-charcoal text-cream">
+      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+        <div className="grid grid-cols-12">
+          <div className="col-span-12 md:col-span-8">
+            <span className="text-[11px] uppercase tracking-[0.3em] text-cream/60">Bắt đầu</span>
+            <h2 className="mt-5 font-serif text-[36px] leading-tight sm:text-5xl md:text-[54px]">
+              Gửi ảnh hạng mục kim loại —<br />
+              <em className="not-italic text-clay">nhận tư vấn màu và hệ lớp</em><br />
+              ngay hôm nay.
+            </h2>
+            <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-cream/80">
+              Đội Lotus tư vấn theo ảnh thực tế: gợi ý màu giả gỗ phù hợp, combo đúng nhu cầu, hướng dẫn thi công từng bước.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
+                <ZaloIcon className="h-5 w-5" /> Nhắn Zalo ngay
+              </a>
+              <a href="#tu-van" className="inline-flex items-center gap-3 border border-cream/45 px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream/90 transition hover:border-cream hover:text-cream">
+                Đặt hàng trực tuyến
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- Footer ---------- */
+/* ── Footer ───────────────────────────────────────────── */
 function Footer() {
   return (
-    <footer className="bg-[oklch(0.18_0.025_50)] py-10 text-background/85">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 md:grid-cols-3 md:px-6">
-        <div>
-          <div className="flex items-center gap-2">
-            <img src={logoLotus} alt="Sơn Lotus Logo" className="w-22  object-contain" />
+    <footer className="border-t border-walnut/15 bg-charcoal text-cream/65">
+      <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-12">
+        <div className="grid gap-10 md:grid-cols-3">
+          <div>
+            <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain brightness-0 invert opacity-80" />
+            <p className="mt-4 text-[12px] leading-relaxed text-cream/45">Giải pháp sơn giả gỗ chuyên cho cổng sắt, hàng rào, lan can, pergola và chi tiết kim loại.</p>
           </div>
-          <p className="mt-3 text-sm opacity-80 leading-relaxed">
-            Giải pháp sơn giả gỗ chuyên cho cổng sắt, hàng rào, lan can, pergola và chi tiết kim loại.
-          </p>
+          <div className="text-[12px]">
+            <h4 className="mb-4 text-[10px] uppercase tracking-[0.25em] text-cream/35">Liên hệ</h4>
+            <ul className="space-y-2 text-cream/55">
+              <li>Hotline: <strong className="text-cream/80">{HOTLINE}</strong></li>
+              <li>Zalo: <a href={ZALO_URL} className="text-cream/80 hover:text-cream">{HOTLINE}</a></li>
+              <li>Email: sales@sonlotus.vn</li>
+              <li>Website: www.sonlotus.vn</li>
+              <li>99/5 Đường XTT26-1, Ấp 2, Xã Bà Điểm, TP.HCM</li>
+            </ul>
+          </div>
+          <div className="text-[12px]">
+            <h4 className="mb-4 text-[10px] uppercase tracking-[0.25em] text-cream/35">Liên kết</h4>
+            <ul className="space-y-2">
+              {[["#ung-dung","Ứng dụng thực tế"],["#bang-mau","Bảng màu sơn giả gỗ"],["#combo","Combo sản phẩm"],["#tu-van","Tư vấn & Đặt hàng"]].map(([h,l]) => (
+                <li key={h}><a href={h} className="text-cream/45 hover:text-cream/80 transition">{l}</a></li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div className="text-sm">
-          <h4 className="text-sm font-bold uppercase tracking-wider">Liên hệ</h4>
-          <ul className="mt-3 space-y-2">
-            <li>Hotline: <strong>{HOTLINE}</strong></li>
-            <li>Zalo: <a href={ZALO_URL} className="underline">{HOTLINE}</a></li>
-            <li>Email: sales@sonlotus.vn</li>
-            <li>Website: www.sonlotus.vn</li>
-            <li>Địa chỉ: 99/5 Đường XTT26-1, Ấp 2, Xã Bà Điểm, TP.HCM</li>
-          </ul>
+        <div className="mt-10 border-t border-cream/8 pt-8 text-[10px] text-cream/30">
+          © {new Date().getFullYear()} CÔNG TY TNHH SẢN XUẤT THƯƠNG MẠI DỊCH VỤ BÍCH TRANG. MST: 0313351528.
         </div>
-        <div className="text-sm">
-          <h4 className="text-sm font-bold uppercase tracking-wider">Liên kết nhanh</h4>
-          <ul className="mt-3 space-y-2">
-            <li><a href="#ung-dung" className="hover:underline">Ứng dụng</a></li>
-            <li><a href="#bang-mau" className="hover:underline">Bảng màu</a></li>
-            <li><a href="#combo" className="hover:underline">Combo</a></li>
-            <li><a href="#tu-van" className="hover:underline">Đặt hàng / Tư vấn</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="mx-auto mt-8 max-w-7xl px-4 text-xs opacity-60 md:px-6">
-        © {new Date().getFullYear()} CÔNG TY TNHH SẢN XUẤT THƯƠNG MẠI DỊCH VỤ BÍCH TRANG. MST: 0313351528.
       </div>
     </footer>
   );
 }
 
-/* ---------- Sticky Mobile CTA ---------- */
+/* ── Sticky Mobile CTA ────────────────────────────────── */
 function StickyMobileCTA() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 gap-2 border-t border-border bg-background/95 p-2 shadow-[0_-8px_24px_-12px_rgba(0,0,0,0.2)] backdrop-blur md:hidden">
-      <a href={ZALO_URL} className="flex items-center justify-center gap-2 rounded-lg bg-[#0068FF] px-4 py-3 text-sm font-bold text-white">
+    <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-walnut/20 bg-cream/98 backdrop-blur-sm md:hidden">
+      <a href={ZALO_URL} className="flex items-center justify-center gap-2 bg-[#0068FF] py-4 text-[11px] uppercase tracking-[0.18em] font-medium text-white">
         <ZaloIcon className="h-4 w-4" /> Nhắn Zalo
       </a>
-      <a href="#tu-van" className="flex items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground">
+      <a href="#tu-van" className="flex items-center justify-center py-4 text-[11px] uppercase tracking-[0.18em] font-medium text-charcoal">
         Đặt hàng
       </a>
     </div>
   );
 }
 
-/* ---------- Icons ---------- */
-function CheckIcon({ className = "" }: { className?: string }) {
+/* ── Icons ────────────────────────────────────────────── */
+function ArrowRightIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
-      <circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.12" />
-      <path d="M6 10.5l2.5 2.5L14 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -1184,7 +728,7 @@ function CheckIcon({ className = "" }: { className?: string }) {
 function ZaloIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M12 2C6.48 2 2 6.06 2 11.07c0 2.74 1.37 5.18 3.5 6.83-.1.83-.46 2.04-.5 2.13-.06.18.13.34.31.27.13-.05 1.79-.79 2.6-1.18 1.27.4 2.65.62 4.09.62 5.52 0 10-4.06 10-9.07S17.52 2 12 2zm-3.7 11.3H6.1c-.2 0-.36-.16-.36-.36 0-.08.03-.16.08-.22l1.94-2.5H6.18c-.2 0-.36-.16-.36-.36s.16-.36.36-.36h2.13c.2 0 .36.16.36.36 0 .08-.03.16-.08.22l-1.94 2.5H8.3c.2 0 .36.16.36.36s-.16.36-.36.36zm1.6 0c-.2 0-.36-.16-.36-.36V10c0-.2.16-.36.36-.36s.36.16.36.36v2.94c0 .2-.16.36-.36.36zm4.2 0h-.06c-.16 0-.3-.1-.34-.26l-.18-.5h-1.46l-.18.5c-.05.16-.18.26-.34.26h-.06c-.24 0-.4-.24-.31-.46l1.18-3.06c.06-.14.2-.24.36-.24s.3.1.36.24l1.18 3.06c.09.22-.07.46-.31.46zm4 0h-2c-.2 0-.36-.16-.36-.36V10c0-.2.16-.36.36-.36s.36.16.36.36v2.58h1.64c.2 0 .36.16.36.36s-.16.36-.36.36zM12.5 11.7l.46-1.26.46 1.26h-.92z"/>
+      <path d="M12 2C6.48 2 2 6.06 2 11.07c0 2.74 1.37 5.18 3.5 6.83-.1.83-.46 2.04-.5 2.13-.06.18.13.34.31.27.13-.05 1.79-.79 2.6-1.18 1.27.4 2.65.62 4.09.62 5.52 0 10-4.06 10-9.07S17.52 2 12 2zm-3.7 11.3H6.1c-.2 0-.36-.16-.36-.36 0-.08.03-.16.08-.22l1.94-2.5H6.18c-.2 0-.36-.16-.36-.36s.16-.36.36-.36h2.13c.2 0 .36.16.36.36 0 .08-.03.16-.08.22l-1.94 2.5H8.3c.2 0 .36.16.36.36s-.16.36-.36.36zm1.6 0c-.2 0-.36-.16-.36-.36V10c0-.2.16-.36.36-.36s.36.16.36.36v2.94c0 .2-.16.36-.36.36zm4.2 0h-.06c-.16 0-.3-.1-.34-.26l-.18-.5h-1.46l-.18.5c-.05.16-.18.26-.34.26h-.06c-.24 0-.4-.24-.31-.46l1.18-3.06c.06-.14.2-.24.36-.24s.3.1.36.24l1.18 3.06c.09.22-.07.46-.31.46zm4 0h-2c-.2 0-.36-.16-.36-.36V10c0-.2.16-.36.36-.36s.36.16.36.36v2.58h1.64c.2 0 .36.16.36.36s-.16.36-.36.36zM12.5 11.7l.46-1.26.46 1.26h-.92z" />
     </svg>
   );
 }
