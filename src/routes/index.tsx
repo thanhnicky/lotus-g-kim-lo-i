@@ -2,18 +2,18 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
 import colorPaletteImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
-import heroGate from "../assets/hero-gate.jpg";
+import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
 import appRailing from "../assets/app-railing.jpg";
-import appFence from "../assets/app-fence.jpg";
+import appFence from "../assets/hang-rao-son-gia-go-lotus.jpeg";
 import appPergola from "../assets/app-pergola.jpg";
-import appDoor from "../assets/app-door.jpg";
-import appFrame from "../assets/app-frame.jpg";
-import appLouver from "../assets/app-louver.jpg";
+import appDoor from "../assets/sua-sat-son-gia-go-dep-lotus.jpeg";
+import appFrame from "../assets/khung-sat-son-gia-go-mau-dep.jpeg";
+import appLouver from "../assets/khung-sat-son-gia-go-lotus.jpeg";
 import appKhungKeoThep from "../assets/khung-keo-thep-gia-go-lotus.jpg";
 import sonChanBanSatGiaGo from "../assets/son-chan-ban-sat-gia-go.jpg";
 import cuaCongSatGiaGo from "../assets/cua-cong-sat-gia-go.jpg";
-import beforeGate from "../assets/before-gate.jpg";
-import afterGate from "../assets/after-gate.jpg";
+import beforeGate from "../assets/before-chan-ban-sat.jpg";
+import afterGate from "../assets/son-chan-ban-sat-gia-go.jpg";
 import banGheSatGiaGoNgoaiTroi from "../assets/ban-ghe-sat-gia-go-ngoai-troi.jpg";
 import sonSatGiaGoGianHoa from "../assets/son-sat-gia-go-gian-hoa.jpg";
 import satGiaGoAshLotus from "../assets/sat-gia-go-ash-lotus.jpg";
@@ -73,7 +73,7 @@ function Header() {
 /* ── Hero ────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section id="top" className="border-b border-walnut/10">
+    <section id="top" className="border-b border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/30">
       <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-12 md:pt-16 md:pb-24">
         <div className="grid grid-cols-12 gap-x-6 gap-y-10">
           <div className="col-span-12 flex flex-col md:col-span-5 lg:col-span-4">
@@ -87,7 +87,7 @@ function Hero() {
               Hệ sơn giả gỗ Lotus biến cổng sắt, hàng rào, lam che nắng, pergola và khung kim loại thành bề mặt có vân gỗ đẹp, ấm, sang — bền ngoài trời nhiều năm.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7">
+              <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
                 Gửi ảnh hạng mục qua Zalo <ArrowRightIcon className="h-4 w-4" />
               </a>
               <a href="#ung-dung" className="text-[12px] font-medium uppercase tracking-[0.18em] text-walnut underline-offset-8 hover:underline">
@@ -103,7 +103,9 @@ function Hero() {
             </div>
           </div>
           <figure className="col-span-12 md:col-span-7 lg:col-span-8">
-            <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10]" width={1920} height={1080} />
+            <div className="relative overflow-hidden rounded-lg shadow-2xl shadow-walnut/10">
+              <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" width={1920} height={1080} />
+            </div>
             <figcaption className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-walnut/45">
               <span>Cổng sắt hoàn thiện giả gỗ · Lotus</span>
               <span>— 001</span>
@@ -118,7 +120,7 @@ function Hero() {
 /* ── Applications ─────────────────────────────────────── */
 function Applications() {
   return (
-    <section id="ung-dung" className="border-t border-walnut/10">
+    <section id="ung-dung" className="border-t border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/20">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -135,7 +137,7 @@ function Applications() {
         {/* 1 large + 4 small */}
         <div className="mt-14 grid grid-cols-12 gap-3 md:gap-5">
           <figure className="col-span-12 md:col-span-7 group">
-            <div className="overflow-hidden">
+            <div className="relative overflow-hidden rounded-lg shadow-lg shadow-walnut/10">
               <img src={appPergola} alt="Pergola kim loại sơn giả gỗ" loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1600} height={1200} />
             </div>
             <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
@@ -151,7 +153,7 @@ function Applications() {
               { img: appRailing, label: "Lan can, tay vịn", ctx: "Cầu thang" },
             ].map((a) => (
               <figure key={a.label} className="group">
-                <div className="overflow-hidden">
+                <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
                   <img src={a.img} alt={a.label} loading="lazy" className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={800} height={800} />
                 </div>
                 <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
@@ -171,7 +173,7 @@ function Applications() {
             { img: appFrame, label: "Khung trang trí", ctx: "Chi tiết kiến trúc" },
           ].map((a) => (
             <figure key={a.label} className="group col-span-3 md:col-span-1">
-              <div className="overflow-hidden">
+              <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
                 <img src={a.img} alt={a.label} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1024} height={768} />
               </div>
               <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
@@ -271,10 +273,10 @@ function BeforeAfter() {
 /* ── Process ──────────────────────────────────────────── */
 function Process() {
   const steps = [
-    { n: "I", t: "Chuẩn bị bề mặt", d: "Vệ sinh sạch, loại bỏ dầu mỡ và gỉ sét. Đánh nhám hoặc xử lý bề mặt tạo độ bám phù hợp cho kim loại." },
-    { n: "II", t: "Lớp lót kim loại", d: "Primer chuyên dụng cho thép, mạ kẽm, nhôm hoặc inox — tạo nền bám dính và chống gỉ từ bên trong." },
-    { n: "III", t: "Tạo màu nền & vân gỗ", d: "Phủ màu nền, sau đó dùng kỹ thuật cọ tạo vân gỗ sống động theo từng loại gỗ được chọn." },
-    { n: "IV", t: "Phủ bảo vệ hoàn thiện", d: "Lớp phủ trong suốt chống UV, chống ẩm — đóng rắn bề mặt và bảo vệ vân gỗ bền theo thời gian." },
+    { n: "01", t: "Chuẩn bị bề mặt", d: "Vệ sinh sạch, loại bỏ dầu mỡ và gỉ sét. Đánh nhám hoặc xử lý bề mặt tạo độ bám phù hợp cho kim loại." },
+    { n: "02", t: "Lớp lót kim loại", d: "Primer chuyên dụng cho thép, mạ kẽm, nhôm hoặc inox — tạo nền bám dính và chống gỉ từ bên trong." },
+    { n: "03", t: "Tạo màu nền & vân gỗ", d: "Phủ màu nền, sau đó dùng kỹ thuật cọ tạo vân gỗ sống động theo từng loại gỗ được chọn." },
+    { n: "04", t: "Phủ bảo vệ hoàn thiện", d: "Lớp phủ trong suốt chống UV, chống ẩm — đóng rắn bề mặt và bảo vệ vân gỗ bền theo thời gian." },
   ];
   return (
     <section className="border-t border-walnut/10 bg-sand/40">
