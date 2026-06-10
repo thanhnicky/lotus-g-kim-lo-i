@@ -84,11 +84,11 @@ function Hero() {
               <em className="not-italic text-clay">mà vẫn bền kim loại.</em>
             </h1>
             <p className="mt-7 max-w-md text-[14px] leading-relaxed text-walnut/70">
-              Dùng Lotus giả gỗ trên kim loại: cổng, hàng rào, lan can, pergola có vân gỗ sắc nét, ấm áp, sang trọng — nhưng giữ độ bền của sắt, không lo cong vênh hay mối mọt.
+              Lotus giả gỗ trên kim loại: vân gỗ sắc nét, ấm, sang — giữ độ bền sắt, không lo cong vênh hay mối mọt.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
-                Gửi ảnh cổng/hàng rào qua Zalo <ArrowRightIcon className="h-4 w-4" />
+                Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-4 w-4" />
               </a>
               <a href="#ung-dung" className="text-[12px] font-medium uppercase tracking-[0.18em] text-walnut underline-offset-8 hover:underline">
                 Xem hạng mục hoàn thiện
@@ -130,7 +130,7 @@ function Applications() {
             </h2>
           </div>
           <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
-            Gửi ảnh hạng mục của bạn <ArrowRightIcon className="h-3.5 w-3.5" />
+            Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
 
@@ -191,10 +191,10 @@ function Applications() {
 /* ── Why Statement ────────────────────────────────────── */
 function WhyStatement() {
   const points = [
-    { n: "01", t: "Cổng, hàng rào nhìn như gỗ thật", d: "Vân gỗ sắc nét, tự nhiên. Khách đến nhà khó nhận ra đây là sắt — chỉ thấy cổng ấm, sang, hợp kiến trúc." },
-    { n: "02", t: "Bền hơn gỗ thật ở nhiều trường hợp", d: "Không lo cong vênh, mối mọt, bạc màu nhanh như gỗ. Giữ độ bền của kim loại, chịu nắng mưa tốt hơn." },
-    { n: "03", t: "Ít lo gỉ sét, bong tróc", d: "Hệ lớp đúng kỹ thuật: primer chuyên dụng cho từng loại kim loại, lớp bảo vệ ngoài trời chống UV, chống ẩm." },
-    { n: "04", t: "Nhìn cao cấp hơn sơn đen/xám", d: "Thay vì cổng sơn đen nhìn cứng như nhà xưởng, giả gỗ giúp mặt tiền nhà phố ấm hơn, sang hơn, khác biệt hơn." },
+    { n: "01", t: "Cổng, hàng rào nhìn như gỗ thật", d: "Từ khoảng nhìn thông thường, bề mặt tạo cảm giác gần gỗ thật hơn hẳn sơn kim loại thường." },
+    { n: "02", t: "Bền hơn gỗ thật ở nhiều trường hợp", d: "Không lo cong vênh, mối mọt, bạc màu. Giữ độ bền kim loại, chịu nắng mưa tốt hơn." },
+    { n: "03", t: "Ít lo gỉ sét, bong tróc", d: "Hệ lớp đúng kỹ thuật: primer chuyên dụng, lớp bảo vệ ngoài trời chống UV, chống ẩm." },
+    { n: "04", t: "Nhìn cao cấp hơn sơn đen/xám", d: "Thay vì sơn đen nhìn cứng như nhà xưởng, giả gỗ giúp mặt tiền ấm hơn, sang hơn." },
   ];
   return (
     <section className="border-t border-walnut/10 bg-charcoal text-cream">
@@ -208,7 +208,7 @@ function WhyStatement() {
           </div>
           <div className="col-span-12 md:col-span-8 md:pt-2">
             <p className="font-serif text-[20px] leading-[1.65] text-cream md:text-[22px]">
-              Cổng sắt, hàng rào, lam, pergola — kim loại bền nhưng lạnh. Lotus giả gỗ giữ kết cấu sắt, chỉ thay đổi bề mặt: cổng, hàng rào nhìn ấm hơn, sang hơn, gần với ngôn ngữ gỗ.
+              Kim loại bền nhưng lạnh. Lotus giả gỗ giữ kết cấu sắt, chỉ thay đổi bề mặt: ấm hơn, sang hơn, gần gỗ.
             </p>
             <ul className="mt-14 divide-y divide-cream/15 border-t border-cream/15">
               {points.map((b) => (
@@ -244,7 +244,7 @@ function BeforeAfter() {
               Trước: chân bàn sắt nhìn lạnh, thiếu ấm. Sau: chân bàn giả gỗ nhìn như gỗ thật, hợp nội thất phòng khách hơn.
             </p>
             <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
-              Gửi ảnh hạng mục của bạn <ArrowRightIcon className="h-3.5 w-3.5" />
+              Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
             </a>
           </div>
           <div className="col-span-12 md:col-span-8">
@@ -326,7 +326,7 @@ function ColorPalette() {
             </h2>
           </div>
           <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
-            Gửi ảnh để được tư vấn màu <ArrowRightIcon className="h-3.5 w-3.5" />
+            Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
         <div className="mt-12">
@@ -364,7 +364,7 @@ function Combos({ selectedCombos, setSelectedCombos }: {
           <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Chọn combo<br />phù hợp hạng mục.</h2>
           <p className="mt-4 text-[13px] text-walnut/60">
             Chưa chắc combo nào phù hợp?{" "}
-            <a href={ZALO_URL} className="text-clay underline-offset-4 hover:underline">Nhắn Zalo gửi ảnh hạng mục</a> để được tư vấn.
+            <a href={ZALO_URL} className="text-clay underline-offset-4 hover:underline">Gửi ảnh hạng mục kim loại qua Zalo</a> để được tư vấn.
           </p>
         </div>
         <div className="mt-14 border border-walnut/15 grid md:grid-cols-3 md:divide-x md:divide-walnut/15">
@@ -484,10 +484,10 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">08 — Tư vấn & Đặt hàng</span>
             <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl">Gửi ảnh cổng, hàng rào<br /><em className="not-italic text-clay">để gợi ý đúng hệ lớp.</em></h2>
             <p className="mt-6 text-[14px] leading-relaxed text-walnut/60">
-              Gửi ảnh hạng mục kim loại qua Zalo — Lotus gợi ý màu giả gỗ, hệ lớp và combo phù hợp trước khi bạn chốt mua.
+              Gửi ảnh hạng mục kim loại qua Zalo — Lotus tư vấn màu, hệ lớp và combo phù hợp trước khi bạn chốt.
             </p>
             <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
-              <ZaloIcon className="h-5 w-5" /> Gửi ảnh qua Zalo
+              <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
             </a>
             <div className="mt-5 border-t border-walnut/15 pt-5 text-[12px] text-walnut/55">
               Hotline: <strong className="text-charcoal">{HOTLINE}</strong><br />Hạng mục lớn: gửi ảnh + kích thước để tính định mức chi tiết.
@@ -495,7 +495,8 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
           </div>
           <div className="lg:col-span-8">
             <div className="border border-walnut/20 p-6 md:p-8">
-              <div className="mb-6 text-[11px] uppercase tracking-[0.25em] text-walnut/55">Dành cho hạng mục nhỏ đã chọn combo</div>
+              <div className="mb-6 text-[11px] uppercase tracking-[0.25em] text-walnut/55">Dành cho hạng mục nhỏ đã chọn xong combo và màu</div>
+              <p className="mb-6 text-[12px] text-walnut/50">Chưa chắc màu hoặc hệ lớp? Gửi ảnh qua Zalo ở trên trước.</p>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid gap-5 md:grid-cols-2">
                   <FField label="Họ và tên" name="name" required placeholder="Nguyễn Văn A" />
@@ -542,7 +543,6 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                   {isSubmitting ? "Đang xử lý..." : "Xác nhận đặt hàng"}
                 </button>
                 <p className="text-[12px] text-walnut/50">Cam kết đổi trả 7 ngày nếu sai màu.</p>
-                <p className="text-[12px] text-walnut/40">Chưa chắc combo/màu/hệ lớp? Gửi ảnh qua Zalo ở trên trước.</p>
               </form>
             </div>
           </div>
@@ -580,7 +580,7 @@ function Projects() {
             <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Hoàn thiện thật.<br />Vật liệu thật.</h2>
           </div>
           <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
-            Tư vấn công trình tương tự <ArrowRightIcon className="h-3.5 w-3.5" />
+            Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
         <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5 lg:gap-6">
@@ -651,11 +651,11 @@ function FinalCTA() {
               trước khi bạn chốt mua.
             </h2>
             <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-cream/80">
-              Gửi ảnh hạng mục kim loại qua Zalo: Lotus tư vấn màu giả gỗ, hệ lớp và combo phù hợp cho công trình của bạn.
+              Gửi ảnh hạng mục kim loại qua Zalo — Lotus tư vấn màu, hệ lớp và combo phù hợp trước khi bạn chốt.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
-                <ZaloIcon className="h-5 w-5" /> Gửi ảnh qua Zalo
+                <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
               </a>
               <a href="#tu-van" className="inline-flex items-center gap-3 border border-cream/45 px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream/90 transition hover:border-cream hover:text-cream">
                 Đặt combo nhỏ
@@ -710,7 +710,7 @@ function StickyMobileCTA() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-walnut/20 bg-cream/98 backdrop-blur-sm md:hidden">
       <a href={ZALO_URL} className="flex items-center justify-center gap-2 bg-[#0068FF] py-4 text-[11px] uppercase tracking-[0.18em] font-medium text-white">
-        <ZaloIcon className="h-4 w-4" /> Nhắn Zalo
+        <ZaloIcon className="h-4 w-4" /> Gửi ảnh qua Zalo
       </a>
       <a href="#tu-van" className="flex items-center justify-center py-4 text-[11px] uppercase tracking-[0.18em] font-medium text-charcoal">
         Đặt hàng
