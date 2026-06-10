@@ -106,7 +106,7 @@ function Hero() {
             <div className="relative overflow-hidden rounded-lg shadow-2xl shadow-walnut/10">
               <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" width={1920} height={1080} />
             </div>
-            <figcaption className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-walnut/45">
+            <figcaption className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.22em] text-walnut/45">
               <span>Cổng sắt hoàn thiện giả gỗ · Lotus</span>
               <span>— 001</span>
             </figcaption>
@@ -142,7 +142,7 @@ function Applications() {
             </div>
             <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
               <span className="font-serif text-[18px] text-charcoal">Pergola / giàn mái kim loại</span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-walnut/45">Ngoại thất</span>
+              <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/45">Ngoại thất</span>
             </figcaption>
           </figure>
           <div className="col-span-12 grid grid-cols-2 gap-3 md:col-span-5 md:gap-5">
@@ -158,7 +158,7 @@ function Applications() {
                 </div>
                 <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
                   <span className="text-[13px] font-medium text-charcoal">{a.label}</span>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-walnut/40">{a.ctx}</span>
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-walnut/40">{a.ctx}</span>
                 </figcaption>
               </figure>
             ))}
@@ -178,7 +178,7 @@ function Applications() {
               </div>
               <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
                 <span className="font-serif text-[16px] text-charcoal">{a.label}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-walnut/45">{a.ctx}</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-walnut/45">{a.ctx}</span>
               </figcaption>
             </figure>
           ))}
@@ -213,7 +213,7 @@ function WhyStatement() {
             <ul className="mt-14 divide-y divide-cream/15 border-t border-cream/15">
               {points.map((b) => (
                 <li key={b.n} className="flex gap-8 py-7">
-                  <span className="mt-0.5 shrink-0 text-[10px] uppercase tracking-[0.25em] text-clay">{b.n}</span>
+                  <span className="mt-0.5 shrink-0 text-[11px] uppercase tracking-[0.25em] text-clay">{b.n}</span>
                   <div>
                     <div className="font-serif text-[19px] text-cream">{b.t}</div>
                     <p className="mt-2 text-[13px] leading-relaxed text-cream/75">{b.d}</p>
@@ -260,8 +260,8 @@ function BeforeAfter() {
                 </svg>
               </div>
               <input type="range" min="0" max="100" value={pos} onChange={(e) => setPos(Number(e.target.value))} className="absolute inset-0 w-full cursor-ew-resize opacity-0" />
-              <div className="pointer-events-none absolute bottom-4 left-5 text-[10px] uppercase tracking-[0.25em] text-cream/75">Trước</div>
-              <div className="pointer-events-none absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.25em] text-cream/75">Sau</div>
+              <div className="pointer-events-none absolute bottom-4 left-5 text-[11px] uppercase tracking-[0.25em] text-cream/75">Trước</div>
+              <div className="pointer-events-none absolute bottom-4 right-5 text-[11px] uppercase tracking-[0.25em] text-cream/75">Sau</div>
             </div>
           </div>
         </div>
@@ -590,7 +590,7 @@ function Projects() {
               </div>
               <figcaption className="mt-3 border-t border-walnut/15 pt-3">
                 <div className="font-serif text-[16px] text-charcoal">{p.label}</div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-walnut/45">{p.detail}</div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-walnut/45">{p.detail}</div>
               </figcaption>
             </figure>
           ))}
