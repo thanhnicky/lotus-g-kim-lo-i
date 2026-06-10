@@ -25,9 +25,9 @@ const HOTLINE = "0943 966 662";
 
 function LandingPage() {
   const [selectedCombos, setSelectedCombos] = useState<Record<string, { small: number; large: number }>>({
-    "Combo tiết kiệm": { small: 0, large: 0 },
-    "Combo thông dụng": { small: 0, large: 0 },
-    "Combo cao cấp 2K": { small: 0, large: 0 },
+    "Combo hạng mục nhỏ": { small: 0, large: 0 },
+    "Combo ngoại thất": { small: 0, large: 0 },
+    "Combo 2K cao cấp": { small: 0, large: 0 },
   });
   return (
     <div className="min-h-screen bg-cream text-charcoal antialiased font-sans">
@@ -79,27 +79,27 @@ function Hero() {
           <div className="col-span-12 flex flex-col md:col-span-5 lg:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">Lotus · Hoàn thiện bề mặt kim loại</span>
             <h1 className="mt-6 font-serif text-[42px] leading-[1.05] tracking-tight text-charcoal sm:text-[52px] md:text-[60px] lg:text-[70px]">
-              Kim loại<br />
-              mang vẻ đẹp<br />
-              <em className="not-italic text-clay">gỗ tự nhiên.</em>
+              Cổng, hàng rào, lam<br />
+              nhìn như gỗ thật<br />
+              <em className="not-italic text-clay">mà vẫn bền kim loại.</em>
             </h1>
             <p className="mt-7 max-w-md text-[14px] leading-relaxed text-walnut/70">
-              Hệ sơn giả gỗ Lotus biến cổng sắt, hàng rào, lam che nắng, pergola và khung kim loại thành bề mặt có vân gỗ đẹp, ấm, sang — bền ngoài trời nhiều năm.
+              Dùng Lotus giả gỗ trên kim loại: cổng, hàng rào, lan can, pergola có vân gỗ sắc nét, ấm áp, sang trọng — nhưng giữ độ bền của sắt, không lo cong vênh hay mối mọt.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
-                Gửi ảnh hạng mục qua Zalo <ArrowRightIcon className="h-4 w-4" />
+                Gửi ảnh cổng/hàng rào qua Zalo <ArrowRightIcon className="h-4 w-4" />
               </a>
               <a href="#ung-dung" className="text-[12px] font-medium uppercase tracking-[0.18em] text-walnut underline-offset-8 hover:underline">
-                Xem ứng dụng thực tế
+                Xem hạng mục hoàn thiện
               </a>
             </div>
             <div className="mt-10 flex flex-wrap gap-x-6 gap-y-1.5 border-t border-walnut/15 pt-6 text-[10px] uppercase tracking-[0.22em] text-walnut/50">
-              <span>Bền 5+ năm ngoài trời</span>
+              <span>Vân gỗ sắc nét, tự nhiên</span>
               <span className="text-walnut/25">/</span>
-              <span>Hệ lớp đúng kỹ thuật</span>
+              <span>Bám dính tốt trên kim loại</span>
               <span className="text-walnut/25">/</span>
-              <span>Tư vấn theo công trình thật</span>
+              <span>Bền ngoài trời 5+ năm</span>
             </div>
           </div>
           <figure className="col-span-12 md:col-span-7 lg:col-span-8">
@@ -126,11 +126,11 @@ function Applications() {
           <div>
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">02 — Ứng dụng</span>
             <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">
-              Kim loại nào cũng có thể<br />mang vẻ đẹp gỗ.
+              Những hạng mục kim loại<br />hoàn thiện giả gỗ đẹp nhất.
             </h2>
           </div>
           <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
-            Gửi ảnh hạng mục để tư vấn <ArrowRightIcon className="h-3.5 w-3.5" />
+            Gửi ảnh hạng mục của bạn <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
 
@@ -191,32 +191,32 @@ function Applications() {
 /* ── Why Statement ────────────────────────────────────── */
 function WhyStatement() {
   const points = [
-    { n: "01", t: "Vân gỗ thuyết phục", d: "Lớp hoàn thiện tạo chiều sâu và vân gỗ tự nhiên. Người xem không dễ nhận ra đây là kim loại." },
-    { n: "02", t: "Bám dính đúng kỹ thuật", d: "Primer phù hợp cho thép, mạ kẽm, nhôm, inox — đảm bảo độ bám lâu dài trên từng loại nền kim loại." },
-    { n: "03", t: "Phù hợp ngoại thất", d: "Lớp phủ bảo vệ chịu UV, chịu ẩm, bền nhiều năm trên cổng, hàng rào, lam, giàn ngoài trời." },
-    { n: "04", t: "Cảm giác ấm hơn cho công trình", d: "Thay đổi tone vật liệu từ công nghiệp lạnh về gần nội ngoại thất ấm, có chiều sâu và kiến trúc hơn." },
+    { n: "01", t: "Cổng, hàng rào nhìn như gỗ thật", d: "Vân gỗ sắc nét, tự nhiên. Khách đến nhà khó nhận ra đây là sắt — chỉ thấy cổng ấm, sang, hợp kiến trúc." },
+    { n: "02", t: "Bền hơn gỗ thật ở nhiều trường hợp", d: "Không lo cong vênh, mối mọt, bạc màu nhanh như gỗ. Giữ độ bền của kim loại, chịu nắng mưa tốt hơn." },
+    { n: "03", t: "Ít lo gỉ sét, bong tróc", d: "Hệ lớp đúng kỹ thuật: primer chuyên dụng cho từng loại kim loại, lớp bảo vệ ngoài trời chống UV, chống ẩm." },
+    { n: "04", t: "Nhìn cao cấp hơn sơn đen/xám", d: "Thay vì cổng sơn đen nhìn cứng như nhà xưởng, giả gỗ giúp mặt tiền nhà phố ấm hơn, sang hơn, khác biệt hơn." },
   ];
   return (
     <section className="border-t border-walnut/10 bg-charcoal text-cream">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
         <div className="grid grid-cols-12 gap-x-8 gap-y-10">
           <div className="col-span-12 md:col-span-4">
-            <span className="text-[11px] uppercase tracking-[0.3em] text-cream/60">03 — Vì sao chọn giả gỗ</span>
+            <span className="text-[11px] uppercase tracking-[0.3em] text-cream/80">03 — Vì sao chọn giả gỗ</span>
             <h2 className="mt-5 font-serif text-[34px] leading-tight sm:text-4xl md:text-5xl">
               Giữ độ chắc<br />của kim loại.<br /><em className="not-italic text-clay">Đưa bề mặt<br />về phía gỗ.</em>
             </h2>
           </div>
           <div className="col-span-12 md:col-span-8 md:pt-2">
-            <p className="font-serif text-[20px] leading-[1.65] text-cream/90 md:text-[22px]">
-              Cổng sắt, hàng rào, lam, pergola — kim loại bền nhưng lạnh. Hệ sơn giả gỗ Lotus không thay vật liệu, không phá kết cấu. Nó chỉ thay đổi bề mặt — theo hướng ấm hơn, sang hơn, gần với ngôn ngữ gỗ và kiến trúc hơn.
+            <p className="font-serif text-[20px] leading-[1.65] text-cream md:text-[22px]">
+              Cổng sắt, hàng rào, lam, pergola — kim loại bền nhưng lạnh. Lotus giả gỗ giữ kết cấu sắt, chỉ thay đổi bề mặt: cổng, hàng rào nhìn ấm hơn, sang hơn, gần với ngôn ngữ gỗ.
             </p>
             <ul className="mt-14 divide-y divide-cream/15 border-t border-cream/15">
               {points.map((b) => (
                 <li key={b.n} className="flex gap-8 py-7">
-                  <span className="mt-0.5 shrink-0 text-[11px] uppercase tracking-[0.25em] text-clay">{b.n}</span>
+                  <span className="mt-0.5 w-10 shrink-0 font-serif text-[3rem] leading-none text-clay/60 sm:text-[3.5rem]">{b.n}</span>
                   <div>
                     <div className="font-serif text-[19px] text-cream">{b.t}</div>
-                    <p className="mt-2 text-[13px] leading-relaxed text-cream/75">{b.d}</p>
+                    <p className="mt-2 text-[13px] leading-relaxed text-cream/90">{b.d}</p>
                   </div>
                 </li>
               ))}
@@ -238,13 +238,13 @@ function BeforeAfter() {
           <div className="col-span-12 md:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">04 — Trước & Sau</span>
             <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">
-              Sắt thô<br />thành bề mặt<br /><em className="not-italic text-clay">có chiều sâu.</em>
+              Chân bàn sắt<br />thành giả gỗ<br /><em className="not-italic text-clay">ấm, sang hơn.</em>
             </h2>
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/60">
-              Cùng cấu kiện. Cùng kích thước. Chỉ khác lớp hoàn thiện — cảm giác hoàn toàn khác biệt.
+              Trước: chân bàn sắt nhìn lạnh, thiếu ấm. Sau: chân bàn giả gỗ nhìn như gỗ thật, hợp nội thất phòng khách hơn.
             </p>
             <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
-              Tư vấn hạng mục tương tự <ArrowRightIcon className="h-3.5 w-3.5" />
+              Gửi ảnh hạng mục của bạn <ArrowRightIcon className="h-3.5 w-3.5" />
             </a>
           </div>
           <div className="col-span-12 md:col-span-8">
@@ -273,10 +273,10 @@ function BeforeAfter() {
 /* ── Process ──────────────────────────────────────────── */
 function Process() {
   const steps = [
-    { n: "01", t: "Chuẩn bị bề mặt", d: "Vệ sinh sạch, loại bỏ dầu mỡ và gỉ sét. Đánh nhám hoặc xử lý bề mặt tạo độ bám phù hợp cho kim loại." },
-    { n: "02", t: "Lớp lót kim loại", d: "Primer chuyên dụng cho thép, mạ kẽm, nhôm hoặc inox — tạo nền bám dính và chống gỉ từ bên trong." },
-    { n: "03", t: "Tạo màu nền & vân gỗ", d: "Phủ màu nền, sau đó dùng kỹ thuật cọ tạo vân gỗ sống động theo từng loại gỗ được chọn." },
-    { n: "04", t: "Phủ bảo vệ hoàn thiện", d: "Lớp phủ trong suốt chống UV, chống ẩm — đóng rắn bề mặt và bảo vệ vân gỗ bền theo thời gian." },
+    { n: "01", t: "Xử lý bề mặt", d: "Làm sạch, loại bỏ gỉ sét, tạo nhám — nền bám tốt cho các lớp sau." },
+    { n: "02", t: "Lót kim loại", d: "Primer chuyên dụng cho thép, mạ kẽm, nhôm — chống gỉ từ bên trong." },
+    { n: "03", t: "Tạo vân gỗ", d: "Phủ màu nền, cọ vân gỗ theo tông được chọn — vân sắc nét, tự nhiên." },
+    { n: "04", t: "Bảo vệ ngoài trời", d: "Lớp phủ trong suốt chống UV, chống ẩm — bền nắng mưa nhiều năm." },
   ];
   return (
     <section className="border-t border-walnut/10 bg-sand/40">
@@ -288,7 +288,7 @@ function Process() {
               Bốn bước.<br />Một hệ hoàn<br />thiện bài bản.
             </h2>
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/60">
-              Không phải quét một lớp màu. Đây là một finish system được thiết kế cho từng loại kim loại và điều kiện sử dụng.
+              Không phải quét một lớp màu. Đây là hệ lớp bài bản cho từng loại kim loại và điều kiện phơi nắng.
             </p>
           </div>
           <div className="col-span-12 md:col-span-8 md:pl-4">
@@ -346,9 +346,9 @@ function Combos({ selectedCombos, setSelectedCombos }: {
   setSelectedCombos: React.Dispatch<React.SetStateAction<Record<string, { small: number; large: number }>>>;
 }) {
   const combos = [
-    { name: "Combo tiết kiệm", tag: "Cơ bản", desc: "Sơn lót kim loại + sơn phủ màu giả gỗ.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ"], prices: { small: 515000, large: 2350000 }, highlight: false },
-    { name: "Combo thông dụng", tag: "Phổ biến nhất", desc: "Sơn lót + sơn phủ màu giả gỗ + lớp phủ bảo vệ ngoài trời.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ bảo vệ ngoài trời"], prices: { small: 751000, large: 3420000 }, highlight: true },
-    { name: "Combo cao cấp 2K", tag: "Bền cao cấp", desc: "Sơn lót + sơn phủ màu giả gỗ + lớp phủ 2K cao cấp ngoài trời.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ 2K bảo vệ cao cấp"], prices: { small: 888000, large: 4050000 }, highlight: false },
+    { name: "Combo hạng mục nhỏ", tag: "Trong nhà", desc: "Cho cổng, hàng rào nhỏ ít nắng mưa. Sơn lót + sơn phủ màu giả gỗ.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ"], prices: { small: 515000, large: 2350000 }, highlight: false },
+    { name: "Combo ngoại thất", tag: "Ngoài trời", desc: "Cho cổng, hàng rào, lam phơi nắng mưa bình thường. Sơn lót + sơn phủ màu + lớp bảo vệ ngoài trời.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ bảo vệ ngoài trời"], prices: { small: 751000, large: 3420000 }, highlight: true },
+    { name: "Combo 2K cao cấp", tag: "Khu vực biển", desc: "Cho hạng mục gần biển, nắng gắt hoặc cần độ bóng cao. Sơn lót + sơn phủ màu + lớp 2K bảo vệ.", items: ["Sơn lót kim loại", "Sơn phủ màu giả gỗ", "Sơn phủ 2K bảo vệ cao cấp"], prices: { small: 888000, large: 4050000 }, highlight: false },
   ];
   const fmt = (p: number) => Math.floor(p).toLocaleString("vi-VN") + " đ";
   const upd = (name: string, size: "small" | "large", v: number) =>
@@ -433,9 +433,9 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
   const [paymentMethod, setPaymentMethod] = useState<"cod" | "online">("cod");
 
   const comboPrices: Record<string, { small: number; large: number }> = {
-    "Combo tiết kiệm": { small: 515000, large: 2350000 },
-    "Combo thông dụng": { small: 751000, large: 3420000 },
-    "Combo cao cấp 2K": { small: 888000, large: 4050000 },
+    "Combo hạng mục nhỏ": { small: 515000, large: 2350000 },
+    "Combo ngoại thất": { small: 751000, large: 3420000 },
+    "Combo 2K cao cấp": { small: 888000, large: 4050000 },
   };
   const colorOptions = ["Chưa chọn","LPCP14.LWF1018","LMCP0.LWF103","LPCP4.LWF101","LPCP8.LWF103","LPCP0.LWF1017","LPCP0.LWF101","LPCP0.LWF1012","LPCP8.LWFF2","LPCP0.LWF1013"];
   const fmt = (p: number) => Math.floor(p).toLocaleString("vi-VN") + " đ";
@@ -482,20 +482,20 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">08 — Tư vấn & Đặt hàng</span>
-            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl">Gửi ảnh<br />hạng mục<br /><em className="not-italic text-clay">qua Zalo.</em></h2>
+            <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl">Gửi ảnh cổng, hàng rào<br /><em className="not-italic text-clay">để gợi ý đúng hệ lớp.</em></h2>
             <p className="mt-6 text-[14px] leading-relaxed text-walnut/60">
-              Gửi ảnh cổng, hàng rào, lam, hoặc hạng mục kim loại để được gợi ý màu giả gỗ, hệ lớp và cách thi công phù hợp — miễn phí.
+              Gửi ảnh hạng mục kim loại qua Zalo — Lotus gợi ý màu giả gỗ, hệ lớp và combo phù hợp trước khi bạn chốt mua.
             </p>
             <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
-              <ZaloIcon className="h-5 w-5" /> Nhắn Zalo ngay
+              <ZaloIcon className="h-5 w-5" /> Gửi ảnh qua Zalo
             </a>
             <div className="mt-5 border-t border-walnut/15 pt-5 text-[12px] text-walnut/55">
-              Hotline: <strong className="text-charcoal">{HOTLINE}</strong><br />Phản hồi trong 15 phút · Tư vấn 8h–20h
+              Hotline: <strong className="text-charcoal">{HOTLINE}</strong><br />Hạng mục lớn: gửi ảnh + kích thước để tính định mức chi tiết.
             </div>
           </div>
           <div className="lg:col-span-8">
             <div className="border border-walnut/20 p-6 md:p-8">
-              <div className="mb-6 text-[11px] uppercase tracking-[0.25em] text-walnut/55">Hoặc đặt hàng trực tuyến</div>
+              <div className="mb-6 text-[11px] uppercase tracking-[0.25em] text-walnut/55">Dành cho hạng mục nhỏ đã chọn combo</div>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid gap-5 md:grid-cols-2">
                   <FField label="Họ và tên" name="name" required placeholder="Nguyễn Văn A" />
@@ -542,6 +542,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                   {isSubmitting ? "Đang xử lý..." : "Xác nhận đặt hàng"}
                 </button>
                 <p className="text-[12px] text-walnut/50">Cam kết đổi trả 7 ngày nếu sai màu.</p>
+                <p className="text-[12px] text-walnut/40">Chưa chắc combo/màu/hệ lớp? Gửi ảnh qua Zalo ở trên trước.</p>
               </form>
             </div>
           </div>
@@ -645,19 +646,19 @@ function FinalCTA() {
           <div className="col-span-12 md:col-span-8">
             <span className="text-[11px] uppercase tracking-[0.3em] text-cream/60">Bắt đầu</span>
             <h2 className="mt-5 font-serif text-[36px] leading-tight sm:text-5xl md:text-[54px]">
-              Gửi ảnh hạng mục kim loại —<br />
-              <em className="not-italic text-clay">nhận tư vấn màu và hệ lớp</em><br />
-              ngay hôm nay.
+              Gửi ảnh cổng, hàng rào hiện tại —<br />
+              <em className="not-italic text-clay">Lotus gợi ý đúng màu, đúng hệ lớp</em><br />
+              trước khi bạn chốt mua.
             </h2>
             <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-cream/80">
-              Đội Lotus tư vấn theo ảnh thực tế: gợi ý màu giả gỗ phù hợp, combo đúng nhu cầu, hướng dẫn thi công từng bước.
+              Gửi ảnh hạng mục kim loại qua Zalo: Lotus tư vấn màu giả gỗ, hệ lớp và combo phù hợp cho công trình của bạn.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
-                <ZaloIcon className="h-5 w-5" /> Nhắn Zalo ngay
+                <ZaloIcon className="h-5 w-5" /> Gửi ảnh qua Zalo
               </a>
               <a href="#tu-van" className="inline-flex items-center gap-3 border border-cream/45 px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream/90 transition hover:border-cream hover:text-cream">
-                Đặt hàng trực tuyến
+                Đặt combo nhỏ
               </a>
             </div>
           </div>
@@ -674,7 +675,7 @@ function Footer() {
       <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-12">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain brightness-0 invert opacity-80" />
+            <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain opacity-80" />
             <p className="mt-4 text-[12px] leading-relaxed text-cream/45">Giải pháp sơn giả gỗ chuyên cho cổng sắt, hàng rào, lan can, pergola và chi tiết kim loại.</p>
           </div>
           <div className="text-[12px]">
