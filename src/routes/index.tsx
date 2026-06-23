@@ -41,7 +41,7 @@ function LandingPage() {
 
   useEffect(() => {
     if (showStickyBar) {
-      document.body.style.paddingBottom = "56px";
+      document.body.style.paddingBottom = "70px";
     } else {
       document.body.style.paddingBottom = "0";
     }
