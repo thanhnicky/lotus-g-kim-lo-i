@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
 import colorPaletteImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
@@ -29,10 +29,31 @@ function LandingPage() {
     "Combo ngoại thất": { small: 0, large: 0 },
     "Combo 2K cao cấp": { small: 0, large: 0 },
   });
+  const [showStickyBar, setShowStickyBar] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyBar(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (showStickyBar) {
+      document.body.style.paddingBottom = "56px";
+    } else {
+      document.body.style.paddingBottom = "0";
+    }
+    return () => {
+      document.body.style.paddingBottom = "0";
+    };
+  }, [showStickyBar]);
   return (
     <div className="min-h-screen bg-cream text-charcoal antialiased font-sans">
       <Header />
       <Hero />
+      <TrustBar />
       <Applications />
       <WhyStatement />
       <BeforeAfter />
@@ -44,7 +65,7 @@ function LandingPage() {
       <FAQ />
       <FinalCTA />
       <Footer />
-      <StickyMobileCTA />
+      <StickyMobileCTA showStickyBar={showStickyBar} />
     </div>
   );
 }
@@ -86,14 +107,17 @@ function Hero() {
             <p className="mt-7 max-w-md text-[14px] leading-relaxed text-walnut/70">
               Lotus giả gỗ trên kim loại: vân gỗ sắc nét, ấm, sang — giữ độ bền sắt, không lo cong vênh hay mối mọt.
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
+              <a href={ZALO_URL} className="inline-flex items-center justify-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
                 Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-4 w-4" />
               </a>
-              <a href="#ung-dung" className="text-[12px] font-medium uppercase tracking-[0.18em] text-walnut underline-offset-8 hover:underline">
-                Xem hạng mục hoàn thiện
+              <a href="#combo" className="inline-flex items-center justify-center gap-3 border border-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-clay hover:text-cream sm:px-7">
+                Xem Combo & Đặt Hàng Ngay <ArrowRightIcon className="h-4 w-4" />
               </a>
             </div>
+            <p className="mt-6 text-center text-[11px] text-walnut/50">
+              ✓ Cam kết đổi trả 7 ngày · Giao hàng toàn quốc · Tư vấn miễn phí
+            </p>
             <div className="mt-10 flex flex-wrap gap-x-6 gap-y-1.5 border-t border-walnut/15 pt-6 text-[10px] uppercase tracking-[0.22em] text-walnut/50">
               <span>Vân gỗ sắc nét, tự nhiên</span>
               <span className="text-walnut/25">/</span>
@@ -111,6 +135,30 @@ function Hero() {
               <span>— 001</span>
             </figcaption>
           </figure>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Trust Bar ────────────────────────────────────────── */
+function TrustBar() {
+  return (
+    <section className="border-t border-walnut/10 bg-[#f5f0ea]">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-12 md:py-16">
+        <div className="grid grid-cols-3 gap-8 md:gap-12">
+          <div className="col-span-3 text-center md:col-span-1">
+            <div className="font-serif text-[42px] leading-none text-charcoal sm:text-[48px] md:text-[56px]">500+</div>
+            <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-walnut/60">công trình hoàn thiện</div>
+          </div>
+          <div className="col-span-3 text-center md:col-span-1">
+            <div className="font-serif text-[42px] leading-none text-charcoal sm:text-[48px] md:text-[56px]">5+ năm</div>
+            <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-walnut/60">bền ngoài trời</div>
+          </div>
+          <div className="col-span-3 text-center md:col-span-1">
+            <div className="font-serif text-[42px] leading-none text-charcoal sm:text-[48px] md:text-[56px]">7 ngày</div>
+            <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-walnut/60">đổi trả nếu sai màu</div>
+          </div>
         </div>
       </div>
     </section>
@@ -377,6 +425,11 @@ function Combos({ selectedCombos, setSelectedCombos }: {
               <ul className="mt-5 space-y-1.5 border-t border-walnut/12 pt-4">
                 {c.items.map(item => <li key={item} className="flex items-center gap-2 text-[12px] text-walnut/70"><span className="h-px w-3 bg-clay/55 shrink-0" />{item}</li>)}
               </ul>
+              <p className="mt-4 text-[11px] italic text-walnut/50">
+                {c.name === "Combo hạng mục nhỏ" && "Đủ cho ~5–8m² (cổng đơn, hàng rào ngắn)"}
+                {c.name === "Combo ngoại thất" && "Đủ cho ~25–30m² (1 cổng đôi tiêu chuẩn)"}
+                {c.name === "Combo 2K cao cấp" && "Đủ cho ~20–25m² (khu biển, pergola, lam mặt tiền)"}
+              </p>
               <div className="mt-6 space-y-3 border-t border-walnut/12 pt-4">
                 {(["small", "large"] as const).map(size => (
                   <div key={size} className="flex items-center justify-between">
@@ -387,6 +440,11 @@ function Combos({ selectedCombos, setSelectedCombos }: {
                     <QtyCtrl value={selectedCombos[c.name][size]} onChange={v => upd(c.name, size, v)} />
                   </div>
                 ))}
+                <div className="mt-2">
+                  <span className="inline-block bg-clay px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.15em] text-cream">
+                    Chuyển khoản: giảm thêm 10%
+                  </span>
+                </div>
                 {comboTotal(c.name) > 0 && (
                   <div className="flex items-center justify-between border-t border-walnut/12 pt-3">
                     <span className="text-[12px] text-walnut">Tổng combo</span>
@@ -646,21 +704,23 @@ function FinalCTA() {
           <div className="col-span-12 md:col-span-8">
             <span className="text-[11px] uppercase tracking-[0.3em] text-cream/60">Bắt đầu</span>
             <h2 className="mt-5 font-serif text-[36px] leading-tight sm:text-5xl md:text-[54px]">
-              Gửi ảnh cổng, hàng rào hiện tại —<br />
-              <em className="not-italic text-clay">Lotus gợi ý đúng màu, đúng hệ lớp</em><br />
-              trước khi bạn chốt mua.
+              Chưa chắc combo nào? Gửi ảnh —<br />
+              <em className="not-italic text-clay">Lotus tư vấn ngay, miễn phí.</em>
             </h2>
             <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-cream/80">
-              Gửi ảnh hạng mục kim loại qua Zalo — Lotus tư vấn màu, hệ lớp và combo phù hợp trước khi bạn chốt.
+              Chụp ảnh hạng mục cần hoàn thiện, gửi qua Zalo. Lotus xem và gợi ý đúng màu, đúng hệ lớp — trước khi bạn chốt mua.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
                 <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
               </a>
               <a href="#tu-van" className="inline-flex items-center gap-3 border border-cream/45 px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream/90 transition hover:border-cream hover:text-cream">
-                Đặt combo nhỏ
+                Xem Combo & Đặt Ngay →
               </a>
             </div>
+            <p className="mt-6 text-center text-[11px] text-cream/50">
+              ✓ Cam kết đổi trả 7 ngày nếu sai màu · Không ép mua · Tư vấn thật
+            </p>
           </div>
         </div>
       </div>
@@ -706,14 +766,21 @@ function Footer() {
 }
 
 /* ── Sticky Mobile CTA ────────────────────────────────── */
-function StickyMobileCTA() {
+function StickyMobileCTA({ showStickyBar }: { showStickyBar: boolean }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-walnut/20 bg-cream/98 backdrop-blur-sm md:hidden">
-      <a href={ZALO_URL} className="flex items-center justify-center gap-2 bg-[#0068FF] py-4 text-[11px] uppercase tracking-[0.18em] font-medium text-white">
-        <ZaloIcon className="h-4 w-4" /> Gửi ảnh qua Zalo
-      </a>
-      <a href="#tu-van" className="flex items-center justify-center py-4 text-[11px] uppercase tracking-[0.18em] font-medium text-charcoal">
-        Đặt hàng
+    <div
+      id="sticky-zalo-bar"
+      className={`fixed inset-x-0 bottom-0 z-[9999] flex items-center justify-between px-5 bg-clay text-cream transition-opacity duration-300 md:hidden ${showStickyBar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      style={{ height: "56px" }}
+    >
+      <span className="text-[10px] uppercase tracking-[0.18em] text-cream/80">
+        Tư vấn miễn phí · Giao toàn quốc
+      </span>
+      <a
+        href={ZALO_URL}
+        className="inline-flex items-center gap-2 bg-white px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
+      >
+        NHẮN ZALO NGAY <ArrowRightIcon className="h-3.5 w-3.5" />
       </a>
     </div>
   );
