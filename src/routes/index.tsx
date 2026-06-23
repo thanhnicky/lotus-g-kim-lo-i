@@ -95,19 +95,19 @@ function Header() {
 function Hero() {
   return (
     <section id="top" className="border-b border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/30">
-      <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-12 md:pt-16 md:pb-24">
+      <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-12 md:pt-14 md:pb-20">
         <div className="grid grid-cols-12 gap-x-6 gap-y-10">
-          <div className="col-span-12 flex flex-col md:col-span-5 lg:col-span-4">
+          <div className="col-span-12 flex flex-col md:col-span-6 lg:col-span-5">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">Lotus · Hoàn thiện bề mặt kim loại</span>
-            <h1 className="mt-6 font-serif text-[42px] leading-[1.05] tracking-tight text-charcoal sm:text-[52px] md:text-[60px] lg:text-[70px]">
+            <h1 className="mt-5 font-serif text-[42px] leading-[1.05] tracking-tight text-charcoal sm:text-[52px] md:text-[56px] lg:text-[64px]">
               Cổng, hàng rào, lam<br />
               nhìn như gỗ thật<br />
               <em className="not-italic text-clay">mà vẫn bền kim loại.</em>
             </h1>
-            <p className="mt-7 max-w-md text-[14px] leading-relaxed text-walnut/70">
+            <p className="mt-5 max-w-md text-[14px] leading-relaxed text-walnut/70">
               Lotus giả gỗ trên kim loại: vân gỗ sắc nét, ấm, sang — giữ độ bền sắt, không lo cong vênh hay mối mọt.
             </p>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
               <a href={ZALO_URL} className="inline-flex items-center justify-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
                 Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-4 w-4" />
               </a>
@@ -115,10 +115,10 @@ function Hero() {
                 Xem Combo & Đặt Hàng Ngay <ArrowRightIcon className="h-4 w-4" />
               </a>
             </div>
-            <p className="mt-6 text-center text-[11px] text-walnut/50">
+            <p className="mt-4 text-center text-[11px] text-walnut/50">
               ✓ Cam kết đổi trả 7 ngày · Giao hàng toàn quốc · Tư vấn miễn phí
             </p>
-            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-1.5 border-t border-walnut/15 pt-6 text-[10px] uppercase tracking-[0.22em] text-walnut/50">
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-1.5 border-t border-walnut/15 pt-4 text-[10px] uppercase tracking-[0.22em] text-walnut/50">
               <span>Vân gỗ sắc nét, tự nhiên</span>
               <span className="text-walnut/25">/</span>
               <span>Bám dính tốt trên kim loại</span>
@@ -126,7 +126,7 @@ function Hero() {
               <span>Bền ngoài trời 5+ năm</span>
             </div>
           </div>
-          <figure className="col-span-12 md:col-span-7 lg:col-span-8">
+          <figure className="col-span-12 md:col-span-6 lg:col-span-7">
             <div className="relative overflow-hidden rounded-lg shadow-2xl shadow-walnut/10">
               <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" width={1920} height={1080} />
             </div>
