@@ -145,19 +145,19 @@ function Hero() {
 function TrustBar() {
   return (
     <section className="border-t border-walnut/10 bg-[#f5f0ea]">
-      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-12 md:py-16">
+      <div className="mx-auto max-w-[1400px] px-5 py-10 md:px-12 md:py-14">
         <div className="grid grid-cols-3 gap-8 md:gap-12">
           <div className="col-span-3 text-center md:col-span-1">
             <div className="font-serif text-[42px] leading-none text-charcoal sm:text-[48px] md:text-[56px]">500+</div>
-            <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-walnut/60">công trình hoàn thiện</div>
+            <div className="mt-2 text-[11px] uppercase tracking-[0.22em] text-walnut/60">công trình hoàn thiện</div>
           </div>
           <div className="col-span-3 text-center md:col-span-1">
             <div className="font-serif text-[42px] leading-none text-charcoal sm:text-[48px] md:text-[56px]">5+ năm</div>
-            <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-walnut/60">bền ngoài trời</div>
+            <div className="mt-2 text-[11px] uppercase tracking-[0.22em] text-walnut/60">bền ngoài trời</div>
           </div>
           <div className="col-span-3 text-center md:col-span-1">
             <div className="font-serif text-[42px] leading-none text-charcoal sm:text-[48px] md:text-[56px]">7 ngày</div>
-            <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-walnut/60">đổi trả nếu sai màu</div>
+            <div className="mt-2 text-[11px] uppercase tracking-[0.22em] text-walnut/60">đổi trả nếu sai màu</div>
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@ function TrustBar() {
 function Applications() {
   return (
     <section id="ung-dung" className="border-t border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/20">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">02 — Ứng dụng</span>
@@ -206,7 +206,7 @@ function Applications() {
                 </div>
                 <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
                   <span className="text-[13px] font-medium text-charcoal">{a.label}</span>
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-walnut/40">{a.ctx}</span>
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/40">{a.ctx}</span>
                 </figcaption>
               </figure>
             ))}
@@ -226,7 +226,7 @@ function Applications() {
               </div>
               <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
                 <span className="font-serif text-[16px] text-charcoal">{a.label}</span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-walnut/45">{a.ctx}</span>
+                <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/45">{a.ctx}</span>
               </figcaption>
             </figure>
           ))}
@@ -246,7 +246,7 @@ function WhyStatement() {
   ];
   return (
     <section className="border-t border-walnut/10 bg-charcoal text-cream">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid grid-cols-12 gap-x-8 gap-y-10">
           <div className="col-span-12 md:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-cream/80">03 — Vì sao chọn giả gỗ</span>
@@ -264,7 +264,7 @@ function WhyStatement() {
                   <span className="mt-0.5 w-10 shrink-0 font-serif text-[3rem] leading-none text-clay/60 sm:text-[3.5rem]">{b.n}</span>
                   <div>
                     <div className="font-serif text-[19px] text-cream">{b.t}</div>
-                    <p className="mt-2 text-[13px] leading-relaxed text-cream/90">{b.d}</p>
+                    <p className="mt-2 text-[14px] leading-relaxed text-cream/90">{b.d}</p>
                   </div>
                 </li>
               ))}
@@ -281,7 +281,7 @@ function BeforeAfter() {
   const [pos, setPos] = useState(50);
   return (
     <section className="border-t border-walnut/10">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid grid-cols-12 gap-x-8 gap-y-10">
           <div className="col-span-12 md:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">04 — Trước & Sau</span>
@@ -328,7 +328,7 @@ function Process() {
   ];
   return (
     <section className="border-t border-walnut/10 bg-sand/40">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">05 — Hệ lớp</span>
@@ -346,7 +346,7 @@ function Process() {
                   <span className="mt-0.5 w-10 shrink-0 font-serif text-[3rem] leading-none text-clay/45 sm:text-[3.5rem]">{s.n}</span>
                   <div className="pt-1">
                     <h3 className="font-serif text-[20px] leading-tight text-charcoal sm:text-[24px]">{s.t}</h3>
-                    <p className="mt-2.5 text-[13px] leading-relaxed text-walnut/58">{s.d}</p>
+                    <p className="mt-2.5 text-[14px] leading-relaxed text-walnut/58">{s.d}</p>
                   </div>
                 </li>
               ))}
@@ -365,7 +365,7 @@ function Process() {
 function ColorPalette() {
   return (
     <section id="bang-mau" className="border-t border-walnut/10">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">06 — Bảng màu</span>
@@ -406,7 +406,7 @@ function Combos({ selectedCombos, setSelectedCombos }: {
 
   return (
     <section id="combo" className="border-t border-walnut/10 bg-sand/40">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div>
           <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">07 — Combo sản phẩm</span>
           <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Chọn combo<br />phù hợp hạng mục.</h2>
@@ -536,7 +536,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
 
   return (
     <section id="tu-van" className="border-t border-walnut/10">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">08 — Tư vấn & Đặt hàng</span>
@@ -631,7 +631,7 @@ function Projects() {
   ];
   return (
     <section className="border-t border-walnut/10 bg-sand/40">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">09 — Công trình thực tế</span>
@@ -672,7 +672,7 @@ function FAQ() {
   ];
   return (
     <section id="faq" className="border-t border-walnut/10">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">10 — FAQ</span>
@@ -685,7 +685,7 @@ function FAQ() {
                   <span>{f.q}</span>
                   <span className="mt-0.5 shrink-0 text-[18px] leading-none text-walnut/35 transition group-open:rotate-45 group-open:text-clay">+</span>
                 </summary>
-                <p className="mt-3 text-[13px] leading-relaxed text-walnut/60">{f.a}</p>
+                <p className="mt-3 text-[14px] leading-relaxed text-walnut/60">{f.a}</p>
               </details>
             ))}
           </div>
@@ -699,7 +699,7 @@ function FAQ() {
 function FinalCTA() {
   return (
     <section className="border-t border-walnut/10 bg-charcoal text-cream">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-12 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid grid-cols-12">
           <div className="col-span-12 md:col-span-8">
             <span className="text-[11px] uppercase tracking-[0.3em] text-cream/60">Bắt đầu</span>
@@ -757,7 +757,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-10 border-t border-cream/8 pt-8 text-[10px] text-cream/30">
+        <div className="mt-10 border-t border-cream/8 pt-8 text-[11px] text-cream/30">
           © {new Date().getFullYear()} CÔNG TY TNHH SẢN XUẤT THƯƠNG MẠI DỊCH VỤ BÍCH TRANG. MST: 0313351528.
         </div>
       </div>
