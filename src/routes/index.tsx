@@ -714,7 +714,7 @@ function FinalCTA() {
               <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
                 <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
               </a>
-              <a href="#tu-van" className="inline-flex items-center gap-3 border border-cream/45 px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream/90 transition hover:border-cream hover:text-cream">
+              <a href="#tu-van" className="inline-flex items-center gap-3 bg-white px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-charcoal transition hover:bg-cream">
                 Xem Combo & Đặt Ngay →
               </a>
             </div>
@@ -770,17 +770,20 @@ function StickyMobileCTA({ showStickyBar }: { showStickyBar: boolean }) {
   return (
     <div
       id="sticky-zalo-bar"
-      className={`fixed inset-x-0 bottom-0 z-[9999] flex items-center justify-between px-5 bg-clay text-cream transition-opacity duration-300 md:hidden ${showStickyBar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-      style={{ height: "56px" }}
+      className={`fixed inset-x-0 bottom-0 z-[9999] grid grid-cols-2 gap-2 px-4 pb-safe bg-clay pt-3 transition-opacity duration-300 md:hidden ${showStickyBar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+      style={{ paddingBottom: "env(safe-area-inset-bottom, 12px)" }}
     >
-      <span className="text-[10px] uppercase tracking-[0.18em] text-cream/80">
-        Tư vấn miễn phí · Giao toàn quốc
-      </span>
       <a
         href={ZALO_URL}
-        className="inline-flex items-center gap-2 bg-white px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
+        className="flex items-center justify-center gap-2 bg-white px-3 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
       >
-        NHẮN ZALO NGAY <ArrowRightIcon className="h-3.5 w-3.5" />
+        Nhắn Zalo
+      </a>
+      <a
+        href="#combo"
+        className="flex items-center justify-center gap-2 bg-white px-3 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
+      >
+        Xem combo
       </a>
     </div>
   );
