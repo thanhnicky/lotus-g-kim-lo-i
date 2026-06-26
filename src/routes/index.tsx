@@ -52,18 +52,20 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-cream text-charcoal antialiased font-sans">
       <Header />
-      <Hero />
-      <TrustBar />
-      <Applications />
-      <WhyStatement />
-      <BeforeAfter />
-      <Process />
-      <ColorPalette />
-      <Combos selectedCombos={selectedCombos} setSelectedCombos={setSelectedCombos} />
-      <LeadForm selectedCombos={selectedCombos} />
-      <Projects />
-      <FAQ />
-      <FinalCTA />
+      <main>
+        <Hero />
+        <TrustBar />
+        <Applications />
+        <WhyStatement />
+        <BeforeAfter />
+        <Process />
+        <ColorPalette />
+        <Combos selectedCombos={selectedCombos} setSelectedCombos={setSelectedCombos} />
+        <LeadForm selectedCombos={selectedCombos} />
+        <Projects />
+        <FAQ />
+        <FinalCTA />
+      </main>
       <Footer />
       <StickyMobileCTA showStickyBar={showStickyBar} />
     </div>
@@ -76,7 +78,7 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-walnut/15 bg-cream/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-3 md:px-12">
         <a href="#top">
-          <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain" />
+          <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain" width={150} height={50} loading="lazy" decoding="async" />
         </a>
         <nav className="hidden items-center gap-8 text-[11px] uppercase tracking-[0.22em] text-walnut/65 md:flex">
           {[["#ung-dung","Ứng dụng"],["#bang-mau","Bảng màu"],["#combo","Combo"],["#tu-van","Tư vấn"],["#faq","FAQ"]].map(([h,l]) => (
@@ -128,7 +130,7 @@ function Hero() {
           </div>
           <figure className="col-span-12 md:col-span-6 lg:col-span-7">
             <div className="relative overflow-hidden rounded-lg shadow-2xl shadow-walnut/10">
-              <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" width={1920} height={1080} />
+              <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" width={1920} height={1080} fetchPriority="high" decoding="async" />
             </div>
             <figcaption className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.22em] text-walnut/45">
               <span>Cổng sắt hoàn thiện giả gỗ · Lotus</span>
@@ -186,7 +188,7 @@ function Applications() {
         <div className="mt-14 grid grid-cols-12 gap-3 md:gap-5">
           <figure className="col-span-12 md:col-span-7 group">
             <div className="relative overflow-hidden rounded-lg shadow-lg shadow-walnut/10">
-              <img src={appPergola} alt="Pergola kim loại sơn giả gỗ" loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1600} height={1200} />
+              <img src={appPergola} alt="Pergola kim loại sơn giả gỗ" loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1600} height={1200} decoding="async" />
             </div>
             <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
               <span className="font-serif text-[18px] text-charcoal">Pergola / giàn mái kim loại</span>
@@ -202,7 +204,7 @@ function Applications() {
             ].map((a) => (
               <figure key={a.label} className="group">
                 <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
-                  <img src={a.img} alt={a.label} loading="lazy" className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={800} height={800} />
+                  <img src={a.img} alt={a.label} loading="lazy" className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={800} height={800} decoding="async" />
                 </div>
                 <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
                   <span className="text-[13px] font-medium text-charcoal">{a.label}</span>
@@ -222,7 +224,7 @@ function Applications() {
           ].map((a) => (
             <figure key={a.label} className="group col-span-3 md:col-span-1">
               <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
-                <img src={a.img} alt={a.label} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1024} height={768} />
+                <img src={a.img} alt={a.label} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1024} height={768} decoding="async" />
               </div>
               <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
                 <span className="font-serif text-[16px] text-charcoal">{a.label}</span>
@@ -288,7 +290,7 @@ function BeforeAfter() {
             <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">
               Chân bàn sắt<br />thành giả gỗ<br /><em className="not-italic text-clay">ấm, sang hơn.</em>
             </h2>
-            <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/60">
+            <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/70">
               Trước: chân bàn sắt nhìn lạnh, thiếu ấm. Sau: chân bàn giả gỗ nhìn như gỗ thật, hợp nội thất phòng khách hơn.
             </p>
             <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
@@ -297,9 +299,9 @@ function BeforeAfter() {
           </div>
           <div className="col-span-12 md:col-span-8">
             <div className="relative select-none overflow-hidden">
-              <img src={afterGate} alt="Sau hoàn thiện giả gỗ" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} />
+              <img src={afterGate} alt="Sau hoàn thiện giả gỗ" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} loading="lazy" decoding="async" />
               <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-                <img src={beforeGate} alt="Trước hoàn thiện" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} />
+                <img src={beforeGate} alt="Trước hoàn thiện" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} loading="lazy" decoding="async" />
               </div>
               <div className="pointer-events-none absolute inset-y-0 w-px bg-cream/60" style={{ left: `${pos}%` }} />
               <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-10 w-10 cursor-ew-resize items-center justify-center bg-cream shadow" style={{ left: `${pos}%` }}>
@@ -346,7 +348,7 @@ function Process() {
                   <span className="mt-0.5 w-10 shrink-0 font-serif text-[3rem] leading-none text-clay/45 sm:text-[3.5rem]">{s.n}</span>
                   <div className="pt-1">
                     <h3 className="font-serif text-[20px] leading-tight text-charcoal sm:text-[24px]">{s.t}</h3>
-                    <p className="mt-2.5 text-[14px] leading-relaxed text-walnut/58">{s.d}</p>
+                    <p className="mt-2.5 text-[14px] leading-relaxed text-walnut/70">{s.d}</p>
                   </div>
                 </li>
               ))}
@@ -378,7 +380,7 @@ function ColorPalette() {
           </a>
         </div>
         <div className="mt-12">
-          <img src={colorPaletteImage} alt="Bảng màu sơn giả gỗ trên kim loại Lotus" className="w-full" loading="lazy" width={2400} height={1200} />
+          <img src={colorPaletteImage} alt="Bảng màu sơn giả gỗ trên kim loại Lotus" className="w-full" loading="lazy" width={2400} height={1200} decoding="async" />
         </div>
         <p className="mt-6 text-[13px] leading-relaxed text-walnut/55">
           Các tông phổ biến: Teak, Walnut, Cánh gián, Sồi sáng, Cherry, Gỗ đỏ đậm và nhiều màu theo yêu cầu. Gửi ảnh công trình qua Zalo để được tư vấn màu cụ thể.
@@ -460,14 +462,14 @@ function Combos({ selectedCombos, setSelectedCombos }: {
             <div>
               <div className="text-[11px] uppercase tracking-[0.22em] text-walnut/55">Tổng đơn hàng</div>
               <div className="mt-1 font-serif text-[32px] text-clay">{fmt(total())}</div>
-              <p className="mt-1 text-[11px] text-walnut/45">Nhỏ 1kg ≈ 5m² · Lớn 5kg ≈ 25m² · Chưa bao gồm phí vận chuyển</p>
+              <p className="mt-1 text-[11px] text-walnut/70">Nhỏ 1kg ≈ 5m² · Lớn 5kg ≈ 25m² · Chưa bao gồm phí vận chuyển</p>
             </div>
             <a href="#tu-van" className="inline-flex items-center gap-3 bg-clay px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream transition hover:bg-walnut">
               Điền thông tin đặt hàng <ArrowRightIcon className="h-4 w-4" />
             </a>
           </div>
         )}
-        <p className="mt-4 text-[12px] text-walnut/45">Combo lớn (5kg mỗi loại) đủ cho ~25–30m² bề mặt, tương đương 1 cổng đôi tiêu chuẩn.</p>
+        <p className="mt-4 text-[12px] text-walnut/70">Combo lớn (5kg mỗi loại) đủ cho ~25–30m² bề mặt, tương đương 1 cổng đôi tiêu chuẩn.</p>
       </div>
     </section>
   );
@@ -554,7 +556,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
           <div className="lg:col-span-8">
             <div className="border border-walnut/20 p-6 md:p-8">
               <div className="mb-6 text-[11px] uppercase tracking-[0.25em] text-walnut/55">Dành cho hạng mục nhỏ đã chọn xong combo và màu</div>
-              <p className="mb-6 text-[12px] text-walnut/50">Chưa chắc màu hoặc hệ lớp? Gửi ảnh qua Zalo ở trên trước.</p>
+              <p className="mb-6 text-[12px] text-walnut/70">Chưa chắc màu hoặc hệ lớp? Gửi ảnh qua Zalo ở trên trước.</p>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid gap-5 md:grid-cols-2">
                   <FField label="Họ và tên" name="name" required placeholder="Nguyễn Văn A" />
@@ -569,8 +571,8 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                       <div key={item.key} className="space-y-2">
                         <div className="text-[13px] font-medium">{item.name} ({item.size}) ×{item.quantity}</div>
                         <div>
-                          <label className="mb-1 block text-[10px] uppercase tracking-[0.15em] text-walnut/50">Mã màu giả gỗ</label>
-                          <select value={comboColors[item.key] || "Chưa chọn"} onChange={e => setComboColors(p => ({ ...p, [item.key]: e.target.value }))} className="w-full border border-walnut/25 bg-cream px-3 py-2 text-[13px] outline-none focus:border-clay">
+                          <label htmlFor={`color-${item.key}`} className="mb-1 block text-[10px] uppercase tracking-[0.15em] text-walnut/50">Mã màu giả gỗ</label>
+                          <select id={`color-${item.key}`} value={comboColors[item.key] || "Chưa chọn"} onChange={e => setComboColors(p => ({ ...p, [item.key]: e.target.value }))} className="w-full border border-walnut/25 bg-cream px-3 py-2 text-[13px] outline-none focus:border-clay">
                             {colorOptions.map(c => <option key={c}>{c}</option>)}
                           </select>
                         </div>
@@ -583,7 +585,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                         <span className="font-serif text-[24px] text-clay">{fmt(getTotal())}</span>
                       </div>
                     </div>
-                    <p className="text-[11px] text-walnut/40">* Chưa bao gồm phí vận chuyển</p>
+                    <p className="text-[11px] text-walnut/60">* Chưa bao gồm phí vận chuyển</p>
                   </div>
                 )}
                 <div>
@@ -591,7 +593,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                   <div className="space-y-2">
                     {[{v:"cod",l:"COD — Thanh toán khi nhận hàng"},{v:"online",l:"Chuyển khoản Online — Miễn phí ship, giảm 10%"}].map(opt => (
                       <label key={opt.v} className="flex cursor-pointer items-center gap-3 border border-walnut/20 p-3 transition hover:border-clay">
-                        <input type="radio" name="paymentMethod" value={opt.v} checked={paymentMethod === opt.v} onChange={e => setPaymentMethod(e.target.value as "cod" | "online")} className="h-4 w-4 accent-clay" />
+                        <input type="radio" id={`payment-${opt.v}`} name="paymentMethod" value={opt.v} checked={paymentMethod === opt.v} onChange={e => setPaymentMethod(e.target.value as "cod" | "online")} className="h-4 w-4 accent-clay" />
                         <span className="text-[13px]">{opt.l}</span>
                       </label>
                     ))}
@@ -600,7 +602,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
                 <button type="submit" disabled={isSubmitting} className="mt-2 inline-flex w-full items-center justify-center gap-3 bg-clay py-4 text-[12px] uppercase tracking-[0.18em] text-cream transition hover:bg-walnut disabled:opacity-50">
                   {isSubmitting ? "Đang xử lý..." : "Xác nhận đặt hàng"}
                 </button>
-                <p className="text-[12px] text-walnut/50">Cam kết đổi trả 7 ngày nếu sai màu.</p>
+                <p className="text-[12px] text-walnut/70">Cam kết đổi trả 7 ngày nếu sai màu.</p>
               </form>
             </div>
           </div>
@@ -611,11 +613,12 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
 }
 
 function FField({ label, name, type = "text", required, placeholder }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string }) {
+  const fieldId = `field-${name}`;
   return (
-    <label className="block">
-      <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-walnut/60">{label}{required && <span className="ml-0.5 text-clay">*</span>}</span>
-      <input type={type} name={name} required={required} placeholder={placeholder} className="w-full border border-walnut/25 bg-cream px-4 py-3 text-[14px] outline-none placeholder:text-walnut/25 focus:border-clay" />
-    </label>
+    <div className="block">
+      <label htmlFor={fieldId} className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-walnut/60">{label}{required && <span className="ml-0.5 text-clay">*</span>}</label>
+      <input id={fieldId} type={type} name={name} required={required} placeholder={placeholder} className="w-full border border-walnut/25 bg-cream px-4 py-3 text-[14px] outline-none placeholder:text-walnut/25 focus:border-clay" />
+    </div>
   );
 }
 
@@ -645,7 +648,7 @@ function Projects() {
           {projects.map((p, i) => (
             <figure key={i} className="group">
               <div className="overflow-hidden">
-                <img src={p.img} alt={p.label} loading="lazy" className={`w-full object-cover transition duration-700 group-hover:scale-[1.02] ${i % 3 === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`} width={1024} height={768} />
+                <img src={p.img} alt={p.label} loading="lazy" className={`w-full object-cover transition duration-700 group-hover:scale-[1.02] ${i % 3 === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`} width={1024} height={768} decoding="async" />
               </div>
               <figcaption className="mt-3 border-t border-walnut/15 pt-3">
                 <div className="font-serif text-[16px] text-charcoal">{p.label}</div>
@@ -685,7 +688,7 @@ function FAQ() {
                   <span>{f.q}</span>
                   <span className="mt-0.5 shrink-0 text-[18px] leading-none text-walnut/35 transition group-open:rotate-45 group-open:text-clay">+</span>
                 </summary>
-                <p className="mt-3 text-[14px] leading-relaxed text-walnut/60">{f.a}</p>
+                <p className="mt-3 text-[14px] leading-relaxed text-walnut/70">{f.a}</p>
               </details>
             ))}
           </div>
@@ -707,7 +710,7 @@ function FinalCTA() {
               Chưa chắc combo nào? Gửi ảnh —<br />
               <em className="not-italic text-clay">Lotus tư vấn ngay, miễn phí.</em>
             </h2>
-            <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-cream/80">
+            <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-cream/90">
               Chụp ảnh hạng mục cần hoàn thiện, gửi qua Zalo. Lotus xem và gợi ý đúng màu, đúng hệ lớp — trước khi bạn chốt mua.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
@@ -735,14 +738,14 @@ function Footer() {
       <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-12">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain opacity-80" />
-            <p className="mt-4 text-[12px] leading-relaxed text-cream/45">Giải pháp sơn giả gỗ chuyên cho cổng sắt, hàng rào, lan can, pergola và chi tiết kim loại.</p>
+            <img src={logoLotus} alt="Sơn Lotus" className="h-9 w-auto object-contain opacity-80" width={150} height={50} loading="lazy" decoding="async" />
+            <p className="mt-4 text-[12px] leading-relaxed text-cream/70">Giải pháp sơn giả gỗ chuyên cho cổng sắt, hàng rào, lan can, pergola và chi tiết kim loại.</p>
           </div>
           <div className="text-[12px]">
             <h4 className="mb-4 text-[10px] uppercase tracking-[0.25em] text-cream/35">Liên hệ</h4>
-            <ul className="space-y-2 text-cream/55">
-              <li>Hotline: <strong className="text-cream/80">{HOTLINE}</strong></li>
-              <li>Zalo: <a href={ZALO_URL} className="text-cream/80 hover:text-cream">{HOTLINE}</a></li>
+            <ul className="space-y-2 text-cream/70">
+              <li>Hotline: <strong className="text-cream/90">{HOTLINE}</strong></li>
+              <li>Zalo: <a href={ZALO_URL} className="text-cream/90 hover:text-cream">{HOTLINE}</a></li>
               <li>Email: sales@sonlotus.vn</li>
               <li>Website: www.sonlotus.vn</li>
               <li>99/5 Đường XTT26-1, Ấp 2, Xã Bà Điểm, TP.HCM</li>
@@ -757,7 +760,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-10 border-t border-cream/8 pt-8 text-[11px] text-cream/30">
+        <div className="mt-10 border-t border-cream/8 pt-8 text-[11px] text-cream/50">
           © {new Date().getFullYear()} CÔNG TY TNHH SẢN XUẤT THƯƠNG MẠI DỊCH VỤ BÍCH TRANG. MST: 0313351528.
         </div>
       </div>
