@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
-import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
-import colorPaletteImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
+import logoLotus from "../assets/optimized/logo-150w.webp";
+import colorPaletteImage from "../assets/optimized/bang-mau-640w.webp";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
 import hero640w from "../assets/optimized/hero-640w.webp";
 import hero750w from "../assets/optimized/hero-750w.webp";
@@ -10,19 +10,19 @@ import hero1080w from "../assets/optimized/hero-1080w.webp";
 import hero1200w from "../assets/optimized/hero-1200w.webp";
 import hero1920w from "../assets/optimized/hero-1920w.webp";
 import appRailing from "../assets/app-railing.jpg";
-import appFence from "../assets/hang-rao-son-gia-go-lotus.jpeg";
-import appPergola from "../assets/app-pergola.jpg";
-import appDoor from "../assets/sua-sat-son-gia-go-dep-lotus.jpeg";
+import appFence from "../assets/optimized/hang-rao-640w.webp";
+import appPergola from "../assets/optimized/app-pergola-640w.webp";
+import appDoor from "../assets/optimized/app-door-640w.webp";
 import appFrame from "../assets/khung-sat-son-gia-go-mau-dep.jpeg";
 import appLouver from "../assets/khung-sat-son-gia-go-lotus.jpeg";
-import appKhungKeoThep from "../assets/khung-keo-thep-gia-go-lotus.jpg";
+import appKhungKeoThep from "../assets/optimized/khung-keo-640w.webp";
 import sonChanBanSatGiaGo from "../assets/son-chan-ban-sat-gia-go.jpg";
 import cuaCongSatGiaGo from "../assets/cua-cong-sat-gia-go.jpg";
 import beforeGate from "../assets/before-chan-ban-sat.jpg";
 import afterGate from "../assets/son-chan-ban-sat-gia-go.jpg";
-import banGheSatGiaGoNgoaiTroi from "../assets/ban-ghe-sat-gia-go-ngoai-troi.jpg";
-import sonSatGiaGoGianHoa from "../assets/son-sat-gia-go-gian-hoa.jpg";
-import satGiaGoAshLotus from "../assets/sat-gia-go-ash-lotus.jpg";
+import banGheSatGiaGoNgoaiTroi from "../assets/optimized/ban-ghe-640w.webp";
+import sonSatGiaGoGianHoa from "../assets/optimized/gian-hoa-640w.webp";
+import satGiaGoAshLotus from "../assets/optimized/sat-ash-640w.webp";
 
 export const Route = createFileRoute("/")({ component: LandingPage });
 
@@ -227,7 +227,17 @@ function Applications() {
             <div className="mt-14 grid grid-cols-12 gap-3 md:gap-5">
               <figure className="col-span-12 md:col-span-7 group">
                 <div className="relative overflow-hidden rounded-lg shadow-lg shadow-walnut/10">
-                  <img src={appPergola} alt="Pergola kim loại sơn giả gỗ" loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1600} height={1200} decoding="async" />
+                  <img 
+                    src={appPergola} 
+                    alt="Pergola kim loại sơn giả gỗ" 
+                    loading="lazy" 
+                    className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" 
+                    width={1600} 
+                    height={1200} 
+                    decoding="async"
+                    srcSet={`${appPergola} 640w, ${appPergola} 750w, ${appPergola} 828w, ${appPergola} 1080w, ${appPergola} 1200w`}
+                    sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, (max-width: 1200px) 100vw, 1920px"
+                  />
                 </div>
                 <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
                   <span className="font-serif text-[18px] text-charcoal">Pergola / giàn mái kim loại</span>
@@ -236,14 +246,24 @@ function Applications() {
               </figure>
               <div className="col-span-12 grid grid-cols-2 gap-3 md:col-span-5 md:gap-5">
                 {[
-                  { img: heroGate, label: "Cổng sắt", ctx: "Ngoại thất" },
-                  { img: appFence, label: "Hàng rào", ctx: "Sân vườn" },
-                  { img: appLouver, label: "Lam che nắng", ctx: "Mặt dựng" },
-                  { img: appRailing, label: "Lan can, tay vịn", ctx: "Cầu thang" },
+                  { img: heroGate, label: "Cổng sắt", ctx: "Ngoại thất", srcSet: `${heroGate} 640w, ${heroGate} 750w, ${heroGate} 828w` },
+                  { img: appFence, label: "Hàng rào", ctx: "Sân vườn", srcSet: `${appFence} 640w, ${appFence} 750w, ${appFence} 828w` },
+                  { img: appLouver, label: "Lam che nắng", ctx: "Mặt dựng", srcSet: `${appLouver} 640w, ${appLouver} 750w, ${appLouver} 828w` },
+                  { img: appRailing, label: "Lan can, tay vịn", ctx: "Cầu thang", srcSet: `${appRailing} 640w, ${appRailing} 750w, ${appRailing} 828w` },
                 ].map((a) => (
                   <figure key={a.label} className="group">
                     <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
-                      <img src={a.img} alt={a.label} loading="lazy" className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={800} height={800} decoding="async" />
+                      <img 
+                        src={a.img} 
+                        alt={a.label} 
+                        loading="lazy" 
+                        className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" 
+                        width={800} 
+                        height={800} 
+                        decoding="async"
+                        srcSet={a.srcSet}
+                        sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, 1920px"
+                      />
                     </div>
                     <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
                       <span className="text-[13px] font-medium text-charcoal">{a.label}</span>
@@ -257,13 +277,23 @@ function Applications() {
             {/* 3 equal */}
             <div className="mt-5 grid grid-cols-3 gap-3 md:gap-5">
               {[
-                { img: appKhungKeoThep, label: "Khung kèo thép", ctx: "Kết cấu nội thất" },
-                { img: appDoor, label: "Cửa sắt / pano cửa", ctx: "Khung mặt tiền" },
-                { img: appFrame, label: "Khung trang trí", ctx: "Chi tiết kiến trúc" },
+                { img: appKhungKeoThep, label: "Khung kèo thép", ctx: "Kết cấu nội thất", srcSet: `${appKhungKeoThep} 640w, ${appKhungKeoThep} 750w, ${appKhungKeoThep} 828w, ${appKhungKeoThep} 1080w` },
+                { img: appDoor, label: "Cửa sắt / pano cửa", ctx: "Khung mặt tiền", srcSet: `${appDoor} 640w, ${appDoor} 750w, ${appDoor} 828w, ${appDoor} 1080w` },
+                { img: appFrame, label: "Khung trang trí", ctx: "Chi tiết kiến trúc", srcSet: `${appFrame} 640w, ${appFrame} 750w, ${appFrame} 828w` },
               ].map((a) => (
                 <figure key={a.label} className="group col-span-3 md:col-span-1">
                   <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
-                    <img src={a.img} alt={a.label} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1024} height={768} decoding="async" />
+                    <img 
+                      src={a.img} 
+                      alt={a.label} 
+                      loading="lazy" 
+                      className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" 
+                      width={1024} 
+                      height={768} 
+                      decoding="async"
+                      srcSet={a.srcSet}
+                      sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, 1920px"
+                    />
                   </div>
                   <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
                     <span className="font-serif text-[16px] text-charcoal">{a.label}</span>
@@ -466,7 +496,17 @@ function ColorPalette() {
         </div>
         {isVisible && (
           <div className="mt-12">
-            <img src={colorPaletteImage} alt="Bảng màu sơn giả gỗ trên kim loại Lotus" className="w-full" loading="lazy" width={2400} height={1200} decoding="async" />
+            <img 
+              src={colorPaletteImage} 
+              alt="Bảng màu sơn giả gỗ trên kim loại Lotus" 
+              className="w-full" 
+              loading="lazy" 
+              width={2400} 
+              height={1200} 
+              decoding="async"
+              srcSet={`${colorPaletteImage} 640w, ${colorPaletteImage} 750w, ${colorPaletteImage} 828w, ${colorPaletteImage} 1080w, ${colorPaletteImage} 1200w`}
+              sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, (max-width: 1200px) 100vw, 1920px"
+            />
           </div>
         )}
         <p className="mt-6 text-[13px] leading-relaxed text-walnut/55">
@@ -715,12 +755,12 @@ function Projects() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const projects = [
-    { img: appKhungKeoThep, label: "Khung kèo thép giả gỗ", detail: "Tông Gõ đỏ · TP.HCM" },
-    { img: cuaCongSatGiaGo, label: "Cửa cổng sắt giả gỗ", detail: "Tông Vàng-đỏ · Đồng Nai" },
-    { img: sonChanBanSatGiaGo, label: "Chân bàn sắt giả gỗ", detail: "Tông Teak · Bình Dương" },
-    { img: banGheSatGiaGoNgoaiTroi, label: "Bàn ghế outdoor sắt giả gỗ", detail: "Tông Vàng-Nâu · Bình Dương" },
-    { img: sonSatGiaGoGianHoa, label: "Giàn hoa công viên", detail: "Tông Nâu-đỏ · Bình Dương" },
-    { img: satGiaGoAshLotus, label: "Bàn ghế cafe sắt giả gỗ", detail: "Tông Nâu-đen · Đồng Nai" },
+    { img: appKhungKeoThep, label: "Khung kèo thép giả gỗ", detail: "Tông Gõ đỏ · TP.HCM", srcSet: `${appKhungKeoThep} 640w, ${appKhungKeoThep} 750w, ${appKhungKeoThep} 828w, ${appKhungKeoThep} 1080w` },
+    { img: cuaCongSatGiaGo, label: "Cửa cổng sắt giả gỗ", detail: "Tông Vàng-đỏ · Đồng Nai", srcSet: `${cuaCongSatGiaGo} 640w, ${cuaCongSatGiaGo} 750w, ${cuaCongSatGiaGo} 828w` },
+    { img: sonChanBanSatGiaGo, label: "Chân bàn sắt giả gỗ", detail: "Tông Teak · Bình Dương", srcSet: `${sonChanBanSatGiaGo} 640w, ${sonChanBanSatGiaGo} 750w, ${sonChanBanSatGiaGo} 828w` },
+    { img: banGheSatGiaGoNgoaiTroi, label: "Bàn ghế outdoor sắt giả gỗ", detail: "Tông Vàng-Nâu · Bình Dương", srcSet: `${banGheSatGiaGoNgoaiTroi} 640w, ${banGheSatGiaGoNgoaiTroi} 750w, ${banGheSatGiaGoNgoaiTroi} 828w, ${banGheSatGiaGoNgoaiTroi} 1080w` },
+    { img: sonSatGiaGoGianHoa, label: "Giàn hoa công viên", detail: "Tông Nâu-đỏ · Bình Dương", srcSet: `${sonSatGiaGoGianHoa} 640w, ${sonSatGiaGoGianHoa} 750w, ${sonSatGiaGoGianHoa} 828w` },
+    { img: satGiaGoAshLotus, label: "Bàn ghế cafe sắt giả gỗ", detail: "Tông Nâu-đen · Đồng Nai", srcSet: `${satGiaGoAshLotus} 640w, ${satGiaGoAshLotus} 750w, ${satGiaGoAshLotus} 828w, ${satGiaGoAshLotus} 1080w` },
   ];
 
   useEffect(() => {
@@ -758,7 +798,17 @@ function Projects() {
             {projects.map((p, i) => (
               <figure key={i} className="group">
                 <div className="overflow-hidden">
-                  <img src={p.img} alt={p.label} loading="lazy" className={`w-full object-cover transition duration-700 group-hover:scale-[1.02] ${i % 3 === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`} width={1024} height={768} decoding="async" />
+                  <img 
+                    src={p.img} 
+                    alt={p.label} 
+                    loading="lazy" 
+                    className={`w-full object-cover transition duration-700 group-hover:scale-[1.02] ${i % 3 === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`} 
+                    width={1024} 
+                    height={768} 
+                    decoding="async"
+                    srcSet={p.srcSet}
+                    sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, 1920px"
+                  />
                 </div>
                 <figcaption className="mt-3 border-t border-walnut/15 pt-3">
                   <div className="font-serif text-[16px] text-charcoal">{p.label}</div>
