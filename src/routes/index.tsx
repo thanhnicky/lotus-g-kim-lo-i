@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import logoLotus from "../assets/optimized/logo-150w.webp";
-import colorPaletteImage from "../assets/optimized/bang-mau-640w.webp";
+import colorPaletteImage from "../assets/optimized/bang-mau-1080w.webp";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
 import hero640w from "../assets/optimized/hero-640w.webp";
 import hero750w from "../assets/optimized/hero-750w.webp";
@@ -23,6 +23,9 @@ import afterGate from "../assets/son-chan-ban-sat-gia-go.jpg";
 import banGheSatGiaGoNgoaiTroi from "../assets/optimized/ban-ghe-640w.webp";
 import sonSatGiaGoGianHoa from "../assets/optimized/gian-hoa-640w.webp";
 import satGiaGoAshLotus from "../assets/optimized/sat-ash-640w.webp";
+import bangMau1080w from "../assets/optimized/bang-mau-1080w.webp";
+import bangMau1200w from "../assets/optimized/bang-mau-1200w.webp";
+import bangMau1920w from "../assets/optimized/bang-mau-1920w.webp";
 
 export const Route = createFileRoute("/")({ component: LandingPage });
 
@@ -504,8 +507,8 @@ function ColorPalette() {
               width={2400} 
               height={1200} 
               decoding="async"
-              srcSet={`${colorPaletteImage} 640w, ${colorPaletteImage} 750w, ${colorPaletteImage} 828w, ${colorPaletteImage} 1080w, ${colorPaletteImage} 1200w`}
-              sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, (max-width: 1200px) 100vw, 1920px"
+              srcSet={`${bangMau1080w} 1080w, ${bangMau1200w} 1200w, ${bangMau1920w} 1920w`}
+              sizes="(max-width: 1080px) 100vw, (max-width: 1200px) 100vw, 1920px"
             />
           </div>
         )}

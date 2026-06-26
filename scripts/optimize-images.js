@@ -35,8 +35,8 @@ const IMAGES_TO_OPTIMIZE = [
   {
     source: 'bang-mau-son-gia-go-tren-sat-lotus.png',
     name: 'bang-mau',
-    widths: [640, 750, 828, 1080, 1200],
-    quality: 80,
+    widths: [1080, 1200, 1920],
+    quality: 95,
   },
   {
     source: 'khung-keo-thep-gia-go-lotus.jpg',
