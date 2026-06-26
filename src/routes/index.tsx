@@ -3,6 +3,12 @@ import { useState, useEffect, useRef } from "react";
 import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
 import colorPaletteImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
+import hero640w from "../assets/optimized/hero-640w.webp";
+import hero750w from "../assets/optimized/hero-750w.webp";
+import hero828w from "../assets/optimized/hero-828w.webp";
+import hero1080w from "../assets/optimized/hero-1080w.webp";
+import hero1200w from "../assets/optimized/hero-1200w.webp";
+import hero1920w from "../assets/optimized/hero-1920w.webp";
 import appRailing from "../assets/app-railing.jpg";
 import appFence from "../assets/hang-rao-son-gia-go-lotus.jpeg";
 import appPergola from "../assets/app-pergola.jpg";
@@ -131,14 +137,14 @@ function Hero() {
           <figure className="col-span-12 md:col-span-6 lg:col-span-7">
             <div className="relative overflow-hidden rounded-lg shadow-2xl shadow-walnut/10">
               <img 
-                src={heroGate} 
+                src={hero640w}
                 alt="Cổng sắt sơn giả gỗ Lotus" 
                 className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" 
                 width={1920} 
                 height={1080} 
                 fetchPriority="high" 
                 decoding="async"
-                srcSet={`${heroGate} 640w, ${heroGate} 750w, ${heroGate} 828w, ${heroGate} 1080w, ${heroGate} 1200w, ${heroGate} 1920w`}
+                srcSet={`${hero640w} 640w, ${hero750w} 750w, ${hero828w} 828w, ${hero1080w} 1080w, ${hero1200w} 1200w, ${hero1920w} 1920w`}
                 sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, (max-width: 1200px) 100vw, 1920px"
               />
             </div>
