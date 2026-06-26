@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
 import colorPaletteImage from "../assets/bang-mau-son-gia-go-tren-sat-lotus.png";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
@@ -130,7 +130,17 @@ function Hero() {
           </div>
           <figure className="col-span-12 md:col-span-6 lg:col-span-7">
             <div className="relative overflow-hidden rounded-lg shadow-2xl shadow-walnut/10">
-              <img src={heroGate} alt="Cổng sắt sơn giả gỗ Lotus" className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" width={1920} height={1080} fetchPriority="high" decoding="async" />
+              <img 
+                src={heroGate} 
+                alt="Cổng sắt sơn giả gỗ Lotus" 
+                className="aspect-[4/3] w-full object-cover md:aspect-[16/10] transition-transform duration-700 hover:scale-[1.01]" 
+                width={1920} 
+                height={1080} 
+                fetchPriority="high" 
+                decoding="async"
+                srcSet={`${heroGate} 640w, ${heroGate} 750w, ${heroGate} 828w, ${heroGate} 1080w, ${heroGate} 1200w, ${heroGate} 1920w`}
+                sizes="(max-width: 640px) 100vw, (max-width: 750px) 100vw, (max-width: 828px) 100vw, (max-width: 1080px) 100vw, (max-width: 1200px) 100vw, 1920px"
+              />
             </div>
             <figcaption className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.22em] text-walnut/45">
               <span>Cổng sắt hoàn thiện giả gỗ · Lotus</span>
@@ -169,8 +179,29 @@ function TrustBar() {
 
 /* ── Applications ─────────────────────────────────────── */
 function Applications() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="ung-dung" className="border-t border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/20">
+    <section id="ung-dung" ref={sectionRef} className="border-t border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/20">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -184,55 +215,59 @@ function Applications() {
           </a>
         </div>
 
-        {/* 1 large + 4 small */}
-        <div className="mt-14 grid grid-cols-12 gap-3 md:gap-5">
-          <figure className="col-span-12 md:col-span-7 group">
-            <div className="relative overflow-hidden rounded-lg shadow-lg shadow-walnut/10">
-              <img src={appPergola} alt="Pergola kim loại sơn giả gỗ" loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1600} height={1200} decoding="async" />
-            </div>
-            <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
-              <span className="font-serif text-[18px] text-charcoal">Pergola / giàn mái kim loại</span>
-              <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/45">Ngoại thất</span>
-            </figcaption>
-          </figure>
-          <div className="col-span-12 grid grid-cols-2 gap-3 md:col-span-5 md:gap-5">
-            {[
-              { img: heroGate, label: "Cổng sắt", ctx: "Ngoại thất" },
-              { img: appFence, label: "Hàng rào", ctx: "Sân vườn" },
-              { img: appLouver, label: "Lam che nắng", ctx: "Mặt dựng" },
-              { img: appRailing, label: "Lan can, tay vịn", ctx: "Cầu thang" },
-            ].map((a) => (
-              <figure key={a.label} className="group">
-                <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
-                  <img src={a.img} alt={a.label} loading="lazy" className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={800} height={800} decoding="async" />
+        {isVisible && (
+          <>
+            {/* 1 large + 4 small */}
+            <div className="mt-14 grid grid-cols-12 gap-3 md:gap-5">
+              <figure className="col-span-12 md:col-span-7 group">
+                <div className="relative overflow-hidden rounded-lg shadow-lg shadow-walnut/10">
+                  <img src={appPergola} alt="Pergola kim loại sơn giả gỗ" loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1600} height={1200} decoding="async" />
                 </div>
-                <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
-                  <span className="text-[13px] font-medium text-charcoal">{a.label}</span>
-                  <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/40">{a.ctx}</span>
+                <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
+                  <span className="font-serif text-[18px] text-charcoal">Pergola / giàn mái kim loại</span>
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/45">Ngoại thất</span>
                 </figcaption>
               </figure>
-            ))}
-          </div>
-        </div>
-
-        {/* 3 equal */}
-        <div className="mt-5 grid grid-cols-3 gap-3 md:gap-5">
-          {[
-            { img: appKhungKeoThep, label: "Khung kèo thép", ctx: "Kết cấu nội thất" },
-            { img: appDoor, label: "Cửa sắt / pano cửa", ctx: "Khung mặt tiền" },
-            { img: appFrame, label: "Khung trang trí", ctx: "Chi tiết kiến trúc" },
-          ].map((a) => (
-            <figure key={a.label} className="group col-span-3 md:col-span-1">
-              <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
-                <img src={a.img} alt={a.label} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1024} height={768} decoding="async" />
+              <div className="col-span-12 grid grid-cols-2 gap-3 md:col-span-5 md:gap-5">
+                {[
+                  { img: heroGate, label: "Cổng sắt", ctx: "Ngoại thất" },
+                  { img: appFence, label: "Hàng rào", ctx: "Sân vườn" },
+                  { img: appLouver, label: "Lam che nắng", ctx: "Mặt dựng" },
+                  { img: appRailing, label: "Lan can, tay vịn", ctx: "Cầu thang" },
+                ].map((a) => (
+                  <figure key={a.label} className="group">
+                    <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
+                      <img src={a.img} alt={a.label} loading="lazy" className="aspect-square w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={800} height={800} decoding="async" />
+                    </div>
+                    <figcaption className="mt-2 flex items-baseline justify-between border-t border-walnut/12 pt-2">
+                      <span className="text-[13px] font-medium text-charcoal">{a.label}</span>
+                      <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/40">{a.ctx}</span>
+                    </figcaption>
+                  </figure>
+                ))}
               </div>
-              <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
-                <span className="font-serif text-[16px] text-charcoal">{a.label}</span>
-                <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/45">{a.ctx}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+            </div>
+
+            {/* 3 equal */}
+            <div className="mt-5 grid grid-cols-3 gap-3 md:gap-5">
+              {[
+                { img: appKhungKeoThep, label: "Khung kèo thép", ctx: "Kết cấu nội thất" },
+                { img: appDoor, label: "Cửa sắt / pano cửa", ctx: "Khung mặt tiền" },
+                { img: appFrame, label: "Khung trang trí", ctx: "Chi tiết kiến trúc" },
+              ].map((a) => (
+                <figure key={a.label} className="group col-span-3 md:col-span-1">
+                  <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
+                    <img src={a.img} alt={a.label} loading="lazy" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.02]" width={1024} height={768} decoding="async" />
+                  </div>
+                  <figcaption className="mt-3 flex items-baseline justify-between border-t border-walnut/15 pt-3">
+                    <span className="font-serif text-[16px] text-charcoal">{a.label}</span>
+                    <span className="text-[11px] uppercase tracking-[0.2em] text-walnut/45">{a.ctx}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
@@ -281,8 +316,29 @@ function WhyStatement() {
 /* ── Before / After ───────────────────────────────────── */
 function BeforeAfter() {
   const [pos, setPos] = useState(50);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="border-t border-walnut/10">
+    <section ref={sectionRef} className="border-t border-walnut/10">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid grid-cols-12 gap-x-8 gap-y-10">
           <div className="col-span-12 md:col-span-4">
@@ -298,21 +354,23 @@ function BeforeAfter() {
             </a>
           </div>
           <div className="col-span-12 md:col-span-8">
-            <div className="relative select-none overflow-hidden">
-              <img src={afterGate} alt="Sau hoàn thiện giả gỗ" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} loading="lazy" decoding="async" />
-              <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-                <img src={beforeGate} alt="Trước hoàn thiện" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} loading="lazy" decoding="async" />
+            {isVisible && (
+              <div className="relative select-none overflow-hidden">
+                <img src={afterGate} alt="Sau hoàn thiện giả gỗ" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} loading="lazy" decoding="async" />
+                <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+                  <img src={beforeGate} alt="Trước hoàn thiện" className="aspect-[4/3] w-full object-cover" width={1600} height={1200} loading="lazy" decoding="async" />
+                </div>
+                <div className="pointer-events-none absolute inset-y-0 w-px bg-cream/60" style={{ left: `${pos}%` }} />
+                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-10 w-10 cursor-ew-resize items-center justify-center bg-cream shadow" style={{ left: `${pos}%` }}>
+                  <svg className="h-5 w-5 text-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
+                  </svg>
+                </div>
+                <input type="range" min="0" max="100" value={pos} onChange={(e) => setPos(Number(e.target.value))} className="absolute inset-0 w-full cursor-ew-resize opacity-0" />
+                <div className="pointer-events-none absolute bottom-4 left-5 text-[11px] uppercase tracking-[0.25em] text-cream/75">Trước</div>
+                <div className="pointer-events-none absolute bottom-4 right-5 text-[11px] uppercase tracking-[0.25em] text-cream/75">Sau</div>
               </div>
-              <div className="pointer-events-none absolute inset-y-0 w-px bg-cream/60" style={{ left: `${pos}%` }} />
-              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 flex h-10 w-10 cursor-ew-resize items-center justify-center bg-cream shadow" style={{ left: `${pos}%` }}>
-                <svg className="h-5 w-5 text-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
-                </svg>
-              </div>
-              <input type="range" min="0" max="100" value={pos} onChange={(e) => setPos(Number(e.target.value))} className="absolute inset-0 w-full cursor-ew-resize opacity-0" />
-              <div className="pointer-events-none absolute bottom-4 left-5 text-[11px] uppercase tracking-[0.25em] text-cream/75">Trước</div>
-              <div className="pointer-events-none absolute bottom-4 right-5 text-[11px] uppercase tracking-[0.25em] text-cream/75">Sau</div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -365,8 +423,29 @@ function Process() {
 
 /* ── Color Palette ────────────────────────────────────── */
 function ColorPalette() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="bang-mau" className="border-t border-walnut/10">
+    <section id="bang-mau" ref={sectionRef} className="border-t border-walnut/10">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -379,9 +458,11 @@ function ColorPalette() {
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
-        <div className="mt-12">
-          <img src={colorPaletteImage} alt="Bảng màu sơn giả gỗ trên kim loại Lotus" className="w-full" loading="lazy" width={2400} height={1200} decoding="async" />
-        </div>
+        {isVisible && (
+          <div className="mt-12">
+            <img src={colorPaletteImage} alt="Bảng màu sơn giả gỗ trên kim loại Lotus" className="w-full" loading="lazy" width={2400} height={1200} decoding="async" />
+          </div>
+        )}
         <p className="mt-6 text-[13px] leading-relaxed text-walnut/55">
           Các tông phổ biến: Teak, Walnut, Cánh gián, Sồi sáng, Cherry, Gỗ đỏ đậm và nhiều màu theo yêu cầu. Gửi ảnh công trình qua Zalo để được tư vấn màu cụ thể.
         </p>
@@ -624,6 +705,9 @@ function FField({ label, name, type = "text", required, placeholder }: { label: 
 
 /* ── Projects ─────────────────────────────────────────── */
 function Projects() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   const projects = [
     { img: appKhungKeoThep, label: "Khung kèo thép giả gỗ", detail: "Tông Gõ đỏ · TP.HCM" },
     { img: cuaCongSatGiaGo, label: "Cửa cổng sắt giả gỗ", detail: "Tông Vàng-đỏ · Đồng Nai" },
@@ -632,8 +716,27 @@ function Projects() {
     { img: sonSatGiaGoGianHoa, label: "Giàn hoa công viên", detail: "Tông Nâu-đỏ · Bình Dương" },
     { img: satGiaGoAshLotus, label: "Bàn ghế cafe sắt giả gỗ", detail: "Tông Nâu-đen · Đồng Nai" },
   ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="border-t border-walnut/10 bg-sand/40">
+    <section ref={sectionRef} className="border-t border-walnut/10 bg-sand/40">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -644,19 +747,21 @@ function Projects() {
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
-        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5 lg:gap-6">
-          {projects.map((p, i) => (
-            <figure key={i} className="group">
-              <div className="overflow-hidden">
-                <img src={p.img} alt={p.label} loading="lazy" className={`w-full object-cover transition duration-700 group-hover:scale-[1.02] ${i % 3 === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`} width={1024} height={768} decoding="async" />
-              </div>
-              <figcaption className="mt-3 border-t border-walnut/15 pt-3">
-                <div className="font-serif text-[16px] text-charcoal">{p.label}</div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-walnut/45">{p.detail}</div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        {isVisible && (
+          <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5 lg:gap-6">
+            {projects.map((p, i) => (
+              <figure key={i} className="group">
+                <div className="overflow-hidden">
+                  <img src={p.img} alt={p.label} loading="lazy" className={`w-full object-cover transition duration-700 group-hover:scale-[1.02] ${i % 3 === 0 ? "aspect-[3/4]" : "aspect-[4/3]"}`} width={1024} height={768} decoding="async" />
+                </div>
+                <figcaption className="mt-3 border-t border-walnut/15 pt-3">
+                  <div className="font-serif text-[16px] text-charcoal">{p.label}</div>
+                  <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-walnut/45">{p.detail}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
