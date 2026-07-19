@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import logoLotus from "../assets/optimized/logo-150w.webp";
 import colorPaletteImage from "../assets/optimized/bang-mau-1080w.webp";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
@@ -39,14 +39,184 @@ function LandingPage() {
     "Combo 2K cao cấp": { small: 0, large: 0 },
   });
   const [showStickyBar, setShowStickyBar] = useState(false);
+  
+  // Intent Engine State
+  const [intentState, setIntentState] = useState({
+    pageType: "b2c_fakewood_metal" as const,
+    intentScore: 0,
+    currentIntent: "explorer" as "explorer" | "considering" | "price_ready" | "hot_lead",
+    selectedPackage: null as "500g" | "1kg" | null,
+    selectedColor: null as string | null,
+    intentEvents: [] as Array<{ name: string; timestamp: number; meta?: any }>,
+    promptDismissed: false,
+    timeOnPage: 0,
+    maxScrollDepth: 0,
+    viewedColorSection: false,
+    viewedProjectSection: false,
+    reachedComboSection: false,
+    comboSectionRevisits: 0,
+    lastComboSectionVisit: 0 as number | null,
+  });
 
+  // Helper: Track intent event
+  const trackIntentEvent = useCallback((name: string, meta?: any) => {
+    console.log(`[Intent Engine] Event: ${name}`, meta || "");
+    setIntentState(prev => ({
+      ...prev,
+      intentEvents: [...prev.intentEvents, { name, timestamp: Date.now(), meta }]
+    }));
+  }, []);
+
+  // Helper: Add intent score
+  const addIntentScore = useCallback((points: number, reason: string) => {
+    console.log(`[Intent Engine] Score +${points}: ${reason}`);
+    setIntentState(prev => {
+      const newScore = prev.intentScore + points;
+      return { ...prev, intentScore: newScore };
+    });
+  }, []);
+
+  // Helper: Update intent state based on score
+  const updateIntentState = useCallback(() => {
+    setIntentState(prev => {
+      let newIntent: "explorer" | "considering" | "price_ready" | "hot_lead" = "explorer";
+      if (prev.intentScore >= 12) newIntent = "hot_lead";
+      else if (prev.intentScore >= 8) newIntent = "price_ready";
+      else if (prev.intentScore >= 4) newIntent = "considering";
+      
+      if (newIntent !== prev.currentIntent) {
+        console.log(`[Intent Engine] Intent changed: ${prev.currentIntent} -> ${newIntent} (score: ${prev.intentScore})`);
+      }
+      return { ...prev, currentIntent: newIntent };
+    });
+  }, []);
+
+  // Track time on page
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIntentState(prev => {
+        const newTime = prev.timeOnPage + 1;
+        // Time on page > 20s => +1
+        if (newTime === 20) {
+          addIntentScore(1, "Time on page > 20s");
+          updateIntentState();
+        }
+        return { ...prev, timeOnPage: newTime };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [addIntentScore, updateIntentState]);
+
+  // Track scroll depth
   useEffect(() => {
     const handleScroll = () => {
       setShowStickyBar(window.scrollY > 300);
+      
+      const scrollDepth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      setIntentState(prev => {
+        const newMaxDepth = Math.max(prev.maxScrollDepth, scrollDepth);
+        // Scroll depth > 35% => +1
+        if (newMaxDepth > 35 && prev.maxScrollDepth <= 35) {
+          addIntentScore(1, "Scroll depth > 35%");
+          updateIntentState();
+        }
+        return { ...prev, maxScrollDepth: newMaxDepth };
+      });
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [addIntentScore, updateIntentState]);
+
+  // Track section visibility using Intersection Observer
+  useEffect(() => {
+    const sections = {
+      colors: document.querySelector('[data-section="colors"]'),
+      projects: document.querySelector('[data-section="projects"]'),
+      combo: document.querySelector('[data-section="combo"]'),
+      order: document.querySelector('[data-section="order"]'),
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const section = entry.target as HTMLElement;
+            const sectionType = section.dataset.section;
+            
+            if (sectionType === "colors" && !intentState.viewedColorSection) {
+              trackIntentEvent("viewed_color_section");
+              addIntentScore(2, "Viewed color section");
+              setIntentState(prev => ({ ...prev, viewedColorSection: true }));
+              updateIntentState();
+            }
+            
+            if (sectionType === "projects" && !intentState.viewedProjectSection) {
+              trackIntentEvent("viewed_project_section");
+              addIntentScore(1, "Viewed real project section");
+              setIntentState(prev => ({ ...prev, viewedProjectSection: true }));
+              updateIntentState();
+            }
+            
+            if (sectionType === "combo" || sectionType === "order") {
+              if (!intentState.reachedComboSection) {
+                trackIntentEvent("reached_combo_section");
+                addIntentScore(4, "Reached combo/order section");
+                setIntentState(prev => ({ ...prev, reachedComboSection: true, lastComboSectionVisit: Date.now() }));
+                updateIntentState();
+              } else {
+                // Revisit combo/order section => +3
+                setIntentState(prev => {
+                  const timeSinceLastVisit = prev.lastComboSectionVisit ? Date.now() - prev.lastComboSectionVisit : Infinity;
+                  if (timeSinceLastVisit > 5000) { // Only count if been away for at least 5 seconds
+                    trackIntentEvent("revisited_combo_section");
+                    addIntentScore(3, "Revisited combo/order section");
+                    updateIntentState();
+                    return { ...prev, comboSectionRevisits: prev.comboSectionRevisits + 1, lastComboSectionVisit: Date.now() };
+                  }
+                  return prev;
+                });
+              }
+            }
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    Object.values(sections).forEach(section => {
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, [intentState, trackIntentEvent, addIntentScore, updateIntentState]);
+
+  // Track CTA clicks
+  const handleCTAClick = useCallback((ctaType: string, meta?: any) => {
+    trackIntentEvent(`cta_click_${ctaType}`, meta);
+    
+    switch (ctaType) {
+      case "hero_zalo":
+        addIntentScore(5, "Click Zalo CTA");
+        break;
+      case "hero_combo":
+        addIntentScore(3, "Click hero 'Xem Combo' CTA");
+        break;
+      case "view_combo":
+        addIntentScore(3, "Click 'Xem combo' CTA");
+        break;
+      case "place_order":
+        addIntentScore(4, "Click 'Đặt hàng' CTA");
+        break;
+      case "select_package":
+        addIntentScore(4, "Select package (500g/1kg)");
+        setIntentState(prev => ({ ...prev, selectedPackage: meta?.package || null }));
+        break;
+      case "select_color":
+        setIntentState(prev => ({ ...prev, selectedColor: meta?.color || null }));
+        break;
+    }
+    updateIntentState();
+  }, [trackIntentEvent, addIntentScore, updateIntentState]);
 
   useEffect(() => {
     if (showStickyBar) {
@@ -105,7 +275,7 @@ function Header() {
 /* ── Hero ────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section id="top" className="border-b border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/30">
+    <section id="top" data-section="hero" className="border-b border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/30">
       <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-12 md:pt-14 md:pb-20">
         <div className="grid grid-cols-12 gap-x-6 gap-y-10">
           <div className="col-span-12 flex flex-col md:col-span-6 lg:col-span-5">
@@ -119,10 +289,10 @@ function Hero() {
               Lotus giả gỗ trên kim loại: vân gỗ sắc nét, ấm, sang — giữ độ bền sắt, không lo cong vênh hay mối mọt.
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
-              <a href={ZALO_URL} className="inline-flex items-center justify-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
+              <a href={ZALO_URL} data-cta="hero_zalo" onClick={() => handleCTAClick("hero_zalo")} className="inline-flex items-center justify-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
                 Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-4 w-4" />
               </a>
-              <a href="#combo" className="inline-flex items-center justify-center gap-3 border border-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-clay hover:text-cream sm:px-7">
+              <a href="#combo" data-cta="hero_combo" onClick={() => handleCTAClick("hero_combo")} className="inline-flex items-center justify-center gap-3 border border-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-clay hover:text-cream sm:px-7">
                 Xem Combo & Đặt Hàng Ngay <ArrowRightIcon className="h-4 w-4" />
               </a>
             </div>
@@ -210,7 +380,7 @@ function Applications() {
   }, []);
 
   return (
-    <section id="ung-dung" ref={sectionRef} className="border-t border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/20">
+    <section id="ung-dung" ref={sectionRef} data-section="applications" className="border-t border-walnut/10 bg-gradient-to-br from-cream via-cream to-sand/20">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -219,7 +389,7 @@ function Applications() {
               Những hạng mục kim loại<br />hoàn thiện giả gỗ đẹp nhất.
             </h2>
           </div>
-          <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+          <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -377,7 +547,7 @@ function BeforeAfter() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="border-t border-walnut/10">
+    <section ref={sectionRef} data-section="before-after" className="border-t border-walnut/10">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid grid-cols-12 gap-x-8 gap-y-10">
           <div className="col-span-12 md:col-span-4">
@@ -388,7 +558,7 @@ function BeforeAfter() {
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/70">
               Trước: chân bàn sắt nhìn lạnh, thiếu ấm. Sau: chân bàn giả gỗ nhìn như gỗ thật, hợp nội thất phòng khách hơn.
             </p>
-            <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
+            <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
               Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
             </a>
           </div>
@@ -484,7 +654,7 @@ function ColorPalette() {
   }, []);
 
   return (
-    <section id="bang-mau" ref={sectionRef} className="border-t border-walnut/10">
+    <section id="bang-mau" ref={sectionRef} data-section="colors" className="border-t border-walnut/10">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -493,7 +663,7 @@ function ColorPalette() {
               Chọn tông gỗ<br />phù hợp công trình.
             </h2>
           </div>
-          <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+          <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -537,14 +707,14 @@ function Combos({ selectedCombos, setSelectedCombos }: {
   const total = () => combos.reduce((t, c) => { const s = selectedCombos[c.name]; return t + s.small * c.prices.small + s.large * c.prices.large; }, 0);
 
   return (
-    <section id="combo" className="border-t border-walnut/10 bg-sand/40">
+    <section id="combo" data-section="combo" className="border-t border-walnut/10 bg-sand/40">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div>
           <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">07 — Combo sản phẩm</span>
           <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Chọn combo<br />phù hợp hạng mục.</h2>
           <p className="mt-4 text-[13px] text-walnut/60">
             Chưa chắc combo nào phù hợp?{" "}
-            <a href={ZALO_URL} className="text-clay underline-offset-4 hover:underline">Gửi ảnh hạng mục kim loại qua Zalo</a> để được tư vấn.
+            <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="text-clay underline-offset-4 hover:underline">Gửi ảnh hạng mục kim loại qua Zalo</a> để được tư vấn.
           </p>
         </div>
         <div className="mt-14 border border-walnut/15 grid md:grid-cols-3 md:divide-x md:divide-walnut/15">
@@ -594,7 +764,7 @@ function Combos({ selectedCombos, setSelectedCombos }: {
               <div className="mt-1 font-serif text-[32px] text-clay">{fmt(total())}</div>
               <p className="mt-1 text-[11px] text-walnut/70">Nhỏ 1kg ≈ 5m² · Lớn 5kg ≈ 25m² · Chưa bao gồm phí vận chuyển</p>
             </div>
-            <a href="#tu-van" className="inline-flex items-center gap-3 bg-clay px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream transition hover:bg-walnut">
+            <a href="#tu-van" data-cta="place_order" onClick={() => handleCTAClick("place_order")} className="inline-flex items-center gap-3 bg-clay px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-cream transition hover:bg-walnut">
               Điền thông tin đặt hàng <ArrowRightIcon className="h-4 w-4" />
             </a>
           </div>
@@ -667,7 +837,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
   };
 
   return (
-    <section id="tu-van" className="border-t border-walnut/10">
+    <section id="tu-van" data-section="order" className="border-t border-walnut/10">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -676,7 +846,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
             <p className="mt-6 text-[14px] leading-relaxed text-walnut/60">
               Gửi ảnh hạng mục kim loại qua Zalo — Lotus tư vấn màu, hệ lớp và combo phù hợp trước khi bạn chốt.
             </p>
-            <a href={ZALO_URL} className="mt-8 inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
+            <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="mt-8 inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
               <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
             </a>
             <div className="mt-5 border-t border-walnut/15 pt-5 text-[12px] text-walnut/55">
@@ -785,14 +955,14 @@ function Projects() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="border-t border-walnut/10 bg-sand/40">
+    <section ref={sectionRef} data-section="projects" className="border-t border-walnut/10 bg-sand/40">
       <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-12 md:py-24">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">09 — Công trình thực tế</span>
             <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Hoàn thiện thật.<br />Vật liệu thật.</h2>
           </div>
-          <a href={ZALO_URL} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+          <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -878,10 +1048,10 @@ function FinalCTA() {
               Chụp ảnh hạng mục cần hoàn thiện, gửi qua Zalo. Lotus xem và gợi ý đúng màu, đúng hệ lớp — trước khi bạn chốt mua.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
-              <a href={ZALO_URL} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
+              <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
                 <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
               </a>
-              <a href="#tu-van" className="inline-flex items-center gap-3 bg-white px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-charcoal transition hover:bg-cream">
+              <a href="#tu-van" data-cta="view_combo" onClick={() => handleCTAClick("view_combo")} className="inline-flex items-center gap-3 bg-white px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-charcoal transition hover:bg-cream">
                 Xem Combo & Đặt Ngay →
               </a>
             </div>
@@ -942,12 +1112,16 @@ function StickyMobileCTA({ showStickyBar }: { showStickyBar: boolean }) {
     >
       <a
         href={ZALO_URL}
+        data-cta="zalo"
+        onClick={() => handleCTAClick("zalo")}
         className="flex items-center justify-center gap-2 bg-white px-3 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
       >
         Nhắn Zalo
       </a>
       <a
         href="#combo"
+        data-cta="view_combo"
+        onClick={() => handleCTAClick("view_combo")}
         className="flex items-center justify-center gap-2 bg-white px-3 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
       >
         Xem combo
