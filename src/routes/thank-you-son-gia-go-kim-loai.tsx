@@ -2,6 +2,12 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export const Route = createFileRoute("/thank-you-son-gia-go-kim-loai")({
   component: ThankYou,
 });
@@ -20,6 +26,18 @@ function ThankYou() {
 
       const params = new URLSearchParams(window.location.search);
       setPhone(params.get("phone") || data.phone || "");
+
+      // Track conversion event for GA4
+      if (window.gtag && data.orderId) {
+        window.gtag('event', 'form_submit', {
+          'event_category': 'lead_generation',
+          'event_label': 'son_gia_go_kim_loai',
+          'value': data.totalPrice || 0,
+          'currency': 'VND',
+          'order_id': data.orderId,
+          'phone': data.phone || params.get("phone") || ""
+        });
+      }
     }
   }, []);
 
