@@ -1,12 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect, useRef, useCallback } from "react";
 import logoLotus from "../assets/optimized/logo-150w.webp";
-
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-  }
-}
+import { trackZaloClick } from "../utils/analytics";
 import colorPaletteImage from "../assets/optimized/bang-mau-1080w.webp";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
 import hero640w from "../assets/optimized/hero-640w.webp";
@@ -284,7 +279,7 @@ function Header() {
             <a key={h} href={h} className="transition hover:text-charcoal">{l}</a>
           ))}
         </nav>
-        <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="hidden text-[11px] uppercase tracking-[0.22em] text-clay border-b border-clay pb-0.5 transition hover:text-walnut hover:border-walnut md:block">
+        <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("navbar")} className="hidden text-[11px] uppercase tracking-[0.22em] text-clay border-b border-clay pb-0.5 transition hover:text-walnut hover:border-walnut md:block">
           Nhắn Zalo tư vấn
         </a>
       </div>
@@ -309,7 +304,7 @@ function Hero() {
               Lotus giả gỗ trên kim loại: vân gỗ sắc nét, ấm, sang — giữ độ bền sắt, không lo cong vênh hay mối mọt.
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
-              <a href={ZALO_URL} data-cta="hero_zalo" onClick={() => handleCTAClick("hero_zalo")} className="inline-flex items-center justify-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
+              <a href={ZALO_URL} data-cta="hero_zalo" onClick={() => trackZaloClick("hero")} className="inline-flex items-center justify-center gap-3 bg-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-cream transition hover:bg-walnut sm:px-7 shadow-lg shadow-clay/20">
                 Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-4 w-4" />
               </a>
               <a href="#combo" data-cta="hero_combo" onClick={() => handleCTAClick("hero_combo")} className="inline-flex items-center justify-center gap-3 border border-clay px-6 py-4 text-[12px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-clay hover:text-cream sm:px-7">
@@ -409,7 +404,7 @@ function Applications() {
               Những hạng mục kim loại<br />hoàn thiện giả gỗ đẹp nhất.
             </h2>
           </div>
-          <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+          <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("applications")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -578,7 +573,7 @@ function BeforeAfter() {
             <p className="mt-6 max-w-xs text-[14px] leading-relaxed text-walnut/70">
               Trước: chân bàn sắt nhìn lạnh, thiếu ấm. Sau: chân bàn giả gỗ nhìn như gỗ thật, hợp nội thất phòng khách hơn.
             </p>
-            <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
+            <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("before_after")} className="mt-8 inline-flex items-center gap-2 border-b border-walnut/35 pb-0.5 text-[11px] uppercase tracking-[0.22em] text-walnut transition hover:text-clay hover:border-clay">
               Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
             </a>
           </div>
@@ -683,7 +678,7 @@ function ColorPalette() {
               Chọn tông gỗ<br />phù hợp công trình.
             </h2>
           </div>
-          <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+          <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("color_palette_header")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -734,7 +729,7 @@ function Combos({ selectedCombos, setSelectedCombos }: {
           <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Chọn combo<br />phù hợp hạng mục.</h2>
           <p className="mt-4 text-[13px] text-walnut/60">
             Chưa chắc combo nào phù hợp?{" "}
-            <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="text-clay underline-offset-4 hover:underline">Gửi ảnh hạng mục kim loại qua Zalo</a> để được tư vấn.
+            <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("combo")} className="text-clay underline-offset-4 hover:underline">Gửi ảnh hạng mục kim loại qua Zalo</a> để được tư vấn.
           </p>
         </div>
         <div className="mt-14 border border-walnut/15 grid md:grid-cols-3 md:divide-x md:divide-walnut/15">
@@ -866,7 +861,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
             <p className="mt-6 text-[14px] leading-relaxed text-walnut/60">
               Gửi ảnh hạng mục kim loại qua Zalo — Lotus tư vấn màu, hệ lớp và combo phù hợp trước khi bạn chốt.
             </p>
-            <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="mt-8 inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
+            <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("color_palette")} className="mt-8 inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
               <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
             </a>
             <div className="mt-5 border-t border-walnut/15 pt-5 text-[12px] text-walnut/55">
@@ -982,7 +977,7 @@ function Projects() {
             <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">09 — Công trình thực tế</span>
             <h2 className="mt-5 font-serif text-[34px] leading-tight text-charcoal sm:text-4xl md:text-5xl">Hoàn thiện thật.<br />Vật liệu thật.</h2>
           </div>
-          <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
+          <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("projects")} className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-clay transition hover:text-walnut">
             Gửi ảnh hạng mục kim loại qua Zalo <ArrowRightIcon className="h-3.5 w-3.5" />
           </a>
         </div>
@@ -1068,7 +1063,7 @@ function FinalCTA() {
               Chụp ảnh hạng mục cần hoàn thiện, gửi qua Zalo. Lotus xem và gợi ý đúng màu, đúng hệ lớp — trước khi bạn chốt mua.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
-              <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
+              <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("final_cta")} className="inline-flex items-center gap-3 bg-[#0068FF] px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#0056d6]">
                 <ZaloIcon className="h-5 w-5" /> Gửi ảnh hạng mục kim loại qua Zalo
               </a>
               <a href="#tu-van" data-cta="view_combo" onClick={() => handleCTAClick("view_combo")} className="inline-flex items-center gap-3 bg-white px-7 py-4 text-[12px] uppercase tracking-[0.18em] text-charcoal transition hover:bg-cream">
@@ -1099,7 +1094,7 @@ function Footer() {
             <h4 className="mb-4 text-[10px] uppercase tracking-[0.25em] text-cream/35">Liên hệ</h4>
             <ul className="space-y-2 text-cream/70">
               <li>Hotline: <strong className="text-cream/90">{HOTLINE}</strong></li>
-              <li>Zalo: <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="text-cream/90 hover:text-cream">{HOTLINE}</a></li>
+              <li>Zalo: <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("footer")} className="text-cream/90 hover:text-cream">{HOTLINE}</a></li>
               <li>Email: sales@sonlotus.vn</li>
               <li>Website: www.sonlotus.vn</li>
               <li>99/5 Đường XTT26-1, Ấp 2, Xã Bà Điểm, TP.HCM</li>
@@ -1133,7 +1128,7 @@ function StickyMobileCTA({ showStickyBar }: { showStickyBar: boolean }) {
       <a
         href={ZALO_URL}
         data-cta="zalo"
-        onClick={() => handleCTAClick("zalo")}
+        onClick={() => trackZaloClick("sticky")}
         className="flex items-center justify-center gap-2 bg-white px-3 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
       >
         Nhắn Zalo
