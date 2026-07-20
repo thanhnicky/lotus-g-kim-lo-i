@@ -203,11 +203,14 @@ function LandingPage() {
     // Track Zalo click event for GA4
     if (ctaType === "zalo" || ctaType === "hero_zalo") {
       if (typeof window !== "undefined" && window.gtag) {
+        console.log('Sending zalo_click event to GA4', { ctaType });
         window.gtag('event', 'zalo_click', {
           'event_category': 'engagement',
           'event_label': 'son_gia_go_kim_loai',
           'cta_type': ctaType
         });
+      } else {
+        console.log('gtag not available', { ctaType, hasGtag: typeof window !== "undefined" && !!window.gtag });
       }
     }
 
