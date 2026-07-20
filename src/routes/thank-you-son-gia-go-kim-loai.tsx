@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logoLotus from "../assets/logo-lotus-paint-35325.jpg";
 
-export const Route = createFileRoute("/thank-you")({
+export const Route = createFileRoute("/thank-you-son-gia-go-kim-loai")({
   component: ThankYou,
 });
 

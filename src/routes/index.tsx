@@ -833,7 +833,7 @@ function LeadForm({ selectedCombos }: { selectedCombos: Record<string, { small: 
     try {
       await fetch("https://script.google.com/macros/s/AKfycbyv7gIgwksqqalJhhqqUp8KUGCM9r0LEu6LtRd8wuGE86lmFHQGXZGJp8gHWNzBaC_T/exec", { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(orderData) });
     } catch (err) { console.error(err); setIsSubmitting(false); return; }
-    navigate({ to: `/thank-you?phone=${phone}` });
+    navigate({ to: `/thank-you-son-gia-go-kim-loai?phone=${phone}` });
   };
 
   return (

@@ -9,12 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ThankYouRouteImport } from './routes/thank-you'
+import { Route as ThankYouSonGiaGoKimLoaiRouteImport } from './routes/thank-you-son-gia-go-kim-loai'
 import { Route as IndexRouteImport } from './routes/index'
 
-const ThankYouRoute = ThankYouRouteImport.update({
-  id: '/thank-you',
-  path: '/thank-you',
+const ThankYouSonGiaGoKimLoaiRoute = ThankYouSonGiaGoKimLoaiRouteImport.update({
+  id: '/thank-you-son-gia-go-kim-loai',
+  path: '/thank-you-son-gia-go-kim-loai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +25,37 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/thank-you': typeof ThankYouRoute
+  '/thank-you-son-gia-go-kim-loai': typeof ThankYouSonGiaGoKimLoaiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/thank-you': typeof ThankYouRoute
+  '/thank-you-son-gia-go-kim-loai': typeof ThankYouSonGiaGoKimLoaiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/thank-you': typeof ThankYouRoute
+  '/thank-you-son-gia-go-kim-loai': typeof ThankYouSonGiaGoKimLoaiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/thank-you'
+  fullPaths: '/' | '/thank-you-son-gia-go-kim-loai'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/thank-you'
-  id: '__root__' | '/' | '/thank-you'
+  to: '/' | '/thank-you-son-gia-go-kim-loai'
+  id: '__root__' | '/' | '/thank-you-son-gia-go-kim-loai'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ThankYouRoute: typeof ThankYouRoute
+  ThankYouSonGiaGoKimLoaiRoute: typeof ThankYouSonGiaGoKimLoaiRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/thank-you': {
-      id: '/thank-you'
-      path: '/thank-you'
-      fullPath: '/thank-you'
-      preLoaderRoute: typeof ThankYouRouteImport
+    '/thank-you-son-gia-go-kim-loai': {
+      id: '/thank-you-son-gia-go-kim-loai'
+      path: '/thank-you-son-gia-go-kim-loai'
+      fullPath: '/thank-you-son-gia-go-kim-loai'
+      preLoaderRoute: typeof ThankYouSonGiaGoKimLoaiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ThankYouRoute: ThankYouRoute,
+  ThankYouSonGiaGoKimLoaiRoute: ThankYouSonGiaGoKimLoaiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
