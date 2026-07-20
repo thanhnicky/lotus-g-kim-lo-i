@@ -1,6 +1,12 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect, useRef, useCallback } from "react";
 import logoLotus from "../assets/optimized/logo-150w.webp";
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
 import colorPaletteImage from "../assets/optimized/bang-mau-1080w.webp";
 import heroGate from "../assets/son-gia-go-tren-cong-sat-lotus.jpeg";
 import hero640w from "../assets/optimized/hero-640w.webp";
@@ -193,7 +199,18 @@ function LandingPage() {
   // Track CTA clicks
   const handleCTAClick = useCallback((ctaType: string, meta?: any) => {
     trackIntentEvent(`cta_click_${ctaType}`, meta);
-    
+
+    // Track Zalo click event for GA4
+    if (ctaType === "zalo" || ctaType === "hero_zalo") {
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag('event', 'zalo_click', {
+          'event_category': 'engagement',
+          'event_label': 'son_gia_go_kim_loai',
+          'cta_type': ctaType
+        });
+      }
+    }
+
     switch (ctaType) {
       case "hero_zalo":
         addIntentScore(5, "Click Zalo CTA");
