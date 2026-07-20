@@ -284,7 +284,7 @@ function Header() {
             <a key={h} href={h} className="transition hover:text-charcoal">{l}</a>
           ))}
         </nav>
-        <a href={ZALO_URL} className="hidden text-[11px] uppercase tracking-[0.22em] text-clay border-b border-clay pb-0.5 transition hover:text-walnut hover:border-walnut md:block">
+        <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="hidden text-[11px] uppercase tracking-[0.22em] text-clay border-b border-clay pb-0.5 transition hover:text-walnut hover:border-walnut md:block">
           Nhắn Zalo tư vấn
         </a>
       </div>
@@ -1099,7 +1099,7 @@ function Footer() {
             <h4 className="mb-4 text-[10px] uppercase tracking-[0.25em] text-cream/35">Liên hệ</h4>
             <ul className="space-y-2 text-cream/70">
               <li>Hotline: <strong className="text-cream/90">{HOTLINE}</strong></li>
-              <li>Zalo: <a href={ZALO_URL} className="text-cream/90 hover:text-cream">{HOTLINE}</a></li>
+              <li>Zalo: <a href={ZALO_URL} data-cta="zalo" onClick={() => handleCTAClick("zalo")} className="text-cream/90 hover:text-cream">{HOTLINE}</a></li>
               <li>Email: sales@sonlotus.vn</li>
               <li>Website: www.sonlotus.vn</li>
               <li>99/5 Đường XTT26-1, Ấp 2, Xã Bà Điểm, TP.HCM</li>
