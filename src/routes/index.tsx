@@ -129,6 +129,12 @@ function LandingPage() {
   }, [addIntentScore, updateIntentState]);
 
   // Track section visibility using Intersection Observer
+  // NOTE: this effect must only run ONCE on mount. It previously depended on
+  // `intentState` (an object that changes every second via the timeOnPage
+  // timer and on every scroll event), which caused the IntersectionObserver
+  // to be destroyed and recreated dozens/hundreds of times per second,
+  // blocking the main thread and making the page laggy / unresponsive
+  // (and causing Chrome extensions like Tag Assistant to hang).
   useEffect(() => {
     const sections = {
       colors: document.querySelector('[data-section="colors"]'),
@@ -143,40 +149,44 @@ function LandingPage() {
           if (entry.isIntersecting) {
             const section = entry.target as HTMLElement;
             const sectionType = section.dataset.section;
-            
-            if (sectionType === "colors" && !intentState.viewedColorSection) {
+
+            if (sectionType === "colors") {
+              setIntentState(prev => {
+                if (prev.viewedColorSection) return prev;
+                return { ...prev, viewedColorSection: true };
+              });
               trackIntentEvent("viewed_color_section");
               addIntentScore(2, "Viewed color section");
-              setIntentState(prev => ({ ...prev, viewedColorSection: true }));
               updateIntentState();
             }
-            
-            if (sectionType === "projects" && !intentState.viewedProjectSection) {
+
+            if (sectionType === "projects") {
+              setIntentState(prev => {
+                if (prev.viewedProjectSection) return prev;
+                return { ...prev, viewedProjectSection: true };
+              });
               trackIntentEvent("viewed_project_section");
               addIntentScore(1, "Viewed real project section");
-              setIntentState(prev => ({ ...prev, viewedProjectSection: true }));
               updateIntentState();
             }
-            
+
             if (sectionType === "combo" || sectionType === "order") {
-              if (!intentState.reachedComboSection) {
-                trackIntentEvent("reached_combo_section");
-                addIntentScore(4, "Reached combo/order section");
-                setIntentState(prev => ({ ...prev, reachedComboSection: true, lastComboSectionVisit: Date.now() }));
-                updateIntentState();
-              } else {
-                // Revisit combo/order section => +3
-                setIntentState(prev => {
-                  const timeSinceLastVisit = prev.lastComboSectionVisit ? Date.now() - prev.lastComboSectionVisit : Infinity;
-                  if (timeSinceLastVisit > 5000) { // Only count if been away for at least 5 seconds
-                    trackIntentEvent("revisited_combo_section");
-                    addIntentScore(3, "Revisited combo/order section");
-                    updateIntentState();
-                    return { ...prev, comboSectionRevisits: prev.comboSectionRevisits + 1, lastComboSectionVisit: Date.now() };
-                  }
-                  return prev;
-                });
-              }
+              setIntentState(prev => {
+                if (!prev.reachedComboSection) {
+                  trackIntentEvent("reached_combo_section");
+                  addIntentScore(4, "Reached combo/order section");
+                  updateIntentState();
+                  return { ...prev, reachedComboSection: true, lastComboSectionVisit: Date.now() };
+                }
+                const timeSinceLastVisit = prev.lastComboSectionVisit ? Date.now() - prev.lastComboSectionVisit : Infinity;
+                if (timeSinceLastVisit > 5000) {
+                  trackIntentEvent("revisited_combo_section");
+                  addIntentScore(3, "Revisited combo/order section");
+                  updateIntentState();
+                  return { ...prev, comboSectionRevisits: prev.comboSectionRevisits + 1, lastComboSectionVisit: Date.now() };
+                }
+                return prev;
+              });
             }
           }
         });
@@ -189,7 +199,8 @@ function LandingPage() {
     });
 
     return () => observer.disconnect();
-  }, [intentState, trackIntentEvent, addIntentScore, updateIntentState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Track CTA clicks
   const handleCTAClick = useCallback((ctaType: string, meta?: any) => {
