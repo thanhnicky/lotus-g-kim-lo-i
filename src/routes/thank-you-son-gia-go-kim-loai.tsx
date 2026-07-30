@@ -27,17 +27,15 @@ function ThankYou() {
       const params = new URLSearchParams(window.location.search);
       setPhone(params.get("phone") || data.phone || "");
 
-      // Track conversion event for GA4
-      if (window.gtag && data.orderId) {
-        window.gtag('event', 'form_submit', {
-          'event_category': 'lead_generation',
-          'event_label': 'son_gia_go_kim_loai',
-          'value': data.totalPrice || 0,
-          'currency': 'VND',
-          'order_id': data.orderId,
-          'phone': data.phone || params.get("phone") || ""
-        });
-      }
+      // Push conversion event to GTM dataLayer
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: "purchase",
+        transaction_id: data.orderId || data.phone || params.get("phone") || "",
+        value: data.totalPrice || 0,
+        currency: "VND",
+        payment_method: data.paymentMethod || "cod",
+      });
     }
   }, []);
 
