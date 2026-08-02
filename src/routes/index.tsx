@@ -278,6 +278,9 @@ function LandingPage() {
 }
 
 /* ── Header ─────────────────────────────────────────── */
+/* On mobile, the Zalo CTA (a billed Google Ads conversion) lives pinned at
+   the top-right of the header — away from the bottom edge where accidental
+   taps happen while scrolling. */
 function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-walnut/15 bg-cream/90 backdrop-blur-sm">
@@ -292,6 +295,9 @@ function Header() {
         </nav>
         <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("navbar")} className="hidden text-[11px] uppercase tracking-[0.22em] text-clay border-b border-clay pb-0.5 transition hover:text-walnut hover:border-walnut md:block">
           Nhắn Zalo tư vấn
+        </a>
+        <a href={ZALO_URL} data-cta="zalo" onClick={() => trackZaloClick("navbar_mobile")} className="flex items-center gap-1.5 bg-[#0068FF] px-3 py-2 text-[11px] font-medium uppercase tracking-[0.15em] text-white transition hover:bg-[#0056d6] md:hidden">
+          <ZaloIcon className="h-4 w-4" /> Zalo
         </a>
       </div>
     </header>
@@ -1129,6 +1135,10 @@ function Footer() {
 }
 
 /* ── Sticky Mobile CTA ────────────────────────────────── */
+/* The billed "Nhắn Zalo" CTA lives up in the header (top-right) instead of
+   here, since this bottom bar sits right at the screen edge where thumbs
+   rest/scroll and cause accidental (billed) taps. This bar only holds the
+   two non-billed navigation shortcuts, side by side in one row. */
 function StickyMobileCTA({ showStickyBar }: { showStickyBar: boolean }) {
   return (
     <div
@@ -1137,12 +1147,12 @@ function StickyMobileCTA({ showStickyBar }: { showStickyBar: boolean }) {
       style={{ paddingBottom: "env(safe-area-inset-bottom, 12px)" }}
     >
       <a
-        href={ZALO_URL}
-        data-cta="zalo"
-        onClick={() => trackZaloClick("sticky")}
+        href="#bang-mau"
+        data-cta="view_colors"
+        onClick={() => handleCTAClick("view_colors")}
         className="flex items-center justify-center gap-2 bg-white px-3 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-clay transition hover:bg-cream"
       >
-        Nhắn Zalo
+        Bảng màu
       </a>
       <a
         href="#combo"
