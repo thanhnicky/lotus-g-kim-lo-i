@@ -1031,7 +1031,7 @@ function Projects() {
 /* ── FAQ ──────────────────────────────────────────────── */
 function FAQ() {
   const faqs = [
-    { q: "Sơn giả gỗ trên kim loại có bền không?", a: "Khi thi công đúng quy trình và dùng đủ lớp phủ bảo vệ, hệ sơn giả gỗ Lotus có độ bền cao, bám dính tốt trên kim loại và giữ được màu lâu." },
+    { q: "Sơn giả gỗ trên kim loại có bền không?", a: "Khi thi công đúng quy trình và dùng đủ lớp phủ bảo vệ, hệ sơn giả gỗ Lotus có độ bền cao, bám dính tốt trên kim loại và giữ được màu lâu. Khi thi công đầy đủ 3 lớp (lót, phủ màu, bảo vệ), độ bền màu từ 7–10 năm mới cần sơn lại." },
     { q: "Có dùng ngoài trời được không?", a: "Có. Combo thông dụng và combo cao cấp 2K có lớp phủ bảo vệ chuyên dụng cho ngoài trời, chống tia UV và thời tiết." },
     { q: "Phù hợp với những hạng mục nào?", a: "Cổng sắt, hàng rào, lan can, khung thép trang trí, cửa sắt, mái hiên, pergola, lam sắt và các chi tiết kim loại nội ngoại thất." },
     { q: "Tôi chưa biết chọn combo nào thì làm sao?", a: "Bạn chỉ cần nhắn Zalo gửi ảnh hạng mục và mô tả nhu cầu, Lotus sẽ tư vấn combo phù hợp." },
