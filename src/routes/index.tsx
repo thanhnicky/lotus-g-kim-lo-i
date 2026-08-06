@@ -311,7 +311,7 @@ function Hero() {
       <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-14 md:px-12 md:pt-14 md:pb-20">
         <div className="grid grid-cols-12 gap-x-6 gap-y-10">
           <div className="col-span-12 flex flex-col md:col-span-6 lg:col-span-5">
-            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">Lotus · Hoàn thiện bề mặt kim loại</span>
+            <span className="text-[11px] uppercase tracking-[0.3em] text-walnut/55">Sơn Giả Gỗ Lotus Trên Kim Loại</span>
             <h1 className="mt-5 font-serif text-[42px] leading-[1.05] tracking-tight text-charcoal sm:text-[52px] md:text-[56px] lg:text-[64px]">
               Cổng, hàng rào, lam<br />
               nhìn như gỗ thật<br />
