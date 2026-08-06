@@ -534,7 +534,7 @@ function WhyStatement() {
           </div>
           <div className="col-span-12 md:col-span-8 md:pt-2">
             <p className="font-serif text-[20px] leading-[1.65] text-cream md:text-[22px]">
-              Kim loại bền nhưng lạnh. Lotus giả gỗ giữ kết cấu sắt, chỉ thay đổi bề mặt: ấm hơn, sang hơn, gần gỗ.
+              Kim loại bền nhưng lạnh. Lotus giả gỗ giữ kết cấu sắt, chỉ thay đổi bề mặt: ấm hơn, sang hơn, đẹp như vân gỗ tự nhiên.
             </p>
             <ul className="mt-14 divide-y divide-cream/15 border-t border-cream/15">
               {points.map((b) => (
