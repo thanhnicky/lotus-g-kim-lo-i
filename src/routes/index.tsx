@@ -484,7 +484,7 @@ function Applications() {
               {[
                 { img: appKhungKeoThep, label: "Khung kèo thép", ctx: "Kết cấu nội thất", srcSet: `${appKhungKeoThep} 640w, ${appKhungKeoThep} 750w, ${appKhungKeoThep} 828w, ${appKhungKeoThep} 1080w` },
                 { img: appDoor, label: "Cửa sắt / pano cửa", ctx: "Khung mặt tiền", srcSet: `${appDoor} 640w, ${appDoor} 750w, ${appDoor} 828w, ${appDoor} 1080w` },
-                { img: appFrame, label: "Khung trang trí", ctx: "Chi tiết kiến trúc", srcSet: `${appFrame} 640w, ${appFrame} 750w, ${appFrame} 828w` },
+                { img: appFrame, label: "Khung trang trí", ctx: "Hạng mục ngoài trời", srcSet: `${appFrame} 640w, ${appFrame} 750w, ${appFrame} 828w` },
               ].map((a) => (
                 <figure key={a.label} className="group col-span-3 md:col-span-1">
                   <div className="relative overflow-hidden rounded-lg shadow-md shadow-walnut/8">
