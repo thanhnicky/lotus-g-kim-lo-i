@@ -529,7 +529,7 @@ function WhyStatement() {
           <div className="col-span-12 md:col-span-4">
             <span className="text-[11px] uppercase tracking-[0.3em] text-cream/80">03 — Vì sao chọn giả gỗ</span>
             <h2 className="mt-5 font-serif text-[34px] leading-tight sm:text-4xl md:text-5xl">
-              Giữ độ chắc<br />của kim loại.<br /><em className="not-italic text-clay">Đưa bề mặt<br />về phía gỗ.</em>
+              Ruột Sắt.<br /><em className="not-italic text-clay">Da Gỗ.</em>
             </h2>
           </div>
           <div className="col-span-12 md:col-span-8 md:pt-2">
